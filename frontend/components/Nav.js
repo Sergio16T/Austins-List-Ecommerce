@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const StyledNav = styled.ul`
         display: flex; 
         align-items: center; 
-        justify-content: center;  
+        justify-content: flex-end;
         .slidingBar {
             position: absolute; 
             height: 1px; 
@@ -52,7 +52,7 @@ const StyledNav = styled.ul`
 const Nav = props => {
     return (
         <StyledNav navBarColor={props.navBarColor}>
-            <Link href="/aboutus">
+            <Link href="/about">
                 <li>
                     <a>About Us</a>
                     <div className="slidingBar"></div>

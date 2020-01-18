@@ -1,9 +1,10 @@
 import Link from 'next/link'; 
 import styled from 'styled-components'; 
+import { HomePageSection, Button } from './styles/HomePageSection'; 
 
 const Wrapper = styled.div`
     .homePage_section {
-        height: 400px; 
+        height: 80vh; 
     }
 `; 
 const Container = styled.div`
@@ -12,7 +13,6 @@ const Container = styled.div`
     overflow: hidden; 
 `;
 const StyledHomeDiv = styled.div`
-    position: relative; 
     background-color: rgba(10,10,54,1);
     video {
         width: 110%; 
@@ -50,13 +50,28 @@ const Home = (props) => {
                 <h3> The place for local Austin artists to upload art and for you to explore!</h3>
             </div>
             <video autoPlay muted loop> 
-                <source src="https://mooveit-videos.s3-us-west-2.amazonaws.com/compilation_preview.mp4" type="video/mp4"/>
+                <source src="" alt="homePageVideo" type="video/mp4"/> {/* get video in AWS s3 bucket */}
             </video>
         </StyledHomeDiv>
-        </Container>
-        <div className="homePage_section">Test</div>
+        </Container> 
+        {/* create two modals side by side For Shoppers For Artists */}
+        <HomePageSection className="homePage_section">
+            <div className="column1">
+                <h3>Austin Art available for view on one platform</h3>
+                <p>Our Mission is to bring together the Arts Community of Austin and their work 
+                    and make it easy to browse through for people seeking art for their home or 
+                    business.</p>
+                <Button>Get Started</Button>
+            </div>
+            <div className="column2">
+            <h3>For Artists</h3>
+            <p>Create an account, upload work, ability to edit and delete as needed. Easy to use!</p>
+            <h3>For Consumers</h3>
+            <p> Search through Austin's Art and discover unique and amazing pieces!</p>
+            </div>
+        </HomePageSection>
         <div className="homePage_section">
-            test2
+           
         </div>
         </Wrapper>
     )

@@ -39,13 +39,38 @@ const GlobalStyle = createGlobalStyle`
 
 `; 
 class Page extends Component {
+	state = {
+		navBarColor: false, 
+		border: false,
+	}
+	componentDidMount() {
+		window.addEventListener('scroll', this.handleScroll); 
+		window.addEventListener('load', this.handleScroll); 
+	}
+	componentWillUnmount() {
+		window.removeEventListener('scroll', this.handleScroll); 
+		window.removeEventListener('load', this.handleScroll);
+	}
+	 handleScroll = () => {
+        if(window.scrollY > (window.innerHeight * 0.10)) {
+          this.setState({
+			  navBarColor: true,
+			  border: true, 
+		  });    
+        } else {
+			this.setState({
+				navBarColor: false,
+				border: false
+			}); 
+		} 
+    } 
 	render() {
 		return (
 			<ThemeProvider theme={theme}>
 				<GlobalStyle/>
 				<StyledPage>
 					<Meta/>
-					<Header/>
+					<Header navBarColor={this.state.navBarColor} border={this.state.border}/>
 					<InnerDiv>
 						{this.props.children}
 					</InnerDiv>

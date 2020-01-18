@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link'; 
-import styled from 'styled-components'; 
+import styled, { keyframes } from 'styled-components'; 
 import Router from 'next/router'; 
 import Nprogress from 'nprogress'; 
 import Nav from './Nav'; 
@@ -20,17 +20,19 @@ const StyledHeader = styled.div`
     background-image: linear-gradient(180deg, #fff 50%, transparent 0);
     background-size: 100% 200%;
     background-position: ${props => props.navBarColor ? "0 0" : "0 100%"};
-    transition: background-position .4s ease; 
+    /* transition: background-position .4s ease;  */
     position: fixed; 
     width: 100%;  
     z-index: 4; 
     color: white; 
+    transition: .3s ease;  
+    box-shadow: ${props => props.border ? "0px 1px 2px 1px rgba(0,0, 0, 0.4)" : ""}; 
     .topBar {
         display: grid; 
         grid-template-columns: auto 1fr; 
         justify-content: space-between; 
         align-items: stretch; 
-        padding: 10px 0; 
+        padding: 10px 5%; 
         /* border-bottom: 4px solid ${props => props.theme.black};  */
     }
     .subBar {
@@ -64,28 +66,16 @@ const Logo = styled.h1`
     }
     `; 
 
-const Header = props => {
-    const [navBarColor, setNavbarColor] = useState(false); 
-
-    useEffect(()=> {
-        window.addEventListener('scroll', handleScroll); 
-    })
-    const handleScroll = ()=> {
-        if(window.scrollY >= 89) {
-            setNavbarColor(true); 
-        } else {
-            setNavbarColor(false); 
-        }     
-    }
+const Header = props => { 
     return (
-        <StyledHeader navBarColor={navBarColor}>
+        <StyledHeader navBarColor={props.navBarColor} border={props.border} className="header">
             <div className="topBar">
-                <Logo navBarColor={navBarColor}>
+                <Logo navBarColor={props.navBarColor}>
                     <Link href="/">
                         <a className="navBar_links">Local Arts</a>
                     </Link>
                 </Logo>
-                <Nav navBarColor={navBarColor}/>
+                <Nav navBarColor={props.navBarColor}/>
             </div>
             {/* <div className="subBar">
                 <p>Search...</p>
