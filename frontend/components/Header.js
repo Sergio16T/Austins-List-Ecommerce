@@ -90,6 +90,14 @@ const StyledHeader = styled.div`
                     margin-bottom: 3px; 
                 }
             }
+            #mobileOpenfalse {
+                li {
+                    a {
+                        color: 'white'; 
+                        transition: none;
+                    }
+                }
+            }
         }
 `;
 

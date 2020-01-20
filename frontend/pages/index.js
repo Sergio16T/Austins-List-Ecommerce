@@ -62,7 +62,7 @@ const Home = (props) => {
                 <h3> The place for local Austin artists to upload art and for you to explore!</h3>
             </div>
             <video autoPlay muted loop> 
-                <source src="" alt="homePageVideo" type="video/mp4"/> link to video in aws s3 bucket
+                <source src="" alt="homePageVideo" type="video/mp4"/> {/*link to video in aws s3 bucket*/}
             </video>
         </StyledHomeDiv>
         </Container> 
