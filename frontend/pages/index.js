@@ -54,7 +54,7 @@ const StyledHomeDiv = styled.div`
 
 const Home = (props) => {
     return (
-        <Wrapper>
+        <Wrapper pathName={props.query.pathName}>
         <Container className="Container">
         <StyledHomeDiv className="homeContent">
             <div id="welcome"> 

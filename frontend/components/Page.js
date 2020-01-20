@@ -43,14 +43,23 @@ class Page extends Component {
 	state = {
 		navBarColor: false, //maybe use context for state here so that I can change it lower in the tree
 		border: false,
+		headerDropDown: false,
+		topBar : 'topBar',
 	}
 	componentDidMount() {
 		window.addEventListener('scroll', this.handleScroll); 
 		window.addEventListener('load', this.handleScroll); 
+		this.setState({
+			headerDropDown: false,
+			width: window.innerWidth
+        });
 	}
 	componentWillUnmount() {
 		window.removeEventListener('scroll', this.handleScroll); 
 		window.removeEventListener('load', this.handleScroll);
+		this.setState({
+			headerDropDown: false
+		}); 
 	}
 	 handleScroll = () => {
         if(window.scrollY > (window.innerHeight * 0.10)) {
@@ -64,14 +73,48 @@ class Page extends Component {
 				border: false
 			}); 
 		} 
-    } 
+	} 
+	openMobileMenu = (e) => {
+		console.log('click'); 
+        if(!this.state.headerDropDown) {
+            this.setState({
+                headerDropDown: true, 
+				topBar: 'nav_isOpen', 
+            }); 
+        } else {
+            this.setState({
+                headerDropDown: false,
+				topBar: 'topBar', 
+            }); 
+        }
+	}
+	logoOpenOff = () => {
+		if(window.innerWidth > 1000) {
+			return; 
+		}
+		if(!this.state.headerDropDown) {
+			return; 
+		}
+		this.setState({
+			headerDropDown: false, 
+			topBar: 'topBar'
+		}); 
+	}
 	render() {
 		return (
 			<ThemeProvider theme={theme}>
 				<GlobalStyle/>
 				<StyledPage>
 					<Meta/>
-					<Header navBarColor={this.state.navBarColor} border={this.state.border}/>
+					<Header 
+					navBarColor={this.state.navBarColor} 
+					border={this.state.border} 
+					topBar ={this.state.topBar}
+					headerDropDown={this.state.headerDropDown} 
+					openMobileMenu={this.openMobileMenu}
+					logoOpenOff={this.logoOpenOff}
+					width = {this.state.width}
+					/>
 					<InnerDiv>
 						{this.props.children}
 					</InnerDiv>

@@ -91,6 +91,10 @@ const StyledHeader = styled.div`
                 }
             }
             #mobileOpenfalse {
+                box-shadow: none; 
+                .slidingBar {
+                    display: none; 
+                }
                 li {
                     a {
                         color: 'white'; 
@@ -122,41 +126,46 @@ const Logo = styled.h1`
     `; 
 
 class Header extends React.Component { 
-    state = {
-        headerDropDown: false, 
-        topBarClass: 'topBar'
-    }
+    // state = {
+    //     headerDropDown: false, 
+    //     topBar: 'topBar'
+    // }
 
-    componentDidMount() {
-        this.setState({
-            headerDropDown: false
-        });
-    }
-     openMobileMenu = () => {
-        console.log('click'); 
-        if(!this.state.headerDropDown) {
-            this.setState({
-                headerDropDown: true, 
-                topBar: 'nav_isOpen'
-            }); 
-        } else {
-            this.setState({
-                headerDropDown: false,
-                topBar: 'topBar'
-            }); 
-        }
-    }
+    // componentDidMount() {
+    //     this.setState({
+    //         headerDropDown: false
+    //     });
+    // }
+    //  openMobileMenu = () => {
+    //     console.log('click'); 
+    //     if(!this.state.headerDropDown) {
+    //         this.setState({
+    //             headerDropDown: true, 
+    //             topBar: 'nav_isOpen'
+    //         }); 
+    //     } else {
+    //         this.setState({
+    //             headerDropDown: false,
+    //             topBar: 'topBar'
+    //         }); 
+    //     }
+    // }
     render() {
         return (
-            <StyledHeader navBarColor={this.props.navBarColor} border={this.props.border} className="header" openDropDown={this.state.headerDropDown}>
-                <div className='topBar' id={this.state.topBar}>
+            <StyledHeader navBarColor={this.props.navBarColor} border={this.props.border} className="header" openDropDown={this.props.headerDropDown}>
+                <div className='topBar' id={this.props.topBar}>
                     <Logo navBarColor={this.props.navBarColor}>
                         <Link href="/">
-                            <a className="navBar_links">Local Arts</a>
+                            <a className="navBar_links" onClick={this.props.logoOpenOff}>Local Arts</a>
                         </Link>
                     </Logo>
-                    <Nav navBarColor={this.props.navBarColor} openDropDown={this.state.headerDropDown}/>
-                    <div id="hamburger" onClick={this.openMobileMenu}>
+                    <Nav 
+                    navBarColor={this.props.navBarColor} 
+                    openDropDown={this.props.headerDropDown} 
+                    openMobileMenu={this.props.openMobileMenu}
+                    width={this.props.width}
+                    />
+                    <div id="hamburger" onClick={this.props.openMobileMenu}>
                         <div id="ham_top"></div>
                         <div id="ham_middle"></div>
                         <div id="ham_bottom"></div>

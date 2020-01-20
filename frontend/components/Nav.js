@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router'; 
 import Link from 'next/link'; 
 import styled from 'styled-components'; 
 
@@ -72,7 +73,13 @@ const StyledNav = styled.ul`
                 display: none; 
             }
             li {
-                padding: 1.6rem 0; 
+                padding: 1.4rem 0; 
+                .underline {
+                  width: 90%; 
+                  display: block; 
+                  background: #0a0a36; 
+                  }
+                }
                 a {
                     color: ${props => props.openDropDown ? '#0a0a36' : 'white'}; 
                     transition-delay: color 2s; 
@@ -83,55 +90,79 @@ const StyledNav = styled.ul`
                     }
                 }
             }
-        }
 
 
 `;
 
 
 const Nav = props => {
+    const router = useRouter();   
+    useEffect(() => {
+        console.log(router.pathname)
+        let slidingBars = document.querySelectorAll('.slidingBar'); 
+        let navLink = document.getElementById(`${router.pathname}`); 
+
+        slidingBars.forEach(bar => bar.classList.remove('underline')); 
+        if(document.contains(navLink)) {
+          navLink.classList.add('underline'); 
+        }   
+    }, [router.pathname]);
+
     return (
-        <StyledNav navBarColor={props.navBarColor} className="navbar" openDropDown={props.openDropDown} id={`mobileOpen${props.openDropDown}`}>
+        <StyledNav 
+        pathName = {router.pathname}
+        navBarColor={props.navBarColor} 
+        className="navbar" 
+        openDropDown={props.openDropDown} 
+        id={`mobileOpen${props.openDropDown}`}>
+            {props.width < 1000 && (
+                <Link href="/">
+                    <li onClick={props.openMobileMenu}>
+                    <a>Home</a>
+                    <div className="slidingBar" id="/"></div>
+                </li>
+                </Link>
+            )}
             <Link href="/about">
-                <li>
+                <li onClick={props.openMobileMenu}>
                     <a>About Us</a>
-                    <div className="slidingBar"></div>
+                    <div className="slidingBar" id="/about"></div>
                 </li>
             </Link>
             <Link href="/items">
-                <li>
+                <li onClick={props.openMobileMenu}>
                     <a>Shop</a>
-                    <div className="slidingBar"></div>
+                    <div className="slidingBar" id="/items"></div>
                 </li>
             </Link>
             <Link href="/sell">
-                <li>
+                <li onClick={props.openMobileMenu}>
                     <a>Sell</a>
-                    <div className="slidingBar"></div>
+                    <div className="slidingBar" id="/sell"></div>
                 </li>  
             </Link>
             <Link href="/orders">
-                <li>
+                <li onClick={props.openMobileMenu}>
                     <a>Orders</a>
-                    <div className="slidingBar"></div>
+                    <div className="slidingBar" id="/orders"></div>
                 </li>
             </Link>
             <Link href="/contact">
-                <li>
+                <li onClick={props.openMobileMenu}>
                     <a>Contact</a>
-                    <div className="slidingBar"></div>
+                    <div className="slidingBar" id="/contact"></div>
                 </li>
             </Link>
             <Link href="/signin">
-                <li>
+                <li onClick={props.openMobileMenu}>
                     <a>Sign In</a>
-                    <div className="slidingBar"></div>
+                    <div className="slidingBar" id="/signin"></div>
                 </li>
             </Link>
             <Link href="/signout">
-                <li>
+                <li onClick={props.openMobileMenu}>
                     <a>Sign Out</a>
-                    <div className="slidingBar"></div>
+                    <div className="slidingBar" id="/signout"></div>
                 </li>
             </Link>
             <div id="socialListContainer">
