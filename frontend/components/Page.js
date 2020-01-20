@@ -16,6 +16,7 @@ const theme = {
 const StyledPage = styled.div`
 	background-color: white; 
 	color: black; 
+
 `;
 const InnerDiv = styled.div`
 	/* max-width: ${props => props.theme.maxWidth }; 
@@ -40,7 +41,7 @@ const GlobalStyle = createGlobalStyle`
 `; 
 class Page extends Component {
 	state = {
-		navBarColor: false, 
+		navBarColor: false, //maybe use context for state here so that I can change it lower in the tree
 		border: false,
 	}
 	componentDidMount() {

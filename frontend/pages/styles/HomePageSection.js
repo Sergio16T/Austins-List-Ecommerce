@@ -6,7 +6,7 @@ const HomePageSection = styled.div`
     justify-content: center; 
     align-items: center; 
     grid-gap: 10%; 
-    margin: 8% 8%;
+    margin: 4% 8%;
     opacity: .99; 
     .column1, .column2 {
         display: grid; 
@@ -28,7 +28,13 @@ const HomePageSection = styled.div`
             margin: 2% 0;
          }
     }
-   
+   @media (max-width: 1000px){
+        grid-template-columns: 1fr; 
+        margin: 8% 8%; 
+        .column1, .column2 {
+            height: 85%; 
+        }
+   }
 `; 
 const Button = styled.button`
     width: 60%; 

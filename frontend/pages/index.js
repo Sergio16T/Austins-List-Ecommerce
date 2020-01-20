@@ -1,4 +1,3 @@
-import Link from 'next/link'; 
 import styled from 'styled-components'; 
 import { HomePageSection, Button } from './styles/HomePageSection'; 
 
@@ -38,6 +37,19 @@ const StyledHomeDiv = styled.div`
             font-size: 1.5rem; 
         }
     }
+    @media (max-width: 1000px) {
+        height: 100vh; 
+        overflow: hidden; 
+        video {
+            object-fit: cover; 
+        }
+        #welcome {
+            text-align: center;
+            justify-content: flex-start; 
+            padding: 30% 5% 0 5%; 
+            width: inherit; 
+        }
+    }
 `; 
 
 const Home = (props) => {
@@ -50,7 +62,7 @@ const Home = (props) => {
                 <h3> The place for local Austin artists to upload art and for you to explore!</h3>
             </div>
             <video autoPlay muted loop> 
-                <source src="" alt="homePageVideo" type="video/mp4"/> {/* get video in AWS s3 bucket */}
+                <source src="" alt="homePageVideo" type="video/mp4"/> {/* link to video in aws s3 bucket*/}
             </video>
         </StyledHomeDiv>
         </Container> 

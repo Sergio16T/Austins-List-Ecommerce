@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 const StyledNav = styled.ul`
         display: flex; 
-        align-items: center; 
-        justify-content: flex-end;
+        /* align-items: center; 
+        justify-content: flex-end; */
         .slidingBar {
             position: absolute; 
             height: 1px; 
@@ -20,7 +20,6 @@ const StyledNav = styled.ul`
         }
         a {
             color: ${props => props.navBarColor ? '#0a0a36' : 'white' };
-           /* color: white;  */
             font-weight: 600; 
             position: relative;  
             /* color: #0a0a36;  */
@@ -45,13 +44,56 @@ const StyledNav = styled.ul`
                 }
             }
         }
+        .socialListItem {
+            padding: 0 1rem; 
+        }
+        #socialListContainer {
+            margin: 0; 
+        }
+        @media (min-width: 1000px) {
+            justify-content: flex-end; 
+            align-items: center; 
+        }
+        @media (max-width: 1000px) {
+            /* display: none;  */
+            transform: ${props => props.openDropDown ? 'translateY(0)' :  'translateY(-110%)'};
+            transition: transform .3s; 
+            background-color: rgba(255, 255, 255, 0.98); 
+            /* height: 80vh;  */
+            position: absolute; 
+            width: 100%; 
+            padding-top: 5.5rem; 
+            top: 0%; 
+            left: 0; 
+            padding-left: 2rem; 
+            z-index: 2; 
+            flex-direction: column; 
+            margin: 0; 
+            box-shadow: 0px 1px 2px 1px rgba(0,0, 0, 0.4); 
+            .slidingBar {
+                display: none; 
+            }
+            li {
+                padding: 1.6rem 0; 
+                a {
+                    color: ${props => props.openDropDown ? '#0a0a36' : 'white'}; 
+                    transition-delay: color 2s; 
+                }
+                &:hover {
+                    a {
+                        top: 2px; 
+                    }
+                }
+            }
+        }
+
 
 `;
 
 
 const Nav = props => {
     return (
-        <StyledNav navBarColor={props.navBarColor}>
+        <StyledNav navBarColor={props.navBarColor} className="navbar" openDropDown={props.openDropDown}>
             <Link href="/about">
                 <li>
                     <a>About Us</a>
@@ -94,6 +136,7 @@ const Nav = props => {
                     <div className="slidingBar"></div>
                 </li>
             </Link>
+            <li id="socialListContainer">
             <SocialMediaIcon
             alt="linkedin"
             aria="linkedin"
@@ -119,6 +162,7 @@ const Nav = props => {
             path="M12.11 10.28c-.702 0-1.272.79-1.272 1.76 0 .974.57 1.762 1.272 1.762.702 0 1.27-.788 1.27-1.76.002-.973-.568-1.76-1.27-1.76zm4.428-4.58c.145-.358.152-2.387-.62-4.33 0 0-1.772.194-4.453 2.034C10.903 3.248 9.95 3.17 9 3.17s-1.902.078-2.465.233C3.855 1.563 2.083 1.37 2.083 1.37c-.773 1.943-.766 3.972-.62 4.33C.553 6.685 0 7.87 0 9.486c0 7.03 5.832 7.143 7.304 7.143h3.392c1.472 0 7.304-.115 7.304-7.145 0-1.617-.554-2.8-1.462-3.786zm-7.51 10.064h-.055c-3.69 0-6.564-.44-6.564-4.026 0-.86.302-1.656 1.022-2.318 1.2-1.103 3.233-.52 5.54-.52h.055c2.306 0 4.34-.582 5.54.52.72.662 1.023 1.46 1.023 2.318 0 3.586-2.873 4.026-6.562 4.026zM5.89 10.28c-.702 0-1.27.79-1.27 1.76 0 .974.568 1.762 1.27 1.762.703 0 1.272-.788 1.272-1.76 0-.973-.57-1.76-1.272-1.76z"
             navBarColor={props.navBarColor}
             />
+            </li>
         </StyledNav>
     );
 };
@@ -126,8 +170,8 @@ const Nav = props => {
 
 const SocialMediaIcon = (props) => {
     return (
-        <li className="socialListItem">
-        <a 
+        // <li className="socialListItem">
+        <a className="socialListItem"
         alt={props.alt} 
         aria-label={props.aria}
         href="/" 
@@ -154,7 +198,7 @@ const SocialMediaIcon = (props) => {
         </svg> 
         ) }
         </a>
-        </li>
+        // </li>
     ); 
 }
 
