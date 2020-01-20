@@ -63,7 +63,17 @@ const StyledHeader = styled.div`
                } 
                #hamburger {
                   & div {
-                  background-color: #0a0a36; 
+                    transition: transform .4s ease; 
+                    background-color: #0a0a36; 
+                  }
+                  #ham_top {
+                      transform: translateY(0px) rotate(-135deg); 
+                  }
+                  #ham_middle {
+                      transform: scale(0); 
+                  }
+                  #ham_bottom {
+                      transform: translateY(-10px) rotate(-45deg); 
                   }
                 }
             } 
@@ -73,6 +83,7 @@ const StyledHeader = styled.div`
                 z-index: 4;
                 cursor: pointer; 
                 & div {
+                    transition: transform .4s ease; 
                     background-color: ${props => props.navBarColor ? '#0a0a36' : 'white' };
                     width: 15px; 
                     height: 2px; 

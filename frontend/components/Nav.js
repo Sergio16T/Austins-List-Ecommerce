@@ -185,7 +185,7 @@ const SocialMediaIcon = (props) => {
         width="18"
         viewBox={props.viewBox}
         >
-        <path fill="currentColor"/*{props.navBarColor ? '#0a0a36' : 'white'}*/ d={props.path}></path>
+        <path fill="currentColor" d={props.path}></path>
         </svg> 
         )
         : ( 
@@ -194,7 +194,7 @@ const SocialMediaIcon = (props) => {
         xmlns="http://www.w3.org/2000/svg" 
         height="18" 
         width="18">
-        <path fill="currentColor"/*{props.navBarColor ? '#0a0a36' : 'white'}*/ d={props.path}></path>
+        <path fill="currentColor" d={props.path}></path>
         </svg> 
         ) }
         </a>
