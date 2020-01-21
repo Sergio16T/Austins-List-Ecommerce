@@ -45,8 +45,15 @@ const StyledHomeDiv = styled.div`
         }
         #welcome {
             text-align: center;
-            justify-content: flex-start; 
-            padding: 30% 5% 0 5%; 
+            left: 50%; 
+            margin-left: -50%; 
+            width: 100%; 
+        }
+    }
+    @media (max-width: 620px) {
+        #welcome {
+            padding-left: 1.5rem; 
+            padding-right: 1.5rem; 
             width: inherit; 
         }
     }

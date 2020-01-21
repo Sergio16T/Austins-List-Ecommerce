@@ -54,7 +54,7 @@ const StyledHeader = styled.div`
             .topBar {
                 display: flex; 
                 margin: 0; 
-                padding: 22px 5%; 
+                padding: 22px 2rem; 
             }
 
             #nav_isOpen {
@@ -126,30 +126,6 @@ const Logo = styled.h1`
     `; 
 
 class Header extends React.Component { 
-    // state = {
-    //     headerDropDown: false, 
-    //     topBar: 'topBar'
-    // }
-
-    // componentDidMount() {
-    //     this.setState({
-    //         headerDropDown: false
-    //     });
-    // }
-    //  openMobileMenu = () => {
-    //     console.log('click'); 
-    //     if(!this.state.headerDropDown) {
-    //         this.setState({
-    //             headerDropDown: true, 
-    //             topBar: 'nav_isOpen'
-    //         }); 
-    //     } else {
-    //         this.setState({
-    //             headerDropDown: false,
-    //             topBar: 'topBar'
-    //         }); 
-    //     }
-    // }
     render() {
         return (
             <StyledHeader navBarColor={this.props.navBarColor} border={this.props.border} className="header" openDropDown={this.props.headerDropDown}>

@@ -37,6 +37,18 @@ const StyledNav = styled.ul`
             font-size: 1.4rem; 
             &:hover {
                 cursor: pointer; 
+            }
+        }
+        #socialListContainer {
+            display: flex; 
+            margin: 0;
+        }
+        @media (min-width: 1000px) {
+            justify-content: flex-end; 
+            align-items: center; 
+            li {
+                &:hover {
+                cursor: pointer; 
                 a{
                     top: -2px; 
                 } 
@@ -44,14 +56,7 @@ const StyledNav = styled.ul`
                     width: 100%;
                 }
             }
-        }
-        #socialListContainer {
-            display: flex; 
-            margin: 0; 
-        }
-        @media (min-width: 1000px) {
-            justify-content: flex-end; 
-            align-items: center; 
+            }
         }
         @media (max-width: 1000px) {
             /* display: none;  */
@@ -72,8 +77,13 @@ const StyledNav = styled.ul`
             .slidingBar {
                 display: none; 
             }
+            .socialListItem {
+                margin: 0rem 1rem; 
+                padding: 1.4rem 0;
+            }
             li {
                 padding: 1.4rem 0; 
+                /* margin: 1rem 0;  */
                 .underline {
                   width: 90%; 
                   display: block; 
@@ -83,11 +93,6 @@ const StyledNav = styled.ul`
                 a {
                     color: ${props => props.openDropDown ? '#0a0a36' : 'white'}; 
                     transition-delay: color 2s; 
-                }
-                &:hover {
-                    a {
-                        top: 2px; 
-                    }
                 }
             }
 
@@ -205,7 +210,7 @@ const Nav = props => {
 const SocialMediaIcon = (props) => {
     return (
         <li className="socialListItem">
-        <a className="socialListItem"
+        <a
         alt={props.alt} 
         aria-label={props.aria}
         href="/" 

@@ -19,9 +19,6 @@ const StyledPage = styled.div`
 
 `;
 const InnerDiv = styled.div`
-	/* max-width: ${props => props.theme.maxWidth }; 
-	margin: 0 auto; 
-	padding: 2rem;  */
 `; 
 const GlobalStyle = createGlobalStyle`	
 	html {
