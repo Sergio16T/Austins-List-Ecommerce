@@ -45,13 +45,13 @@ const StyledHomeDiv = styled.div`
         }
         #welcome {
             text-align: center;
-            left: 50%; 
-            margin-left: -50%; 
             width: 100%; 
         }
     }
     @media (max-width: 620px) {
         #welcome {
+            justify-content: flex-start; 
+            margin-top: 35%; 
             padding-left: 1.5rem; 
             padding-right: 1.5rem; 
             width: inherit; 
@@ -69,7 +69,7 @@ const Home = (props) => {
                 <h3> The place for local Austin artists to upload art and for you to explore!</h3>
             </div>
             <video autoPlay muted loop> 
-                <source src="" alt="homePageVideo" type="video/mp4"/> {/*link to video in aws s3 bucket*/}
+                <source src="https://mooveit-videos.s3-us-west-2.amazonaws.com/compilation_preview.mp4" alt="homePageVideo" type="video/mp4"/> {/*link to video in aws s3 bucket*/}
             </video>
         </StyledHomeDiv>
         </Container> 
