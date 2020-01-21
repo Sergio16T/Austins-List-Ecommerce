@@ -97,16 +97,21 @@ const StyledNav = styled.ul`
 
 const Nav = props => {
     const router = useRouter();   
+    let isMounted = false; 
     useEffect(() => {
-        console.log(router.pathname)
-        let slidingBars = document.querySelectorAll('.slidingBar'); 
-        let navLink = document.getElementById(`${router.pathname}`); 
+        isMounted = true; 
+        if(isMounted) {
+            console.log(router.pathname); 
+            let slidingBars = document.querySelectorAll('.slidingBar'); 
+            let navLink = document.getElementById(`${router.pathname}`); 
 
-        slidingBars.forEach(bar => bar.classList.remove('underline')); 
-        if(document.contains(navLink)) {
-          navLink.classList.add('underline'); 
-        }   
-    }, [router.pathname]);
+            slidingBars.forEach(bar => bar.classList.remove('underline')); 
+            if(document.contains(navLink)) {
+            navLink.classList.add('underline'); 
+            }   
+        }
+        return () => isMounted = false; 
+    }, [router.pathname, props.width]);
 
     return (
         <StyledNav 

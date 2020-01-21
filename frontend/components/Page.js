@@ -52,7 +52,10 @@ class Page extends Component {
 		this.setState({
 			headerDropDown: false,
 			width: window.innerWidth
-        });
+		});
+		window.addEventListener('resize', () => this.setState({
+			width: window.innerWidth
+		})); 
 	}
 	componentWillUnmount() {
 		window.removeEventListener('scroll', this.handleScroll); 
