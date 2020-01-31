@@ -59,11 +59,9 @@ const StyledNav = styled.ul`
             }
         }
         @media (max-width: 1000px) {
-            /* display: none;  */
             transform: ${props => props.openDropDown ? 'translateY(0)' :  'translateY(-110%)'};
             transition: transform .3s; 
             background-color: rgba(255, 255, 255, 0.98); 
-            /* height: 80vh;  */
             position: absolute; 
             width: 100%; 
             padding-top: 5.5rem; 
@@ -82,7 +80,10 @@ const StyledNav = styled.ul`
                 padding: 1.4rem 0;
             }
             li {
-                padding: 1.4rem 0; 
+                /* padding: 1.4rem 0;  */
+                margin-top: .7rem; 
+                margin-bottom: .7rem; 
+                margin-left: 1rem; 
                 /* margin: 1rem 0;  */
                 .underline {
                   width: 90%; 

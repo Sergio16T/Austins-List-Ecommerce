@@ -11,7 +11,7 @@ const SellStyles = styled.div`
 `; 
 const Sell = (props) => {
     return (
-        <SellStyles pathName={props.pathName}>
+        <SellStyles>
         </SellStyles>
     )
 }

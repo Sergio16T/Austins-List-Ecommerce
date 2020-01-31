@@ -1,0 +1,13 @@
+#import * from './generated/prisma.graphql'
+
+type Query {
+    user(id: ID!): User
+    users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+    items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, 
+    first: Int): [Item!]! 
+}
+
+type Mutation {
+    createItem (title: String, description: String, price: Int, 
+    image: String, largeImage: String): Item!
+}

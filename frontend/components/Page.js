@@ -19,6 +19,7 @@ const StyledPage = styled.div`
 
 `;
 const InnerDiv = styled.div`
+	margin: 0 auto; 
 `; 
 const GlobalStyle = createGlobalStyle`	
 	html {
