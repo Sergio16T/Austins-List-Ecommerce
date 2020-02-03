@@ -4,16 +4,24 @@ const SellStyles = styled.div`
     background: linear-gradient(to Bottom, rgba(10,10,54,1) 14%, white 0%); 
     height: 100vh; 
     position: relative;
-    form {
+    /* form {
         position: absolute; 
         top: 50%;
         left: 50%; 
         transform: translate(-50%, -50%); 
         width: 70%; 
+
+    } */
+    .formContainer {
+        padding: 200px 0; 
+    }
+    form { 
+        width: 70%; 
         max-width: 1000px; 
         background-color: white; 
-        position: block; 
+        display: block; 
         color: black; 
+        margin: 0 auto; 
     }
    
 `; 

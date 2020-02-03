@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Link from 'next/link'; 
 import { StyledItem } from './styles/ItemStyles'; 
 import styled from 'styled-components'; 
+import FormayMoney from '../lib/formatMoney'; 
+import formatMoney from '../lib/formatMoney';
 
 const Title = styled.div`
     a { 
@@ -43,6 +45,7 @@ class Item extends Component {
                         </Link>
                     </Title>
                     <p>{item.description}</p>
+                    <p>{formatMoney(item.price)}</p>
                     <ItemButtons>
                         <Link href={{
                             pathname: '/update', 

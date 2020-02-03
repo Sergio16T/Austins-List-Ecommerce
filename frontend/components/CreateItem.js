@@ -9,11 +9,15 @@ const CREATE_ITEM_MUTATION = gql`
         $title: String! 
         $description: String!
         $price: Int! 
+        $image: String!
+        $largeImage: String!
         ) {
         createItem(
             title: $title, 
             description: $description, 
             price: $price
+            image: $image
+            largeImage: $largeImage 
             ) {
             id
         }
@@ -22,9 +26,35 @@ const CREATE_ITEM_MUTATION = gql`
 class CreateItem extends Component {
     state = {
         title: '', 
-        price: undefined, 
-        description: '', 
-        errorMessage: ''
+        price: 0, 
+        description: '',
+        image: '',
+        largeImage: '',
+        errorMessage: '',
+        uploadError: ''
+    }
+    uploadFile = async (e) => {
+        console.log('uploading file'); 
+        const files = e.target.files; 
+        const data = new FormData(); 
+        data.append('file', files[0]); 
+        data.append('upload_preset', 'AustinArts'); 
+
+        const res = await fetch('https://api.cloudinary.com/v1_1/dddnhychw/image/upload', {
+            method: 'POST', 
+            body: data  
+        }); 
+        const file = await res.json(); 
+        console.log(file); 
+        try {
+            this.setState({
+                image: file.secure_url, 
+                largeImage: file.eager[0].secure_url,
+            }); 
+        }
+        catch(err) {
+            this.setState({uploadError: err.message}); 
+        }
     }
     handleInput = (e) => {
         let regEx = /^\d+(\.\d{0,2})?$/; 
@@ -56,12 +86,13 @@ class CreateItem extends Component {
         const { errorMessage } = this.state; 
         return (
             <SellStyles>
-                <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
+                <div className="formContainer">
+                <Mutation mutation={CREATE_ITEM_MUTATION} variables={{...this.state, price: this.state.price * 100}}>
                     {(createItem, {loading, error}) => (
                     <StyledForm onSubmit={ async (e)=> {
                         e.preventDefault(); 
                         let res = await createItem(); 
-                        //console.log(res); 
+                        console.log(res); 
                         Router.push({
                             pathname: "/item", 
                             query: {id: res.data.createItem.id}
@@ -75,9 +106,10 @@ class CreateItem extends Component {
                                 id ="file" 
                                 name="file" 
                                 placeholder="upload an image" 
-                            
+                                onChange={this.uploadFile}
                                 />
                             </label>
+                            {this.state.largeImage && <img width="250" src={this.state.image} alt={this.state.description}></img>}
                             <label htmlFor="title">
                                 Title
                                 <input
@@ -119,6 +151,7 @@ class CreateItem extends Component {
                     </StyledForm>
                 )}
                 </Mutation>
+                </div>
             </SellStyles>
         );
     }

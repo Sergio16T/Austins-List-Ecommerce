@@ -63,7 +63,7 @@ class Page extends Component {
 		}); 
 	}
 	 handleScroll = () => {
-        if(window.scrollY > (window.innerHeight * 0.10)) {
+        if(window.scrollY > (window.innerHeight * 0.05)) {
           this.setState({
 			  navBarColor: true,
 			  border: true, 
