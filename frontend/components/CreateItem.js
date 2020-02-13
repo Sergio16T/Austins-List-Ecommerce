@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo'; 
 import Router from 'next/router'; 
 import gql from'graphql-tag'; 
-import { SellStyles, StyledForm} from './styles/FormStyles'; 
+import { StyledFormWrapper, StyledForm} from './styles/FormStyles'; 
 
 const CREATE_ITEM_MUTATION = gql`
     mutation CREATE_ITEM_MUTATION(
@@ -85,7 +85,7 @@ class CreateItem extends Component {
     render() {
         const { errorMessage } = this.state; 
         return (
-            <SellStyles>
+            <StyledFormWrapper>
                 <div className="formContainer">
                 <Mutation mutation={CREATE_ITEM_MUTATION} variables={{...this.state, price: this.state.price * 100}}>
                     {(createItem, {loading, error}) => (
@@ -152,7 +152,7 @@ class CreateItem extends Component {
                 )}
                 </Mutation>
                 </div>
-            </SellStyles>
+            </StyledFormWrapper>
         );
     }
 }

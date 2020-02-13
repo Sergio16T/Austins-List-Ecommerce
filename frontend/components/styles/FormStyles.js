@@ -1,6 +1,6 @@
 import styled from 'styled-components'; 
 
-const SellStyles = styled.div`
+const StyledFormWrapper = styled.div`
     background: linear-gradient(to Bottom, rgba(10,10,54,1) 14%, white 0%); 
     height: 100vh; 
     position: relative;
@@ -70,4 +70,4 @@ const StyledForm = styled.form`
     }
 `;
 
-export { SellStyles, StyledForm }
+export { StyledFormWrapper, StyledForm }

@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components'; 
 
 const AboutStyles = styled.div`
-    background: rgba(10,10,54,1); 
+   /* background: rgba(10,10,54,1);  */
+    background: linear-gradient(to Bottom, rgba(10,10,54,1) 14%, white 0%); 
     height: 100vh; 
     position: relative;
     div {
