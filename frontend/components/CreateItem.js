@@ -3,6 +3,8 @@ import { Mutation } from 'react-apollo';
 import Router from 'next/router'; 
 import gql from'graphql-tag'; 
 import { StyledFormWrapper, StyledForm} from './styles/FormStyles'; 
+import Spinner from './styles/Spinner'; 
+import { ALL_ITEMS_QUERY } from './Items'; 
 
 const CREATE_ITEM_MUTATION = gql`
     mutation CREATE_ITEM_MUTATION(
@@ -35,6 +37,7 @@ class CreateItem extends Component {
     }
     uploadFile = async (e) => {
         console.log('uploading file'); 
+        this.setState({ spinner: true }); 
         const files = e.target.files; 
         const data = new FormData(); 
         data.append('file', files[0]); 
@@ -46,10 +49,12 @@ class CreateItem extends Component {
         }); 
         const file = await res.json(); 
         console.log(file); 
+
         try {
             this.setState({
                 image: file.secure_url, 
                 largeImage: file.eager[0].secure_url,
+                spinner: false
             }); 
         }
         catch(err) {
@@ -80,24 +85,30 @@ class CreateItem extends Component {
         this.setState({
             [name]: val
         }); 
-    
     }
     render() {
         const { errorMessage } = this.state; 
         return (
             <StyledFormWrapper>
                 <div className="formContainer">
-                <Mutation mutation={CREATE_ITEM_MUTATION} variables={{...this.state, price: this.state.price * 100}}>
+                <Mutation 
+                mutation={CREATE_ITEM_MUTATION} 
+                variables={{...this.state, price: this.state.price * 100}}
+                refetchQueries={[{ query: ALL_ITEMS_QUERY }]}
+                >
                     {(createItem, {loading, error}) => (
                     <StyledForm onSubmit={ async (e)=> {
                         e.preventDefault(); 
+                        this.setState({ spinner: true }); 
                         let res = await createItem(); 
+                        this.setState({ spinner: false }); 
                         console.log(res); 
                         Router.push({
                             pathname: "/item", 
                             query: {id: res.data.createItem.id}
                         }); 
                     }} errorMessage = {errorMessage}>
+                         <Spinner spinner={this.state.spinner}/>
                         <fieldset disabled={loading} aria-busy={loading}>
                             <label htmlFor="file">
                                 Image

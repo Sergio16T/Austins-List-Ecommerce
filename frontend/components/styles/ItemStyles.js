@@ -5,8 +5,11 @@ const ItemStyles = styled.div`
     /* background: linear-gradient(to Bottom, rgba(10,10,54,1) 200px, white 0%);  */
     width: 100%; 
     position: relative;
+    padding-top: 100px; 
+    @media (max-width: 600px) {
+        padding-top: 100px; 
+    }
     `; 
-
 const StyledItem = styled.div`
     display: flex; 
     flex-direction: column; 
@@ -19,5 +22,9 @@ const StyledItem = styled.div`
         object-fit: cover; 
     }
 `; 
-
-export { ItemStyles, StyledItem }; 
+const StyledItemsWithPagination = styled.div`
+    position: relative; 
+    width: 100%; 
+    background-color: #FAFAFA;
+`; 
+export { ItemStyles, StyledItem, StyledItemsWithPagination }; 

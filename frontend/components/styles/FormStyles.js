@@ -17,7 +17,7 @@ const StyledFormWrapper = styled.div`
     }
     form { 
         width: 70%; 
-        max-width: 1000px; 
+        max-width: 700px; 
         background-color: white; 
         display: block; 
         color: black; 
@@ -30,10 +30,11 @@ const StyledForm = styled.form`
     background: rgba(0, 0, 0, 0.02);
     border: 5px solid white;
     padding: 20px;
+    position: relative; 
     label {
         display: block;
         margin-bottom: 1rem;
-        font-size: 1.2rem; 
+        font-size: 1.4rem; 
         padding: 2px 0; 
     }
     #priceLabel {
@@ -45,6 +46,7 @@ const StyledForm = styled.form`
         padding: 0;
     }
     input, textarea {
+        font-size: 1.1rem; 
         box-sizing: border-box; 
         width: 100%; 
         border: 1px solid rgba(10,10,54,1); 
@@ -67,6 +69,55 @@ const StyledForm = styled.form`
         outline: none; 
         border: none; 
         cursor: pointer; 
+    }
+    .imageContainer {
+        margin-bottom: 1rem; 
+    }
+    #uploadImageLabel {
+        margin-top: 1rem; 
+        margin-bottom: 0; 
+    }
+    @media (min-width: 700px) {
+    #editInput {
+        position: absolute;
+        border: 0;
+        height: 1px;
+        width: 1px;
+        white-space: nowrap;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+    }
+    #uploadImageLabel {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        text-align: center;
+        background: #2b3eab;
+        width: 140px;
+        height: 38px;
+        color: white;
+        align-content: center;
+        padding: .5rem;
+        margin: .5rem;
+        line-height: inherit;
+    }
+    #itemImage {
+        margin: .5rem; 
+    }
+    .formRow { 
+        display: flex; 
+        .formCol-2 {
+            flex: 0 0 66%; 
+            max-width: 66%; 
+        }
+        .formCol-1{ 
+            display: flex; 
+            justify-content: center; 
+            flex: 0 0 33%; 
+        }
+    }
     }
 `;
 

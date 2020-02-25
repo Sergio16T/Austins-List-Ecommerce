@@ -9,6 +9,7 @@ const Mutations = {
         return item; 
     },
     async updateItem(parent, args, ctx, info) {
+        console.log(args); 
         const updates = {...args}; 
 
         delete updates.id; 

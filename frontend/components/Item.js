@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Link from 'next/link'; 
 import { StyledItem } from './styles/ItemStyles'; 
 import styled from 'styled-components'; 
-import FormayMoney from '../lib/formatMoney'; 
 import formatMoney from '../lib/formatMoney';
 
 const Title = styled.div`
@@ -18,6 +17,7 @@ const ItemButtons = styled.div`
     grid-gap: 1px; 
     background: #E1E1E1;
     button { 
+        background: white; 
         cursor: pointer; 
         padding: 10px; 
         border: none; 

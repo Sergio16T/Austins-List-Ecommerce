@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo'; 
 import gql from 'graphql-tag';
 import Item from './Item';
-import { ItemStyles } from './styles/ItemStyles'; 
+import { ItemStyles, StyledItemsWithPagination } from './styles/ItemStyles'; 
 import styled from 'styled-components';
+import Pagination from './Pagination'; 
 
 const ALL_ITEMS_QUERY = gql`
     query ALL_ITEMS_QUERY {
@@ -26,8 +27,11 @@ const StyledItemContainer = styled.div`
     max-width: 1000px;
     margin: 0 auto; 
     background-color: transparent; 
-    padding-top: 250px;  
+    /* padding-top: 250px;   */
     text-align: center; 
+    @media (max-width: 700px) {
+        grid-template-columns: 1fr; 
+    }
 `; 
 
 const StyledLoadMessage = styled.div`
@@ -43,26 +47,36 @@ const StyledLoadMessage = styled.div`
         padding: 10px; 
     }
 `; 
-const Wrapper = styled.div``; 
+const Wrapper = styled.div`
+
+`; 
 
 class Items extends Component {
     render() {
         return (
             <Wrapper>
             <ItemStyles>
+              
                 <Query query={ALL_ITEMS_QUERY}
                 >
                     {({ data, error, loading }) => { 
                         if (loading) return null; 
                         if (error) return <p> Error: {error.message}</p>
                         console.log('payload', data);
-                        return <StyledItemContainer>
-                                   {data.items.map(item => (
-                                       <Item key={item.id} item={item}/>           
-                                   ))}
-                                </StyledItemContainer>  
-                    }}
+                        return (
+                        <StyledItemsWithPagination>
+                        <Pagination/>
+                            <StyledItemContainer>
+                                        
+                                        {data.items.map(item => (
+                                            <Item key={item.id} item={item}/>           
+                                        ))}
+                            </StyledItemContainer>  
+                        <Pagination/>
+                        </StyledItemsWithPagination>
+                        )}}
                 </Query>
+         
             </ItemStyles>
             </Wrapper>
         );
@@ -70,3 +84,4 @@ class Items extends Component {
 }
 
 export default Items;
+export { ALL_ITEMS_QUERY }
