@@ -7,8 +7,8 @@ import styled from 'styled-components';
 import Pagination from './Pagination'; 
 
 const ALL_ITEMS_QUERY = gql`
-    query ALL_ITEMS_QUERY {
-        items {
+    query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = 4) {
+        items(skip: $skip, first: $first, orderBy: createdAt_ASC) {
             id
             title
             price
@@ -23,7 +23,7 @@ const StyledItemContainer = styled.div`
     display: grid; 
     grid-template-columns: 1fr 1fr; 
     grid-gap: 60px; 
-    padding: 5%; 
+    padding:  0 5%; 
     max-width: 1000px;
     margin: 0 auto; 
     background-color: transparent; 
@@ -58,6 +58,7 @@ class Items extends Component {
             <ItemStyles>
               
                 <Query query={ALL_ITEMS_QUERY}
+                variables={{skip: this.props.page * 4 - 4}}
                 >
                     {({ data, error, loading }) => { 
                         if (loading) return null; 
@@ -65,14 +66,14 @@ class Items extends Component {
                         console.log('payload', data);
                         return (
                         <StyledItemsWithPagination>
-                        <Pagination/>
+                        <Pagination page={this.props.page}/>
                             <StyledItemContainer>
                                         
                                         {data.items.map(item => (
                                             <Item key={item.id} item={item}/>           
                                         ))}
                             </StyledItemContainer>  
-                        <Pagination/>
+                        <Pagination page={this.props.page}/>
                         </StyledItemsWithPagination>
                         )}}
                 </Query>
