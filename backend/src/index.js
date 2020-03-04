@@ -3,6 +3,7 @@ require('dotenv').config();
 const { Prisma } = require('prisma-binding');
 const Mutation = require('./resolvers/Mutation.js'); 
 const Query = require('./resolvers/Query.js'); 
+const cookieParser = require('cookie-parser'); 
 
 
 const server = new GraphQLServer({
@@ -24,6 +25,10 @@ const server = new GraphQLServer({
     }),
   }),
 });
+
+// express middleware to handle cookies 
+server.express.use(cookieParser()); 
+
 server.start({
   cors: {
       credentials: true, // so not just anyone can crud data 

@@ -200,7 +200,7 @@ class UpdateItem extends Component {
                                 </div>
                                 
                                 </div>
-                                <button type="submit">Save Changes</button>
+                                <button type="submit" disabled={this.state.errorMessage ? true : false} aria-disabled={this.state.errorMessage ? true : false}>Save Changes</button>
                             </fieldset>
                         </StyledForm>
                         )}

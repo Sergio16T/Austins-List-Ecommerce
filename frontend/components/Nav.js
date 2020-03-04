@@ -164,12 +164,18 @@ const Nav = props => {
                     <div className="slidingBar" id="/contact"></div>
                 </li>
             </Link>
-            <Link href="/signin">
+            <Link href="/signup">
+                <li onClick={props.openMobileMenu}>
+                    <a>Sign Up</a>
+                    <div className="slidingBar" id="/signup"></div>
+                </li>
+            </Link>
+            {/* <Link href="/signin">
                 <li onClick={props.openMobileMenu}>
                     <a>Sign In</a>
                     <div className="slidingBar" id="/signin"></div>
                 </li>
-            </Link>
+            </Link> */}
             <Link href="/signout">
                 <li onClick={props.openMobileMenu}>
                     <a>Sign Out</a>

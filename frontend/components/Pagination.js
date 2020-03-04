@@ -20,6 +20,7 @@ const PAGINATION_QUERY = gql`
 
 
 const PaginationContainer = styled.div`
+    padding-top: 2rem; 
     width: 100%; 
     display: flex; 
     justify-content: center; 

@@ -56,7 +56,6 @@ class Items extends Component {
         return (
             <Wrapper>
             <ItemStyles>
-              
                 <Query query={ALL_ITEMS_QUERY}
                 variables={{skip: this.props.page * 4 - 4}}
                 >
@@ -67,17 +66,15 @@ class Items extends Component {
                         return (
                         <StyledItemsWithPagination>
                         <Pagination page={this.props.page}/>
-                            <StyledItemContainer>
-                                        
-                                        {data.items.map(item => (
-                                            <Item key={item.id} item={item}/>           
-                                        ))}
+                            <StyledItemContainer>    
+                                {data.items.map(item => (
+                                    <Item key={item.id} item={item}/>           
+                                ))}
                             </StyledItemContainer>  
                         <Pagination page={this.props.page}/>
                         </StyledItemsWithPagination>
                         )}}
                 </Query>
-         
             </ItemStyles>
             </Wrapper>
         );

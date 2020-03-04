@@ -99,7 +99,7 @@ class CreateItem extends Component {
                     {(createItem, {loading, error}) => (
                     <StyledForm onSubmit={ async (e)=> {
                         e.preventDefault(); 
-                        this.setState({ spinner: true }); 
+                        this.setState({ spinner: true });
                         let res = await createItem(); 
                         this.setState({ spinner: false }); 
                         console.log(res); 
@@ -107,7 +107,9 @@ class CreateItem extends Component {
                             pathname: "/item", 
                             query: {id: res.data.createItem.id}
                         }); 
-                    }} errorMessage = {errorMessage}>
+                    }} 
+                    errorMessage = {errorMessage}
+                    >
                          <Spinner spinner={this.state.spinner}/>
                         <fieldset disabled={loading} aria-busy={loading}>
                             <label htmlFor="file">
@@ -157,7 +159,7 @@ class CreateItem extends Component {
                                 required  
                                 />
                             </label>
-                            <button type="submit"> Submit </button>
+                            <button type="submit" disabled={errorMessage ? true : false} aria-disabled={errorMessage ? true : false}> Submit </button>
                         </fieldset>
                     </StyledForm>
                 )}

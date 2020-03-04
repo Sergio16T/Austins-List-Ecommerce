@@ -40,7 +40,7 @@ const StyledForm = styled.form`
     #priceLabel {
         color: ${props => props.errorMessage ? 'red' : 'black'}; 
         font-size: ${props => props.errorMessage ? '1.5rem' : '1.2rem'}; 
-    }
+    }   
     fieldset {
         border: 0;
         padding: 0;
@@ -77,6 +77,10 @@ const StyledForm = styled.form`
         margin-top: 1rem; 
         margin-bottom: 0; 
     }
+    button[aria-disabled='true'] {
+    opacity: .6;
+    pointer-events: none;
+  }
     @media (min-width: 700px) {
     #editInput {
         position: absolute;
