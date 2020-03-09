@@ -4,9 +4,10 @@ const Query = {
     item: forwardTo('prisma'), 
     itemsConnection: forwardTo('prisma'), 
     users: forwardTo('prisma'), 
-    user: (parent, args, ctx, info) => {
-      return ctx.prisma.query.user({
-          where: { id: args.id }
+    user: async (parent, args, ctx, info) => {
+      if(!ctx.request.userId) { return; }
+      return await ctx.prisma.query.user({
+          where: { id: ctx.request.userId }
       }, info); 
     }, 
   }; 

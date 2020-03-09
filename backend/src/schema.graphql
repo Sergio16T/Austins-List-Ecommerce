@@ -1,7 +1,11 @@
 #import * from './generated/prisma.graphql'
 
+type SuccessMessage {
+    message: String
+}
+
 type Query {
-    user(id: ID!): User
+    user: User
     users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
     items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, 
     first: Int): [Item!]! 
@@ -14,4 +18,6 @@ type Mutation {
     image: String, largeImage: String): Item!
     updateItem(id: ID!, title: String, description: String, price: Int, image: String, largeImage: String): Item!
     signup(email: String!, password: String!, name: String!): User!
+    signin(email: String!, password: String!): User!
+    signout: SuccessMessage
 }

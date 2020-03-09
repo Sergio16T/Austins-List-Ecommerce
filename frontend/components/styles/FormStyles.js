@@ -1,7 +1,7 @@
 import styled from 'styled-components'; 
 
 const StyledFormWrapper = styled.div`
-    background: linear-gradient(to Bottom, rgba(10,10,54,1) 14%, white 0%); 
+    background: linear-gradient(to Bottom, rgba(10,10,54,1) 100px, white 0%); 
     height: 100vh; 
     position: relative;
     /* form {
@@ -15,6 +15,10 @@ const StyledFormWrapper = styled.div`
     .formContainer {
         padding: 200px 0; 
     }
+    .accountSignUp {
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+    }
     form { 
         width: 70%; 
         max-width: 700px; 
@@ -23,7 +27,12 @@ const StyledFormWrapper = styled.div`
         color: black; 
         margin: 0 auto; 
     }
-   
+   @media (max-width: 900px) {
+       .accountSignUp {
+           grid-template-columns: 1fr; 
+           grid-row-gap: 2rem; 
+       }
+   }
 `; 
 const StyledForm = styled.form`
     box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);

@@ -76,7 +76,7 @@ class Page extends Component {
 		} 
 	} 
 	openMobileMenu = (e) => {
-		console.log('click'); 
+		//console.log('click'); 
         if(!this.state.headerDropDown) {
             this.setState({
                 headerDropDown: true, 

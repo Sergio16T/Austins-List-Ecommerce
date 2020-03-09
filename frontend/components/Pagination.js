@@ -39,8 +39,7 @@ const Pagination = props => {
                         <Head>
                             <title>Austin Arts page {props.page} of {pages}</title>
                         </Head>
-                        <Link
-                        prefetch
+                        <Link                      
                         href={{
                             pathname: "/items",
                             query: {page: props.page -1}
@@ -49,8 +48,7 @@ const Pagination = props => {
                         <a aria-disabled={props.page <= 1}> &#8592; Prev</a>
                         </Link>
                         <p>Page {props.page} of {pages}</p>
-                        <Link
-                        prefetch
+                        <Link                      
                         href={{
                             pathname:"/items",
                             query: {page: props.page + 1}

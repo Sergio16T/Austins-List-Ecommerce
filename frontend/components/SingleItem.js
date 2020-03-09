@@ -6,12 +6,14 @@ import formatMoney from '../lib/formatMoney';
 
 const ItemWrapper = styled.div`
     position: relative; 
-    background: #FAFAFA;
-    padding: 15% 35px; 
-    background: linear-gradient(to Bottom, rgba(10,10,54,1) 12%, white 0%);  
+    padding-top: 100px; 
+    /* position: relative; 
+    background: #FAFAFA; */
+    padding: 15% 35px;  
+    background: linear-gradient(to Bottom, rgba(10,10,54,1) 100px, white 0%);  
     @media (max-width: 800px) {
-        background: linear-gradient(to Bottom, rgba(10,10,54,1) 10%, white 0%);  
-        padding: 15% 0; 
+        /* background: linear-gradient(to Bottom, rgba(10,10,54,1) 10%, white 0%);  
+        padding: 15% 0;  */
     }
 `;
 const SingleItemStyles = styled.div`
@@ -35,7 +37,6 @@ const SingleItemStyles = styled.div`
         text-align: center;
         flex-direction: column;
     }
-    }
     .itemTitle {
         font-size: 2rem; 
     }
@@ -51,8 +52,8 @@ const SingleItemStyles = styled.div`
         margin: 3rem; 
         font-size: 2rem; 
     }
-    @media (max-width: 800px) {
-        margin-top: 20%; 
+    @media (max-width: 900px) {
+        /* margin-top: 20%;  */
         grid-template-columns: 1fr;
         grid-template-rows: .5fr 1fr; 
         .gridBox {
