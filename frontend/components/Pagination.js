@@ -25,13 +25,18 @@ const PaginationContainer = styled.div`
     display: flex; 
     justify-content: center; 
 `;
+const Placeholder = styled.div`
+    height: 45px;
+    margin-top: 24px; 
+    margin-bottom: 24px; 
+`; 
 const Pagination = props => {
     return (
         <PaginationContainer>
             <Query query={PAGINATION_QUERY}>
                 {({data, error, loading}) => {
+                    if(loading) return <Placeholder/>; 
                     if(error) return <p>{error.message}</p>
-                    if(loading) return null
                     const count = data.itemsConnection.aggregate.count; 
                     const pages = Math.ceil(count / perPage); 
                     return (
@@ -66,3 +71,4 @@ const Pagination = props => {
 
 
 export default Pagination;
+export { PAGINATION_QUERY }; 

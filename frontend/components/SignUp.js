@@ -35,7 +35,7 @@ class SignUp extends Component {
             <Mutation 
             mutation={SIGNUP_MUTATION} 
             variables={this.state}
-            refetchQueries={[CURRENT_USER_QUERY]}
+            refetchQueries={[{ query: CURRENT_USER_QUERY }]}
             >
               {(signup, { error, loading}) => {
                   return (
@@ -57,7 +57,7 @@ class SignUp extends Component {
                                 Name
                                 <input
                                 type ="text" 
-                                id ="name" 
+                                // id ="name" 
                                 name="name" 
                                 placeholder="Name" 
                                 value={this.state.name}
@@ -69,7 +69,7 @@ class SignUp extends Component {
                                 Email
                                 <input
                                 type ="text" 
-                                id ="email" 
+                                // id ="email" 
                                 name="email" 
                                 placeholder="Enter your email address" 
                                 value={this.state.email}
@@ -80,7 +80,7 @@ class SignUp extends Component {
                                 Password
                                 <input
                                 type ="password" 
-                                id ="password" 
+                                // id ="password" 
                                 name="password" 
                                 placeholder="Password" 
                                 value={this.state.password}

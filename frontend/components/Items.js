@@ -47,39 +47,61 @@ const StyledLoadMessage = styled.div`
         padding: 10px; 
     }
 `; 
-const Wrapper = styled.div`
-
-`; 
 
 class Items extends Component {
     render() {
         return (
-            <Wrapper>
-            <ItemStyles>
-                <Query query={ALL_ITEMS_QUERY}
-                variables={{skip: this.props.page * 4 - 4}}
-                >
-                    {({ data, error, loading }) => { 
-                        if (loading) return null; 
-                        if (error) return <p> Error: {error.message}</p>
-                        console.log('payload', data);
-                        return (
-                        <StyledItemsWithPagination>
-                        <Pagination page={this.props.page}/>
-                            <StyledItemContainer>    
-                                {data.items.map(item => (
-                                    <Item key={item.id} item={item}/>           
-                                ))}
-                            </StyledItemContainer>  
-                        <Pagination page={this.props.page}/>
-                        </StyledItemsWithPagination>
-                        )}}
-                </Query>
-            </ItemStyles>
-            </Wrapper>
+                  <ItemStyles>
+                      <Query query={ALL_ITEMS_QUERY}
+                      variables={{skip: this.props.page * 4 - 4}}
+                      >
+                          {({ data, error, loading }) => { 
+                              if (loading) return null; 
+                              if (error) return <p> Error: {error.message}</p>
+                              console.log('payload', data);
+                              return (
+                              <StyledItemsWithPagination>
+                              <Pagination page={this.props.page}/>
+                                  <StyledItemContainer>    
+                                      {data.items.map(item => (
+                                          <Item key={item.id} item={item} page={this.props.page}/>           
+                                      ))}
+                                  </StyledItemContainer>  
+                              <Pagination page={this.props.page}/>
+                              </StyledItemsWithPagination>
+                              )}}
+                      </Query>
+                  </ItemStyles>
         );
     }
 }
 
 export default Items;
 export { ALL_ITEMS_QUERY }
+
+
+
+                //   </Wrapper>
+                // <ItemStyles>
+                //     <StyledItemsWithPagination>
+                //         <Pagination page={this.props.page}/>
+                //             <Query 
+                //             query={ALL_ITEMS_QUERY}
+                //             variables={{skip: this.props.page * 4 - 4}}
+                //             >
+                //                 {({ data, error, loading }) => { 
+                //                     if (loading) return null; 
+                //                     if (error) return <p> Error: {error.message}</p>
+                //                     // console.log('payload', data);
+                //                     return (
+                //                         <StyledItemContainer>    
+                //                             {data.items.map(item => (
+                //                                 <Item key={item.id} item={item} page={this.props.page}/>           
+                //                             ))}
+                //                         </StyledItemContainer>  
+                //                     )}}
+                //             </Query>
+                //         <Pagination page={this.props.page}/>
+                //     </StyledItemsWithPagination>
+                // </ItemStyles>
+                //   <Wrapper>

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Mutation } from 'react-apollo'; 
+import { Query, Mutation } from 'react-apollo'; 
 import Router from 'next/router'; 
 import gql from'graphql-tag'; 
 import { StyledFormWrapper, StyledForm} from './styles/FormStyles'; 
 import Spinner from './styles/Spinner'; 
 import { ALL_ITEMS_QUERY } from './Items'; 
+import { PAGINATION_QUERY } from './Pagination'; 
 
 const CREATE_ITEM_MUTATION = gql`
     mutation CREATE_ITEM_MUTATION(
@@ -65,7 +66,7 @@ class CreateItem extends Component {
         let regEx = /^\d+(\.\d{0,2})?$/; 
         const { value, type, name } = e.target; 
         let val = type === 'number' && value.length ? parseFloat(value) : value; 
-        console.log(regEx.test(val)); 
+        // console.log(regEx.test(val)); 
         try {
             if ((typeof val === 'number') && !regEx.test(val)) {
                 throw new Error('Only two decimal points please'); 
@@ -91,79 +92,97 @@ class CreateItem extends Component {
         return (
             <StyledFormWrapper>
                 <div className="formContainer">
-                <Mutation 
-                mutation={CREATE_ITEM_MUTATION} 
-                variables={{...this.state, price: this.state.price * 100}}
-                refetchQueries={[{ query: ALL_ITEMS_QUERY }]}
-                >
-                    {(createItem, {loading, error}) => (
-                    <StyledForm onSubmit={ async (e)=> {
-                        e.preventDefault(); 
-                        this.setState({ spinner: true });
-                        let res = await createItem(); 
-                        this.setState({ spinner: false }); 
-                        console.log(res); 
-                        Router.push({
-                            pathname: "/item", 
-                            query: {id: res.data.createItem.id}
-                        }); 
-                    }} 
-                    errorMessage = {errorMessage}
-                    >
-                         <Spinner spinner={this.state.spinner}/>
-                        <fieldset disabled={loading} aria-busy={loading}>
-                            <label htmlFor="file">
-                                Image
-                                <input
-                                type ="file" 
-                                id ="file" 
-                                name="file" 
-                                placeholder="upload an image" 
-                                onChange={this.uploadFile}
-                                />
-                            </label>
-                            {this.state.largeImage && <img width="250" src={this.state.image} alt={this.state.description}></img>}
-                            <label htmlFor="title">
-                                Title
-                                <input
-                                type ="text" 
-                                id ="title" 
-                                name="title" 
-                                placeholder="title" 
-                                value={this.state.title}
-                                onChange={this.handleInput}
-                                required  
-                                />
-                            </label>
-                            <label htmlFor="price" id="priceLabel">
-                                {errorMessage ? errorMessage : 'Price'}
-                                <input
-                                type ="number" 
-                                id ="price" 
-                                name="price" 
-                                placeholder="price" 
-                                value={this.state.price}
-                                step=".01"
-                                onChange={this.handleInput}
-                                required  
-                                />
-                            </label>
-                            <label htmlFor="description">
-                                Description
-                                <textarea
-                                id ="description" 
-                                name="description" 
-                                placeholder="Enter a Description" 
-                                value={this.state.description}
-                                onChange={this.handleInput}
-                                required  
-                                />
-                            </label>
-                            <button type="submit" disabled={errorMessage ? true : false} aria-disabled={errorMessage ? true : false}> Submit </button>
-                        </fieldset>
-                    </StyledForm>
-                )}
-                </Mutation>
+                    <Query query={PAGINATION_QUERY}>
+                        {({data, error, loading}) => {
+                            if(loading) return null; 
+                            const count = data.itemsConnection.aggregate.count; 
+                            // console.log(count); 
+                            let lastOnPage  = count/4 === 0; 
+                            let page = Math.ceil((count+1)/4) 
+                            // console.log(page); 
+                            let skip = page * 4 - 4;
+                            // console.log(skip); 
+                            return (
+                        <Mutation 
+                        mutation={CREATE_ITEM_MUTATION} 
+                        variables={{...this.state, price: this.state.price * 100}}
+                        refetchQueries={[
+                            { query: PAGINATION_QUERY }, 
+                            { query: ALL_ITEMS_QUERY, variables: {skip: skip} }, 
+                            { query: ALL_ITEMS_QUERY, variables: {skip: (page-1) * 4 - 4 }}
+                        ]}
+                        >
+                            {(createItem, {loading, error}) => (
+                            <StyledForm onSubmit={ async (e)=> {
+                                e.preventDefault(); 
+                                this.setState({ spinner: true });
+                                let res = await createItem(); 
+                                this.setState({ spinner: false }); 
+                                console.log(res); 
+                                Router.push({
+                                    pathname: "/items", 
+                                    query: {page: page}
+                                    // query: {id: res.data.createItem.id}
+                                }); 
+                            }} 
+                            errorMessage = {errorMessage}
+                            >
+                                <Spinner spinner={this.state.spinner}/>
+                                <fieldset disabled={loading} aria-busy={loading}>
+                                    <label htmlFor="file">
+                                        Image
+                                        <input
+                                        type ="file" 
+                                        id ="file" 
+                                        name="file" 
+                                        placeholder="upload an image" 
+                                        onChange={this.uploadFile}
+                                        />
+                                    </label>
+                                    {this.state.largeImage && <img width="250" src={this.state.image} alt={this.state.description}></img>}
+                                    <label htmlFor="title">
+                                        Title
+                                        <input
+                                        type ="text" 
+                                        id ="title" 
+                                        name="title" 
+                                        placeholder="title" 
+                                        value={this.state.title}
+                                        onChange={this.handleInput}
+                                        required  
+                                        />
+                                    </label>
+                                    <label htmlFor="price" id="priceLabel">
+                                        {errorMessage ? errorMessage : 'Price'}
+                                        <input
+                                        type ="number" 
+                                        id ="price" 
+                                        name="price" 
+                                        placeholder="price" 
+                                        value={this.state.price}
+                                        step=".01"
+                                        onChange={this.handleInput}
+                                        required  
+                                        />
+                                    </label>
+                                    <label htmlFor="description">
+                                        Description
+                                        <textarea
+                                        id ="description" 
+                                        name="description" 
+                                        placeholder="Enter a Description" 
+                                        value={this.state.description}
+                                        onChange={this.handleInput}
+                                        required  
+                                        />
+                                    </label>
+                                    <button type="submit" disabled={errorMessage ? true : false} aria-disabled={errorMessage ? true : false}> Submit </button>
+                                </fieldset>
+                            </StyledForm>
+                        )}
+                        </Mutation> 
+                    )}}
+                </Query>
                 </div>
             </StyledFormWrapper>
         );

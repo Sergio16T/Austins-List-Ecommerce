@@ -9,7 +9,7 @@ const ItemWrapper = styled.div`
     padding-top: 100px; 
     /* position: relative; 
     background: #FAFAFA; */
-    padding: 15% 35px;  
+    padding: 200px 35px;  
     background: linear-gradient(to Bottom, rgba(10,10,54,1) 100px, white 0%);  
     @media (max-width: 800px) {
         /* background: linear-gradient(to Bottom, rgba(10,10,54,1) 10%, white 0%);  

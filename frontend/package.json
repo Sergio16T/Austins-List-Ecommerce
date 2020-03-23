@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "babel-plugin-graphql-tag": "^2.5.0",
+    "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-styled-components": "^1.10.6"
   },
   "//": "This is our babel config, I prefer this over a .babelrc file",

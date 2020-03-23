@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { StyledItem } from './styles/ItemStyles'; 
 import styled from 'styled-components'; 
 import formatMoney from '../lib/formatMoney';
+import DeleteItem from "./DeleteItem"; 
 
 const Title = styled.div`
     a { 
@@ -54,7 +55,7 @@ class Item extends Component {
                             <a id="editButton"> Edit </a>
                         </Link>
                         <button>Add to Cart</button>
-                        <button>Delete</button>
+                        <DeleteItem id={item.id} page={this.props.page}>Delete</DeleteItem>
                     </ItemButtons>
                 </StyledItem>
                 

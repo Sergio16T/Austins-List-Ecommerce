@@ -11,7 +11,6 @@ const SIGNIN_MUTATION = gql`
             id
             name 
             email
-            permissions
         }
     }
 `;
@@ -34,7 +33,7 @@ class SignIn extends Component {
             <Mutation 
             mutation={SIGNIN_MUTATION} 
             variables={this.state}
-            refetchQueries={[CURRENT_USER_QUERY]}>
+            refetchQueries={[{ query: CURRENT_USER_QUERY} ]}>
                 {(signin, {error, loading})=> {
                     return (
                     <StyledForm method="post" onSubmit={async (e) => {
@@ -54,7 +53,7 @@ class SignIn extends Component {
                                 Email
                                 <input
                                 type ="text" 
-                                id ="email" 
+                                // id ="email" 
                                 name="email" 
                                 placeholder="Enter your email address" 
                                 value={this.state.email}
@@ -65,7 +64,7 @@ class SignIn extends Component {
                                 Password
                                 <input
                                 type ="password" 
-                                id ="password" 
+                                // id ="password" 
                                 name="password" 
                                 placeholder="Password" 
                                 value={this.state.password}

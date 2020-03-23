@@ -22,6 +22,13 @@ const Mutations = {
             where: { id: args.id}
         }, info)
     }, 
+    async deleteItem(parent, args, ctx, info){
+        const item = await ctx.prisma.query.item({ where: {id: args.id }}, `{id title}`); 
+        //TODO check to see if the user owns that item before deleting item 
+        return ctx.prisma.mutation.deleteItem({
+            where: { id: args.id }
+        }, info); 
+    },
     async signup(parent, args, ctx, info) {
         args.email = args.email.toLowerCase(); 
         const password = await bcrypt.hash(args.password, 10); 
@@ -51,7 +58,7 @@ const Mutations = {
         if(!valid) {
             throw new error(`Invalid password`); 
         }
-        const token = jwt.sign({userId: user.userId}, process.env.APP_SECRET); 
+        const token = jwt.sign({userId: user.id}, process.env.APP_SECRET); 
         ctx.response.cookie("token", token, {
             httpOnly: true, 
             maxAge: 1000 * 60 * 60 * 24 * 365 
