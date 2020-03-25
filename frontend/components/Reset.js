@@ -6,7 +6,7 @@ import {StyledFormWrapper, StyledForm } from "./styles/FormStyles";
 import { CURRENT_USER_QUERY } from './User'; 
 
 const RESET_PASSWORD_MUTATION = gql`
-    mutation RESET_PASSWORD_MUTATION($resetToken: String, $password: String!, $confirmPassword: String!) {
+    mutation RESET_PASSWORD_MUTATION($resetToken: String!, $password: String!, $confirmPassword: String!) {
         resetPassword(resetToken: $resetToken, password: $password, confirmPassword: $confirmPassword){
             id
             name
@@ -43,18 +43,17 @@ class Reset extends Component {
 						refetchQueries={[{ query: CURRENT_USER_QUERY }]}
 						>
 							{(reset, {error, loading, called}) => {
-								if(loading) return null; 
 								return (
-								<StyledForm>
-									<fieldset method="post" onSubmit ={async (e) => {
-										e.preventDefault(); 
-										const res = await reset(); 
-										console.log(res); 
-										this.setState({
-											confirmPassword: "", 
-											password: ""
-										}); 
-									}}>
+								<StyledForm method="post" onSubmit ={async (e) => {
+									e.preventDefault(); 
+									const res = await reset(); 
+									console.log(res); 
+									this.setState({
+										confirmPassword: "", 
+										password: ""
+									}); 
+								}}>
+									<fieldset>
 										{!loading && !error && called && <p>Success! 
 											Your password has been reset 
 										</p>

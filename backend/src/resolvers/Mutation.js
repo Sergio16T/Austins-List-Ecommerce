@@ -93,7 +93,7 @@ const Mutations = {
             subject: "Reset Your Password", 
             html: email(`Your Password Reset Token is 
             here! \n\n 
-            <a href="${process.env.FRONTEND_URL}/reset?resetToken=${resetToken}">
+            <a href="${process.env.FRONTEND_URL}/resetpassword?resetToken=${resetToken}">
             Click Here to Reset</a> `)
         }); 
         // console.log(res); 
