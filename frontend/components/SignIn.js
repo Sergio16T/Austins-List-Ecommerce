@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {StyledForm} from './styles/FormStyles'; 
+import {StyledForm, StyledResetNote} from './styles/FormStyles'; 
 import { Mutation } from 'react-apollo'; 
 import gql from 'graphql-tag'; 
+import Link from "next/link"; 
 import { CURRENT_USER_QUERY } from './User'; 
 import Spinner from './styles/Spinner';  
 
@@ -74,6 +75,11 @@ class SignIn extends Component {
                             </label>
                             <button type="submit" > Sign In </button>
                         </fieldset>
+                        <StyledResetNote>
+                            <Link href="/reset">
+                                <p id="resetNote">Forgot your Password? Request reset</p>
+                            </Link>
+                        </StyledResetNote>
                     </StyledForm>
                     )}}
             </Mutation>

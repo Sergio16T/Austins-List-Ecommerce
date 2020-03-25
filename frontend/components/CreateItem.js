@@ -65,7 +65,7 @@ class CreateItem extends Component {
     handleInput = (e) => {
         let regEx = /^\d+(\.\d{0,2})?$/; 
         const { value, type, name } = e.target; 
-        let val = type === 'number' && value.length ? parseFloat(value) : value; 
+        let val = type === 'number' && value.length ? parseFloat(value) : value;  
         // console.log(regEx.test(val)); 
         try {
             if ((typeof val === 'number') && !regEx.test(val)) {
@@ -88,7 +88,9 @@ class CreateItem extends Component {
         }); 
     }
     render() {
+        let regEx2= /^\d+(\.\d{0,1})$/; 
         const { errorMessage } = this.state; 
+        const setPrice = regEx2.test(this.state.price) ? this.state.price.toFixed(2) : this.state.price; 
         return (
             <StyledFormWrapper>
                 <div className="formContainer">
@@ -105,7 +107,7 @@ class CreateItem extends Component {
                             return (
                         <Mutation 
                         mutation={CREATE_ITEM_MUTATION} 
-                        variables={{...this.state, price: this.state.price * 100}}
+                        variables={{...this.state, price: setPrice * 100}}
                         refetchQueries={[
                             { query: PAGINATION_QUERY }, 
                             { query: ALL_ITEMS_QUERY, variables: {skip: skip} }, 

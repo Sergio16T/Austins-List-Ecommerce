@@ -134,4 +134,10 @@ const StyledForm = styled.form`
     }
 `;
 
-export { StyledFormWrapper, StyledForm }
+const StyledResetNote = styled.div`
+    padding: 1rem 0; 
+    p {
+        cursor: pointer;
+    }
+`; 
+export { StyledFormWrapper, StyledForm, StyledResetNote }

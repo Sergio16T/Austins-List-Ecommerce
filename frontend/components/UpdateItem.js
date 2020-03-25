@@ -53,13 +53,15 @@ class UpdateItem extends Component {
         spinner: false
     }
     updateItem = async (e, updateItemMutation) => {
+        let regEx2= /^\d+(\.\d{0,1})$/; 
+        const setPrice = regEx2.test(this.state.price) ? this.state.price.toFixed(2) : this.state.price; 
         e.preventDefault(); 
         this.setState({ spinner: true }); 
         const res = await updateItemMutation({
             variables: {
             id: this.props.id, 
             ...this.state, 
-            price: this.state.price * 100,
+            price: setPrice * 100,
             }
         }); 
         this.setState({spinner: false }); 
