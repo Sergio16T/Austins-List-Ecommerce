@@ -86,6 +86,11 @@ const StyledForm = styled.form`
         margin-top: 1rem; 
         margin-bottom: 0; 
     }
+    .errorMessage {
+        color: red; 
+        font-size: 1.2rem; 
+    }
+
     button[aria-disabled='true'] {
     opacity: .6;
     pointer-events: none;

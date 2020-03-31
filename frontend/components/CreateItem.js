@@ -3,7 +3,7 @@ import { Query, Mutation } from 'react-apollo';
 import Router from 'next/router'; 
 import gql from'graphql-tag'; 
 import { StyledFormWrapper, StyledForm} from './styles/FormStyles'; 
-import Spinner from './styles/Spinner'; 
+import Spinner from './Spinner'; 
 import { ALL_ITEMS_QUERY } from './Items'; 
 import { PAGINATION_QUERY } from './Pagination'; 
 
@@ -118,18 +118,32 @@ class CreateItem extends Component {
                             <StyledForm onSubmit={ async (e)=> {
                                 e.preventDefault(); 
                                 this.setState({ spinner: true });
-                                let res = await createItem(); 
+                                let res = await createItem().catch(err => {
+                                    if(err) {
+                                        this.setState({ 
+                                            spinner: false, 
+                                            error: true
+                                         }); 
+                                    } else {
+                                        this.setState({
+                                            error: false
+                                        }); 
+                                    }  
+                                }); 
                                 this.setState({ spinner: false }); 
                                 console.log(res); 
-                                Router.push({
-                                    pathname: "/items", 
-                                    query: {page: page}
-                                    // query: {id: res.data.createItem.id}
-                                }); 
+                                if(!this.state.error) {
+                                    Router.push({
+                                        pathname: "/items", 
+                                        query: {page: page}
+                                        // query: {id: res.data.createItem.id}
+                                    }); 
+                                }
                             }} 
                             errorMessage = {errorMessage}
                             >
                                 <Spinner spinner={this.state.spinner}/>
+                                {error && <p className="errorMessage">{error.message.replace("GraphQL error:", "")}</p>}
                                 <fieldset disabled={loading} aria-busy={loading}>
                                     <label htmlFor="file">
                                         Image

@@ -3,7 +3,8 @@ import styled from 'styled-components';
 const ItemStyles = styled.div`
     background: rgba(10,10,54,1); 
     /* background: linear-gradient(to Bottom, rgba(10,10,54,1) 200px, white 0%);  */
-    width: 100%; 
+    width: 100%;
+    min-height: 100vh;  
     position: relative;
     padding-top: 100px; 
     @media (max-width: 600px) {
@@ -25,6 +26,7 @@ const StyledItem = styled.div`
 const StyledItemsWithPagination = styled.div`
     position: relative; 
     width: 100%; 
+    min-height: 100vh; 
     background-color: #FAFAFA;
 `; 
 export { ItemStyles, StyledItem, StyledItemsWithPagination }; 

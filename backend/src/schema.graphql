@@ -8,7 +8,7 @@ type Query {
     user: User
     users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
     items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, 
-    first: Int): [Item!]! 
+    first: Int): [Item]
     item(where: ItemWhereUniqueInput!): Item
     itemsConnection(where: ItemWhereInput): ItemConnection!
 }

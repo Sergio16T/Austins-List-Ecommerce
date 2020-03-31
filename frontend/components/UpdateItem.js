@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import Router from 'next/router'; 
 import { StyledForm, StyledFormWrapper } from './styles/FormStyles'; 
 import { ALL_ITEMS_QUERY } from './Items';
-import Spinner from './styles/Spinner'; 
+import Spinner from './Spinner'; 
 //need to write query for single item to fill out the form with values from the current item use id from props
 
 const SINGLE_ITEM_QUERY = gql`

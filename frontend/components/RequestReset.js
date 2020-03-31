@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { StyledForm, StyledFormWrapper } from "./styles/FormStyles"; 
+import Spinner from "./Spinner"; 
 
 const REQUEST_RESET_MUTATION = gql`
     mutation REQUEST_RESET_MUTATION($email: String!) {
@@ -24,7 +25,7 @@ class RequestReset extends Component {
     render() {
         return (
 					<StyledFormWrapper>
-            <div className="formContainer">
+            			<div className="formContainer">
 							<Mutation
 							mutation={REQUEST_RESET_MUTATION}
 							variables={this.state}
@@ -33,12 +34,15 @@ class RequestReset extends Component {
 								return (  
 								<StyledForm method="post" onSubmit={async (e)=> {
 										e.preventDefault(); 
+										this.setState({spinner: true }); 
 										const success = await reset(); 
 										console.log(success); 
 										this.setState({
-												email: ''
+												email: '', 
+												spinner: false
 										}); 
 									}}>
+										<Spinner spinner={this.state.spinner}/>
 										<fieldset disabled={loading} aria-busy={loading}>
 											<h2>Request a password reset</h2>
 											{!error && !loading && called && <p>Success! Check 
@@ -59,7 +63,7 @@ class RequestReset extends Component {
 								</StyledForm>)
 							}}
 							</Mutation>
-            </div>
+            			</div>
 					</StyledFormWrapper>
 
         );

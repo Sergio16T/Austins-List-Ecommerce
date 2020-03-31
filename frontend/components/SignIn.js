@@ -4,7 +4,7 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag'; 
 import Link from "next/link"; 
 import { CURRENT_USER_QUERY } from './User'; 
-import Spinner from './styles/Spinner';  
+import Spinner from './Spinner';  
 
 const SIGNIN_MUTATION = gql`
     mutation SIGNIN_MUTATION($email: String!, $password: String!) {
@@ -40,7 +40,12 @@ class SignIn extends Component {
                     <StyledForm method="post" onSubmit={async (e) => {
                         e.preventDefault(); 
                         this.setState({spinner: true }); 
-                        const res = await signin(); 
+                        const res = await signin().catch(err => {
+                            if(err) { 
+                                this.setState({ spinner: false})
+                                console.log(err.message); 
+                            }
+                        }); 
                         this.setState({
                         password: '', 
                         email: ''
@@ -50,6 +55,7 @@ class SignIn extends Component {
                         <Spinner spinner={this.state.spinner}/>
                         <fieldset disabled={loading} aria-busy={loading}>
                             <h2>Sign in</h2>
+                            {error && <p className="errorMessage">{error.message.replace("GraphQL error:", "")}</p>}
                             <label htmlFor="email">
                                 Email
                                 <input

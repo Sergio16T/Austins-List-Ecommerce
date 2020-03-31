@@ -1,6 +1,12 @@
 const { forwardTo } = require('prisma-binding'); 
 const Query = {
-    items: forwardTo('prisma'), 
+    // items: forwardTo('prisma'), 
+    items: (parent, args, ctx, info) => {
+      if(args.skip < 0) return null; 
+      return ctx.prisma.query.items({
+        ...args
+      }, info);
+    }, 
     item: forwardTo('prisma'), 
     itemsConnection: forwardTo('prisma'), 
     users: forwardTo('prisma'), 
