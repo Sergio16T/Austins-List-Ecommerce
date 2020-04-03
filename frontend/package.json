@@ -14,9 +14,11 @@
   "dependencies": {
     "apollo-boost": "^0.4.7",
     "babel-core": "^6.26.3",
+    "downshift": "^5.0.5",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
-    "next": "^9.1.7",
+    "lodash.debounce": "^4.0.8",
+    "next": "^9.3.3",
     "next-with-apollo": "^4.3.0",
     "nprogress": "^0.2.0",
     "prop-types": "^15.7.2",

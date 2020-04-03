@@ -113,6 +113,10 @@ const Nav = props => {
                     )}
                 </Mutation> 
                }
+                {/* <li id="searchIconContainer">
+                    <a><i id="searchIcon" class="fas fa-search"></i></a>
+                  
+                </li> */}
                 <div id="socialListContainer">
                 <SocialMediaIcon
                 alt="linkedin"

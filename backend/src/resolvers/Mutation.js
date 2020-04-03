@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const { randomBytes } = require("crypto"); 
 const { promisify } = require("util"); 
 const { transport, email } = require("../Mailer"); 
+const hasPermissions = require('../Utilities'); 
 
 const Mutations = {
     async createItem(parent, args, ctx, info) {
@@ -32,8 +33,13 @@ const Mutations = {
         }, info)
     }, 
     async deleteItem(parent, args, ctx, info){
-        const item = await ctx.prisma.query.item({ where: {id: args.id }}, `{id title}`); 
+        const item = await ctx.prisma.query.item({ where: {id: args.id }}, `{id title user { id }}`); 
         //TODO check to see if the user owns that item before deleting item 
+        hasPermissions(ctx.request.user, ["ADMIN", "ITEMDELETE"]); 
+        const ownsItem = item.user.id === ctx.request.userId; 
+        if(!ownsItem) {
+            throw new Error("You don't have permission to delete this item"); 
+        }
         return ctx.prisma.mutation.deleteItem({
             where: { id: args.id }
         }, info); 
@@ -139,6 +145,31 @@ const Mutations = {
         }); 
         return updatedUser; 
     }, 
+    async updatePermissions(parent, args, ctx, info) {
+        //1. Check if they are logged in 
+        if(!ctx.request.userId) {
+            throw new Error('You must be logged in!'); 
+        }
+        // 2. Query the current user
+        const currentUser = await ctx.prisma.query.user({
+            where: { 
+                id: ctx.request.userId, 
+            },
+        }, info);  
+        //3. Check if they have permissions to do this 
+        hasPermissions(currentUser, ["ADMIN", "PERMISSIONUPDATE"]);
+        //4. Update the permissions 
+        return ctx.prisma.mutation.updateUser({
+            data: {
+                permissions: {
+                    set: args.permissions, 
+                }, 
+            },
+            where: {
+                id: args.userId
+            }
+        }, info); 
+    },
   }; 
 
   module.exports = Mutations

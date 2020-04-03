@@ -26,7 +26,15 @@ const StyledHeader = styled.div`
     z-index: 4; 
     color: white; 
     transition: .3s ease;  
-    box-shadow: ${props => props.border ? "0px 1px 2px 1px rgba(0,0, 0, 0.4)" : ""}; 
+    /* box-shadow: ${props => props.border ? "0px 1px 2px 1px rgba(0,0, 0, 0.4)" : ""};  */
+    &::after {
+        content: ""; 
+        position: absolute; 
+        width: 100%;
+        box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.4); 
+        opacity: ${props => props.border ? 1 : 0};   
+        transition-delay: ${props => props.border ? ".3s" : "0s"}; 
+    }
     .topBar {
         position: relative; 
         display: grid; 

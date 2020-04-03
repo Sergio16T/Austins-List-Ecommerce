@@ -31,9 +31,12 @@ const HomePageSection = styled.div`
    @media (max-width: 1000px){
         grid-template-columns: 1fr; 
         margin: 8% 8%; 
-        .column1, .column2 {
-            height: 85%; 
-        }
+       
+   }
+   @media (max-width: 550px) {
+    .column1, .column2 {
+        height: 85%; 
+    }
    }
 `; 
 const Button = styled.button`

@@ -67,7 +67,7 @@ class Page extends Component {
           this.setState({
 			  navBarColor: true,
 			  border: true, 
-		  });    
+		  });  
         } else {
 			this.setState({
 				navBarColor: false,

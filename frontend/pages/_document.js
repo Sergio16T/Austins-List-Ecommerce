@@ -34,6 +34,7 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <script src="https://kit.fontawesome.com/b0ebdd2ca1.js"></script>
         </body>
       </Html>
     )
