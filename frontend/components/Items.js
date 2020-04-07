@@ -62,7 +62,7 @@ class Items extends Component {
 										console.log('payload', data);
 										return (
 										<StyledItemsWithPagination>
-										<Search/>
+										{/* <Search/> */}
 										<Pagination page={this.props.page}/>
 												<StyledItemContainer>    
 														{data.items.map(item => (

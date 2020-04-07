@@ -6,7 +6,7 @@ const ItemStyles = styled.div`
     width: 100%;
     min-height: 100vh;  
     position: relative;
-    padding-top: 100px; 
+    padding-top: 85px; 
     @media (max-width: 600px) {
         padding-top: 100px; 
     }

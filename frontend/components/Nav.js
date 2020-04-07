@@ -113,10 +113,16 @@ const Nav = props => {
                     )}
                 </Mutation> 
                }
-                {/* <li id="searchIconContainer">
-                    <a><i id="searchIcon" class="fas fa-search"></i></a>
-                  
-                </li> */}
+               {router.pathname === "/items" && 
+                <>
+               <li id="cart">
+                   <a><img src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-bag.svg?v=5222225297183201505" alt="cart" /></a>
+               </li>
+                <li id="searchIconContainer" >
+                    <a onClick={props.toggleSearchBar}><img src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-search.svg?v=12627112760336229118"></img></a> 
+                </li>
+                </>
+                }
                 <div id="socialListContainer">
                 <SocialMediaIcon
                 alt="linkedin"

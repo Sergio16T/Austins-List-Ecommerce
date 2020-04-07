@@ -12,14 +12,14 @@ const StyledNav = styled.ul`
             width: 0; 
             margin-top: 8px; 
             /* background: #0a0a36; */
-            background: ${props => props.navBarColor ? '#0a0a36' : 'white' };
+            background: ${props => props.navBarColor || props.pathName ==="/items" ? '#0a0a36' : 'white' };
             left: 0;
             transition: width .4s; 
             transition-timing-function: ease;  
            
         }
         a {
-            color: ${props => props.navBarColor ? '#0a0a36' : 'white' };
+            color: ${props => props.navBarColor || props.pathName === "/items" ? '#0a0a36' : 'white' };
             font-weight: 600; 
             position: relative;  
             /* color: #0a0a36;  */

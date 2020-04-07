@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link'; 
 import styled, { keyframes } from 'styled-components'; 
+import { withRouter } from 'next/router'
 import Router from 'next/router'; 
 import Nprogress from 'nprogress'; 
 import Nav from './Nav'; 
+import Search from './Search'; 
 
 Router.onRouteChangeStart = () => {
     Nprogress.start(); 
@@ -19,12 +21,12 @@ Router.onRouteChangeError = () => {
 const StyledHeader = styled.div`
     background-image: linear-gradient(180deg, #fff 50%, transparent 0);
     background-size: 100% 200%;
-    background-position: ${props => props.navBarColor ? "0 0" : "0 100%"};
+    background-position: ${props => props.navBarColor || props.pathName === "/items" ? "0 0" : "0 100%"};
     /* transition: background-position .4s ease;  */
     position: fixed; 
     width: 100%;  
     z-index: 4; 
-    color: white; 
+    /* color: white;  */
     transition: .3s ease;  
     /* box-shadow: ${props => props.border ? "0px 1px 2px 1px rgba(0,0, 0, 0.4)" : ""};  */
     &::after {
@@ -32,7 +34,7 @@ const StyledHeader = styled.div`
         position: absolute; 
         width: 100%;
         box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.4); 
-        opacity: ${props => props.border ? 1 : 0};   
+        opacity: ${props => props.pathName === "/items" ? 1 : props.border ? 1 : 0};   
         transition-delay: ${props => props.border ? ".3s" : "0s"}; 
     }
     .topBar {
@@ -45,15 +47,15 @@ const StyledHeader = styled.div`
         /* border-bottom: 4px solid ${props => props.theme.black};  */
     }
     .subBar {
-        display: grid; 
+        /* display: grid; 
         grid-template-columns: 1fr auto; 
-        border-bottom: 1px solid ${props => props.theme.black}; 
+        border-bottom: 1px solid ${props => props.theme.black};  */
         padding-left: 2rem; 
         p {
             margin: 0; 
             padding: .5rem 1rem;
           
-        }
+        } 
     }
     #hamburger {
             display: none; 
@@ -92,7 +94,7 @@ const StyledHeader = styled.div`
                 cursor: pointer; 
                 & div {
                     transition: transform .4s ease; 
-                    background-color: ${props => props.navBarColor ? '#0a0a36' : 'white' };
+                    background-color: ${props => props.pathName === '/items' ? '#0a0a36': props.navBarColor ? '#0a0a36' : 'white' };
                     width: 15px; 
                     height: 2px; 
                     margin-bottom: 3px; 
@@ -125,7 +127,7 @@ const Logo = styled.h1`
         padding: 0.5rem 1rem; 
     }
     .navBar_links {
-        color: ${props => props.navBarColor ? '#0a0a36' : 'white' };
+        color: ${props => props.pathName === "/items" ? '#0a0a36' : props.navBarColor ? '#0a0a36' : 'white' };
         transition: color .2s ease; 
     }
     @media (max-width: 1000px) {
@@ -134,11 +136,19 @@ const Logo = styled.h1`
     `; 
 
 class Header extends React.Component { 
+    state = {
+        searchBarExpanded: false
+    }
+    toggleSearchBar = () => {
+        this.setState({
+            searchBarExpanded: !this.state.searchBarExpanded
+        }); 
+    }
     render() {
         return (
-            <StyledHeader navBarColor={this.props.navBarColor} border={this.props.border} className="header" openDropDown={this.props.headerDropDown}>
+            <StyledHeader pathName={this.props.router.pathname} navBarColor={this.props.navBarColor} border={this.props.border} className="header" openDropDown={this.props.headerDropDown}>
                 <div className='topBar' id={this.props.topBar}>
-                    <Logo navBarColor={this.props.navBarColor}>
+                    <Logo pathName ={this.props.router.pathname} navBarColor={this.props.navBarColor}>
                         <Link href="/">
                             <a className="navBar_links" onClick={this.props.logoOpenOff}>Local Arts</a>
                         </Link>
@@ -148,6 +158,7 @@ class Header extends React.Component {
                     openDropDown={this.props.headerDropDown} 
                     openMobileMenu={this.props.openMobileMenu}
                     width={this.props.width}
+                    toggleSearchBar ={this.toggleSearchBar}
                     />
                     <div id="hamburger" onClick={this.props.openMobileMenu}>
                         <div id="ham_top"></div>
@@ -155,13 +166,17 @@ class Header extends React.Component {
                         <div id="ham_bottom"></div>
                     </div>
                 </div>
-                {/* <div className="subBar">
-                    <p>Search...</p>
-                </div> */}
+                { this.props.router.pathname === "/items" && 
+                <Search 
+                navBarColor={this.props.navBarColor}
+                pathName={this.props.router.pathname}
+                searchBarExpanded={this.state.searchBarExpanded}
+                /> 
+                }
             </StyledHeader>
         );
     }
 }
 
 
-export default Header;
+export default withRouter(Header);

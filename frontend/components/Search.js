@@ -5,7 +5,6 @@ import { ApolloConsumer } from 'react-apollo';
 import gql from 'graphql-tag'; 
 import debounce from 'lodash.debounce'; 
 import styled from 'styled-components'; 
-import { isTypeNode } from 'graphql';
 
 const SearchStyles = styled.div`
 position: relative; 
@@ -15,9 +14,10 @@ display: flex;
 }
 input {
 	width: 100%; 
-	height: 47px; 
+	/* height: 47px;  */
+    padding: 10px; 
     padding-right: 44px; 
-    font-size: 1.6rem; 
+    font-size: 1.4rem; 
     outline: none; 
     box-sizing: border-box; 
     position: relative; 
@@ -32,12 +32,13 @@ button {
     display: flex; 
     justify-content: center; 
     top: 0px; 
-    right: 1px; 
+    left: 1px; 
     width: 44px;  
     height: 46px; 
     border: transparent;  
     background: transparent; 
     outline: none; 
+    z-index: 2; 
     /* &:hover {
         cursor: pointer; 
     } */
@@ -51,9 +52,12 @@ const DropDown = styled.div`
 `; 
 
 const SearchWrapper = styled.div`
-		display: grid;
+		/* display: grid;
 		grid-template-columns: 1fr auto;
-		border-bottom: 1px solid ${props => props.theme.lightgrey};
+		border-bottom: 1px solid ${props => props.theme.lightgrey}; */
+        max-height: ${props => props.searchBarExpanded ? "100vh" : "0px"};
+        overflow: ${props => !props.searchBarExpanded ? "hidden" : ""};
+        transition: max-height .4s ease-in-out;
 `; 
 
 const SEARCH_ITEMS_QUERY =gql`
@@ -110,7 +114,7 @@ class Search extends Component {
     }, 350); 
     render() {
         return (
-					<SearchWrapper>
+					<SearchWrapper pathName ={this.props.pathName} searchBarExpanded={this.props.searchBarExpanded}>
 						<SearchStyles>
 								<Downshift
 								id="item-down-shift" 
@@ -122,6 +126,9 @@ class Search extends Component {
 										<ApolloConsumer>
 											{(client) => (
 										<React.Fragment>
+                                                {/* <button id="searchButton">
+                                                    <img src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-search.svg?v=12627112760336229118"></img>
+												</button> */}
 												<input
 												{...getInputProps({
 													type: "search",
@@ -135,9 +142,9 @@ class Search extends Component {
 												}, 
 												})}
 												/>
-												<button>
+												{/* <button>
 														<img src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-search.svg?v=12627112760336229118"></img>
-												</button>
+												</button> */}
 										</React.Fragment>
 											)}  
 										</ApolloConsumer>
