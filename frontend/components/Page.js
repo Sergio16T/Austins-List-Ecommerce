@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'; 
 import Meta from './Meta'; 
 import Header from './Header'; 
-
+import Cart from './Cart'; 
 
 const theme = {
 	black: '#393939',
@@ -11,15 +11,31 @@ const theme = {
     offWhite: '#EDEDED',
 	maxWidth: '1000px',
 	bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)', //shorthand for box shadow 
+	blue: "rgba(10,10,54,1)", 
+	purple: "#2b3eab" 
 }
 
 const StyledPage = styled.div`
 	background-color: white; 
 	color: black; 
+	position: relative; 
 
 `;
 const InnerDiv = styled.div`
 	margin: 0 auto; 
+`; 
+const BackDrop = styled.div`
+position: absolute; 
+top: 0; 
+left: 0; 
+width: 100%; 
+height: 100%; 
+overflow: hidden; 
+background: #000000; 
+opacity: ${props => props.isOpen ? .5 : 0}; 
+display: ${props => props.isOpen ? "block" : "none"}; 
+z-index: 4; 
+transition: all 0.4s cubic-bezier(0.46, 0.01, 0.32, 1);
 `; 
 const GlobalStyle = createGlobalStyle`	
 	html {
@@ -38,11 +54,16 @@ const GlobalStyle = createGlobalStyle`
 
 `; 
 class Page extends Component {
+	constructor() {
+		super();
+		this.backDrop = React.createRef(); 
+	}
 	state = {
 		navBarColor: false, //maybe use context for state here so that I can change it lower in the tree
 		border: false,
 		headerDropDown: false,
 		topBar : 'topBar',
+		isOpen: false
 	}
 	componentDidMount() {
 		window.addEventListener('scroll', this.handleScroll); 
@@ -54,6 +75,7 @@ class Page extends Component {
 		window.addEventListener('resize', () => this.setState({
 			width: window.innerWidth
 		})); 
+		document.addEventListener('click', this.handleBackDropClick); 
 	}
 	componentWillUnmount() {
 		window.removeEventListener('scroll', this.handleScroll); 
@@ -101,6 +123,24 @@ class Page extends Component {
 			topBar: 'topBar'
 		}); 
 	}
+	toggleCart = (isOpen) => {
+		this.setState({
+			isOpen: !this.state.isOpen
+		}); 
+		if(isOpen) {
+			document.querySelector("body").style.overflow = "hidden"; 
+		} else {
+			document.querySelector("body").style.overflow = ""; 
+		}
+	}
+	handleBackDropClick = (e) => {
+		if(e.target.contains(this.backDrop.current)) {
+			this.setState({
+				isOpen: false
+			}); 
+			document.querySelector("body").style.overflow = ""; 
+		}
+	}
 	render() {
 		return (
 			<ThemeProvider theme={theme}>
@@ -115,7 +155,12 @@ class Page extends Component {
 					openMobileMenu={this.openMobileMenu}
 					logoOpenOff={this.logoOpenOff}
 					width = {this.state.width}
+					toggleCart={this.toggleCart}
 					/>
+					<BackDrop 
+					ref={this.backDrop}
+					isOpen={this.state.isOpen}/> 
+					<Cart isOpen={this.state.isOpen}/>
 					<InnerDiv>
 						{this.props.children}
 					</InnerDiv>

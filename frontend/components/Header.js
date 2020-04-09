@@ -47,6 +47,7 @@ const StyledHeader = styled.div`
         /* border-bottom: 4px solid ${props => props.theme.black};  */
     }
     .subBar {
+        position: relative; 
         /* display: grid; 
         grid-template-columns: 1fr auto; 
         border-bottom: 1px solid ${props => props.theme.black};  */
@@ -159,6 +160,7 @@ class Header extends React.Component {
                     openMobileMenu={this.props.openMobileMenu}
                     width={this.props.width}
                     toggleSearchBar ={this.toggleSearchBar}
+                    toggleCart={this.props.toggleCart}
                     />
                     <div id="hamburger" onClick={this.props.openMobileMenu}>
                         <div id="ham_top"></div>

@@ -49,15 +49,13 @@ const DropDown = styled.div`
   width: 100%;
   z-index: 2;
   border: 1px solid ${props => props.theme.lightgrey};
+  overflow: visible; 
 `; 
 
 const SearchWrapper = styled.div`
-		/* display: grid;
-		grid-template-columns: 1fr auto;
-		border-bottom: 1px solid ${props => props.theme.lightgrey}; */
         max-height: ${props => props.searchBarExpanded ? "100vh" : "0px"};
-        overflow: ${props => !props.searchBarExpanded ? "hidden" : ""};
-        transition: max-height .4s ease-in-out;
+        overflow: ${props => !props.searchBarOverflow /*&& !props.searchBarExpanded*/ ? "hidden" : ""};
+        transition: max-height 1.2s ease; 
 `; 
 
 const SEARCH_ITEMS_QUERY =gql`
@@ -97,7 +95,18 @@ function routeToItem(item) {
 class Search extends Component {
     state = {
         items: [], 
-        loading: false
+        loading: false,
+        isOpen: false
+    }
+    componentDidUpdate(prevProps) {
+        if(prevProps.searchBarExpanded !== this.props.searchBarExpanded && this.props.searchBarExpanded === false) {
+            this.setState({
+                searchBarOverflow: false
+            }); 
+        }
+        if(prevProps.searchBarExpanded !== this.props.searchBarExpanded && this.props.searchBarExpanded) {
+            this.searchInput.focus(); 
+        }
     }
     onChange = debounce(async (e, client) => {
         console.log("searching..."); 
@@ -114,11 +123,16 @@ class Search extends Component {
     }, 350); 
     render() {
         return (
-					<SearchWrapper pathName ={this.props.pathName} searchBarExpanded={this.props.searchBarExpanded}>
+                    <SearchWrapper 
+                    id="searchWrapper"
+                    pathName ={this.props.pathName} 
+                    searchBarExpanded={this.props.searchBarExpanded}
+                    searchBarOverflow={this.state.searchBarOverflow}
+                    >
 						<SearchStyles>
 								<Downshift
 								id="item-down-shift" 
-								onChange={routeToItem} 
+                                onChange={routeToItem} 
 								itemToString={item => item === null ? '' : item.title}>
 								{({ getInputProps, getItemProps, isOpen, 
 								inputValue, highlightedIndex}) => (
@@ -131,13 +145,19 @@ class Search extends Component {
 												</button> */}
 												<input
 												{...getInputProps({
+                                                    ref: (el) => { this.searchInput = el; }, 
 													type: "search",
-													placeholder:"Search", 
+													placeholder:"", 
 													id:"search", 
 													className: this.state.loading ? "loading" : '', 
 													onChange: (e) => {
 														//If you want to access the event properties in an asynchronous way, you should call event.persist() on the event, which will remove the synthetic event from the pool and allow references to the event to be retained by user code.
-														e.persist(); 
+                                                        e.persist(); 
+                                                        if(e.target.value.length) {
+                                                            this.setState({  
+                                                                searchBarOverflow: true
+                                                            }); 
+                                                        }
 														this.onChange(e, client); 
 												}, 
 												})}

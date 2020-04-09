@@ -116,7 +116,7 @@ const Nav = props => {
                {router.pathname === "/items" && 
                 <>
                <li id="cart">
-                   <a><img src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-bag.svg?v=5222225297183201505" alt="cart" /></a>
+                   <a onClick={() => props.toggleCart(true)}><img src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-bag.svg?v=5222225297183201505" alt="cart" /></a>
                </li>
                 <li id="searchIconContainer" >
                     <a onClick={props.toggleSearchBar}><img src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-search.svg?v=12627112760336229118"></img></a> 
