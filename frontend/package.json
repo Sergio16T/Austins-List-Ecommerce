@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "apollo-boost": "^0.4.7",
+    "apollo-cache-inmemory": "^1.6.5",
     "babel-core": "^6.26.3",
     "downshift": "^5.0.5",
     "graphql": "^14.5.8",

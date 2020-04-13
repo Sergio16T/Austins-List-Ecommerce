@@ -4,6 +4,7 @@ import { StyledItem } from './styles/ItemStyles';
 import styled from 'styled-components'; 
 import formatMoney from '../lib/formatMoney';
 import DeleteItem from "./DeleteItem"; 
+import AddToCart from './AddToCart'; 
 
 const Title = styled.div`
     a { 
@@ -22,6 +23,7 @@ const ItemButtons = styled.div`
         cursor: pointer; 
         padding: 10px; 
         border: none; 
+        outline: none; 
     }
     #editButton {
         background: white; 
@@ -54,7 +56,7 @@ class Item extends Component {
                         }}>
                             <a id="editButton"> Edit </a>
                         </Link>
-                        <button>Add to Cart</button>
+                        <AddToCart id={item.id}/>
                         <DeleteItem id={item.id} page={this.props.page}>Delete</DeleteItem>
                     </ItemButtons>
                 </StyledItem>

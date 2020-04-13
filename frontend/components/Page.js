@@ -160,10 +160,13 @@ class Page extends Component {
 					<BackDrop 
 					ref={this.backDrop}
 					isOpen={this.state.isOpen}/> 
-					<Cart isOpen={this.state.isOpen}/>
 					<InnerDiv>
 						{this.props.children}
 					</InnerDiv>
+					<Cart 
+					isOpen={this.state.isOpen}
+					toggleCart={this.toggleCart}
+					/>
 				</StyledPage>
 	
 			</ThemeProvider>

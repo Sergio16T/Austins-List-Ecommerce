@@ -59,7 +59,7 @@ class Items extends Component {
 								{({ data, error, loading }) => { 
 										if (loading) return null; 
 										if (error) return null; 
-										console.log('payload', data);
+										// console.log('payload', data);
 										return (
 										<StyledItemsWithPagination>
 										{/* <Search/> */}

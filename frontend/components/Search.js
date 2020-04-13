@@ -55,7 +55,7 @@ const DropDown = styled.div`
 const SearchWrapper = styled.div`
         max-height: ${props => props.searchBarExpanded ? "100vh" : "0px"};
         overflow: ${props => !props.searchBarOverflow /*&& !props.searchBarExpanded*/ ? "hidden" : ""};
-        transition: max-height 1.2s ease; 
+        transition: max-height 1s ease; 
 `; 
 
 const SEARCH_ITEMS_QUERY =gql`

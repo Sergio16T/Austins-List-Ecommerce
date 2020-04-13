@@ -48,13 +48,27 @@ const StyledNav = styled.ul`
             li {
                 &:hover {
                 cursor: pointer; 
-                a{
-                    top: -2px; 
-                } 
-                .slidingBar {
-                    width: 100%;
+                    a {
+                        top: -2px; 
+                    } 
+                    .slidingBar {
+                        width: 100%;
+                    }
                 }
             }
+            .feature_icons {
+                position: relative; 
+                #cartImage {
+                width: 23px; 
+                }
+                #cartCount {
+                    position: absolute;
+                    left: 0px;
+                    width: 100%;
+                    bottom: 4px;
+                    font-size: 1.2rem;
+                    text-align: center;
+                }
             }
         }
         @media (max-width: 1000px) {
@@ -94,7 +108,11 @@ const StyledNav = styled.ul`
                     color: ${props => props.openDropDown ? '#0a0a36' : 'white'}; 
                     transition-delay: color 2s; 
                 }
+                #searchIconContainer, #cart {
+                display: none; 
+                }
             }
+           
 `;
 
 export default StyledNav; 

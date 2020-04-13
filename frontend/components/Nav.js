@@ -6,6 +6,7 @@ import { CURRENT_USER_QUERY } from './User';
 import Link from 'next/link'; 
 import StyledNav from "./styles/NavStyles"; 
 import User from './User'; 
+import calculateCartNumer from '../lib/calculateCartNumber'; 
 
 const SIGNOUT_MUTATION = gql`
     mutation SIGNOUT_MUTATION {
@@ -116,7 +117,10 @@ const Nav = props => {
                {router.pathname === "/items" && 
                 <>
                <li id="cart">
-                   <a onClick={() => props.toggleCart(true)}><img src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-bag.svg?v=5222225297183201505" alt="cart" /></a>
+                   <a className="feature_icons" onClick={() => props.toggleCart(true)}>
+                       <img id="cartImage" src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-cart.svg?v=4915344247293215888" alt="cart" />
+                       <span id="cartCount">{calculateCartNumer(user.cart)}</span>
+                    </a>
                </li>
                 <li id="searchIconContainer" >
                     <a onClick={props.toggleSearchBar}><img src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-search.svg?v=12627112760336229118"></img></a> 

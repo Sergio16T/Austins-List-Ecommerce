@@ -170,6 +170,87 @@ const Mutations = {
             }
         }, info); 
     },
+    async addToCart(parent, args ,ctx, info) {
+        const { userId } = ctx.request; 
+        if(!userId){
+            throw new Error("You must be signed in!"); 
+        }
+        // check if the item we are adding already exists in the cart 
+        const [ existingCartItem ] = await ctx.prisma.query.cartItems({
+            where : {
+                user: {id: userId }, 
+                item: {id: args.id }
+            }
+        }, info); 
+        // if it does increment the cartItem quantity
+        if(existingCartItem) {
+            console.log("this item is already in the cart"); 
+            return ctx.prisma.mutation.updateCartItem({
+                where: {id: existingCartItem.id}, 
+                data: {
+                    quantity: existingCartItem.quantity + 1
+                }
+            }, info); 
+        }
+        // if not add it to the cart
+        return ctx.prisma.mutation.createCartItem({
+            // in prisma in order to create a relationship use connect
+            data: { 
+                item: { 
+                    connect: { id: args.id }
+                }, 
+                user: { 
+                    connect: { id: userId }
+                }, 
+             }, 
+        }, info);  
+    }, 
+    async deleteCartItem(parent, args, ctx, info) {
+        if(!ctx.request.userId) {
+            throw new Error("You must be logged in to do that!");   
+        }
+        const cartItem = await ctx.prisma.query.cartItem({
+            where: {
+                id: args.id
+            }, 
+        }, `{id user{ id }}`); 
+        console.log(cartItem); 
+
+        if(!cartItem) {
+            throw new Error("That item is not in the cart!"); 
+        }
+        if(cartItem.user.id !== ctx.request.userId) {
+            throw new Error("That item does not belong to your cart!"); 
+        }
+        return ctx.prisma.mutation.deleteCartItem({
+            where: {id: args.id}
+        }, info); 
+    }, 
+    async updateCartItem(parent, args, ctx, info) {
+        if(!ctx.request.userId) {
+            throw new Error("You must be logged in to do that!");   
+        }
+        const cartItem = await ctx.prisma.query.cartItem({
+            where: {
+                id: args.id
+            }, 
+        }, `{id quantity user{ id }}`); 
+        console.log(cartItem); 
+
+        if(!cartItem) {
+            throw new Error("That item is not in the cart!"); 
+        }
+        if(cartItem.user.id !== ctx.request.userId) {
+            throw new Error("That item does not belong to your cart!"); 
+        }
+        const quantity = args.updateType === "add" ? cartItem.quantity + 1 : cartItem.quantity -1; 
+        return ctx.prisma.mutation.updateCartItem({
+            data: {
+                quantity: quantity
+            }, 
+            where: { id: cartItem.id }
+        }, info); 
+    }
   }; 
 
   module.exports = Mutations

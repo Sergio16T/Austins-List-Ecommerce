@@ -6,6 +6,8 @@ import Router from 'next/router';
 import Nprogress from 'nprogress'; 
 import Nav from './Nav'; 
 import Search from './Search'; 
+import User from './User'; 
+import calculateCartNumer from '../lib/calculateCartNumber'; 
 
 Router.onRouteChangeStart = () => {
     Nprogress.start(); 
@@ -59,9 +61,15 @@ const StyledHeader = styled.div`
         } 
     }
     #hamburger {
-            display: none; 
-        }
+        display: none; 
+    }
+    #mobile_searchIconContainer, #mobilecart {
+        display: none; 
+    }
         @media (max-width: 1000px) {
+            #mobile_searchIconContainer, #mobilecart {
+                display: block; 
+            }
             .topBar {
                 display: flex; 
                 margin: 0; 
@@ -135,7 +143,44 @@ const Logo = styled.h1`
         margin: 0; 
     }
     `; 
+const FeatureIcons = styled.div`
+    font-size: 2rem; 
+    margin: 0; 
+    position: relative; 
+    z-index: 3; 
+    display: flex; 
+    align-items: center; 
+    a { 
+        padding: 0.5rem 1rem; 
+    }
+    .feature_icons {
+        font-size: 2.4rem; 
+        cursor: pointer;
+        position: relative; 
+        #cartImage {
+            width: 22px; 
+        }
+        #cartCount {
+            position: absolute;
+            left: 0px;
+            width: 100%;
+            bottom: 0;
+            top: 16px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
 
+        }
+    
+    `; 
+const SiteMenu = styled.div`
+    font-size: 2rem; 
+    margin: 0; 
+    position: relative; 
+    z-index: 3; 
+    display: flex; 
+    align-items: center; 
+  `; 
 class Header extends React.Component { 
     state = {
         searchBarExpanded: false
@@ -149,11 +194,35 @@ class Header extends React.Component {
         return (
             <StyledHeader pathName={this.props.router.pathname} navBarColor={this.props.navBarColor} border={this.props.border} className="header" openDropDown={this.props.headerDropDown}>
                 <div className='topBar' id={this.props.topBar}>
-                    <Logo pathName ={this.props.router.pathname} navBarColor={this.props.navBarColor}>
-                        <Link href="/">
-                            <a className="navBar_links" onClick={this.props.logoOpenOff}>Local Arts</a>
-                        </Link>
-                    </Logo>
+                    <SiteMenu>
+                    {this.props.router.pathname === "/items" &&
+                        <User>
+                        {({data, error, loading })=> {
+                        if(loading) return null; 
+                        return (
+                            <FeatureIcons>
+                                <li id="mobilecart">
+                                    <a className="feature_icons" onClick={() => this.props.toggleCart(true)}>
+                                        {/* https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-bag.svg?v=5222225297183201505 */}
+                                        <img id="cartImage" src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-cart.svg?v=4915344247293215888" alt="cart" />
+                                        <span id="cartCount">{calculateCartNumer(data.user.cart)}</span>
+                                    </a>
+                                </li>
+                                <li id="mobile_searchIconContainer" >
+                                    <a className="feature_icons" onClick={this.toggleSearchBar}><img src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-search.svg?v=12627112760336229118"></img></a> 
+                                </li>
+                            </FeatureIcons>
+                        )}}
+                        </User>
+                        }
+                        <Logo pathName ={this.props.router.pathname} navBarColor={this.props.navBarColor}>
+                            <Link href="/">
+                                <a className="navBar_links" onClick={this.props.logoOpenOff}>Local Arts</a>
+                            </Link>
+                        </Logo>
+                    </SiteMenu>
+                 
+                 
                     <Nav 
                     navBarColor={this.props.navBarColor} 
                     openDropDown={this.props.headerDropDown} 
