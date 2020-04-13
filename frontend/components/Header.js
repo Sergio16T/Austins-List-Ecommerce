@@ -199,6 +199,8 @@ class Header extends React.Component {
                         <User>
                         {({data, error, loading })=> {
                         if(loading) return null; 
+                        const { user } = data; 
+                        if(!user) return null; 
                         return (
                             <FeatureIcons>
                                 <li id="mobilecart">
@@ -242,6 +244,7 @@ class Header extends React.Component {
                 navBarColor={this.props.navBarColor}
                 pathName={this.props.router.pathname}
                 searchBarExpanded={this.state.searchBarExpanded}
+                toggleSearchBar={this.toggleSearchBar}
                 /> 
                 }
             </StyledHeader>

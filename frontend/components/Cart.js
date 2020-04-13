@@ -20,6 +20,10 @@ const CartWrapper = styled.div`
 		.cartHeader {
 			display: flex;
 		}
+		.cartBody {
+			overflow: auto;
+    		max-height: 558px;
+		}
 		#closeX {
 			opacity: .6; 
 			cursor: pointer; 

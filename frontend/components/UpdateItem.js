@@ -131,7 +131,8 @@ class UpdateItem extends Component {
                     title: data.item.title,
                     price: data.item.price /100, 
                     description: data.item.description, 
-                    image: data.item.image
+                    image: data.item.image, 
+                    largeImage: data.item.largeImage
                 })}>
                 {({data, error, loading})=> {
                     if(loading) return null; 

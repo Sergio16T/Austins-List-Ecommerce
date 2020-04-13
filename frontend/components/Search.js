@@ -85,13 +85,7 @@ const DropDownItem = styled.div`
     margin-right: 10px;
   }
 `;
-function routeToItem(item) {
-	console.log(item); 
-	Router.push({
-		pathname: "/item", 
-		query: {id: item.id}
-	});
-}
+
 class Search extends Component {
     state = {
         items: [], 
@@ -121,6 +115,14 @@ class Search extends Component {
             loading: false
         }); 
     }, 350); 
+    routeToItem = (item) => {
+        this.props.toggleSearchBar(); 
+        console.log(item); 
+        Router.push({
+            pathname: "/item", 
+            query: {id: item.id}
+        }); 
+    }
     render() {
         return (
                     <SearchWrapper 
@@ -132,7 +134,7 @@ class Search extends Component {
 						<SearchStyles>
 								<Downshift
 								id="item-down-shift" 
-                                onChange={routeToItem} 
+                                onChange={this.routeToItem} 
 								itemToString={item => item === null ? '' : item.title}>
 								{({ getInputProps, getItemProps, isOpen, 
 								inputValue, highlightedIndex}) => (

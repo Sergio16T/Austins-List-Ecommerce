@@ -114,7 +114,7 @@ const Nav = props => {
                     )}
                 </Mutation> 
                }
-               {router.pathname === "/items" && 
+               {router.pathname === "/items" && user &&
                 <>
                <li id="cart">
                    <a className="feature_icons" onClick={() => props.toggleCart(true)}>

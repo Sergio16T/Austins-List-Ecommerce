@@ -1,7 +1,7 @@
 import styled from 'styled-components'; 
 
 const StyledFormWrapper = styled.div`
-    background: linear-gradient(to Bottom, rgba(10,10,54,1) 100px, white 0%); 
+    background: linear-gradient(to Bottom, rgba(10,10,54,1) 85px, white 0%); 
     height: 100vh; 
     position: relative;
     /* form {
@@ -48,7 +48,8 @@ const StyledForm = styled.form`
     }
     #priceLabel {
         color: ${props => props.errorMessage ? 'red' : 'black'}; 
-        font-size: ${props => props.errorMessage ? '1.5rem' : '1.2rem'}; 
+        /* font-size: ${props => props.errorMessage ? '1.2rem' : '1.2rem'};  */
+        font-size: 1.2rem; 
     }   
     fieldset {
         border: 0;
