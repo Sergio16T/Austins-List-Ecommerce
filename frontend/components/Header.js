@@ -219,7 +219,7 @@ class Header extends React.Component {
                         }
                         <Logo pathName ={this.props.router.pathname} navBarColor={this.props.navBarColor}>
                             <Link href="/">
-                                <a className="navBar_links" onClick={this.props.logoOpenOff}>Local Arts</a>
+                                <a className="navBar_links" onClick={this.props.logoOpenOff}> Austin's List</a>
                             </Link>
                         </Logo>
                     </SiteMenu>

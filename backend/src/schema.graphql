@@ -11,6 +11,7 @@ type Query {
     first: Int): [Item]
     item(where: ItemWhereUniqueInput!): Item
     itemsConnection(where: ItemWhereInput): ItemConnection!
+    order(id: ID!): Order
 }
 
 type Mutation {
@@ -27,6 +28,8 @@ type Mutation {
     addToCart(id: ID!): CartItem
     deleteCartItem(id: ID!): CartItem
     updateCartItem(updateType: String!, id: ID!): CartItem
+    createOrder(token: String!): Order
+    sendConfirmationEmail(email: String!, id: ID!, amount: Int!, createdAt: String! ): SuccessMessage
 }
 
 type User {

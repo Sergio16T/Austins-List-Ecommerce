@@ -42,7 +42,7 @@ const Pagination = props => {
                     return (
                     <PaginationStyles>
                         <Head>
-                            <title>Austin Arts page {props.page} of {pages}</title>
+                            <title>Austin's List page {props.page} of {pages}</title>
                         </Head>
                         <Link                      
                         href={{

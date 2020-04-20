@@ -162,7 +162,7 @@ class CreateItem extends Component {
                                         type ="text" 
                                         id ="title" 
                                         name="title" 
-                                        placeholder="title" 
+                                        placeholder="Title" 
                                         value={this.state.title}
                                         onChange={this.handleInput}
                                         required  
@@ -174,7 +174,7 @@ class CreateItem extends Component {
                                         type ="number" 
                                         id ="price" 
                                         name="price" 
-                                        placeholder="price" 
+                                        placeholder="Price" 
                                         value={this.state.price}
                                         step=".01"
                                         onChange={this.handleInput}

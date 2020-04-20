@@ -22,6 +22,9 @@ padding: 2rem 0;
 .cartItemImage {
     width: 120px; 
 }
+#itemNA {
+    padding-left: 2rem; 
+}
 @media (max-width: 600px) {
     padding: 1rem 0; 
     .cartItemImage {
@@ -61,10 +64,21 @@ const QuantityDiv = styled.div`
 .cartitem_price {
     font-size: 1.2rem; 
 }
+button[aria-disabled='true'] {
+    opacity: .6;
+    pointer-events: none; 
+}
 `; 
 const CartItem = (props) => {
     const [updateCartItem, { data }] = useMutation(UPDATE_CART_ITEM_MUTATION); 
-	const { item } = props.cartItem; 
+    const { item } = props.cartItem; 
+    if(!item) { return ( 
+        <StyledCartItem>
+            <div></div>
+            <p id="itemNA">This Item Has been Removed</p>
+            <RemoveFromCart id={props.cartItem.id}/>
+        </StyledCartItem> ); 
+    }
 	return (
 		<StyledCartItem>
 			<img className="cartItemImage" src={item.image}/> 
@@ -75,7 +89,7 @@ const CartItem = (props) => {
 					<QuantityDiv>
 						<button className="minus" type="button" onClick={() => {
                             updateCartItem({variables: { updateType: "subtract", id: props.cartItem.id}}); 
-                        }} disabled={props.cartItem.quantity === 1}>-</button>
+                        }} disabled={props.cartItem.quantity === 1} aria-disabled={props.cartItem.quantity === 1}>-</button>
 						<p className="cartItem_Quantity">{props.cartItem.quantity}</p>
 						<button className="plus" onClick={() => {
                             updateCartItem({variables: { updateType: "add", id: props.cartItem.id}}); 

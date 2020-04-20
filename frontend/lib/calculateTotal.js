@@ -1,4 +1,6 @@
 export default function(cart) {
-    return cart.reduce((startValue, element) => 
-    startValue + (element.quantity * element.item.price), 0); 
+    return cart.reduce((startValue, element) => {
+    if(!element.item) return startValue; 
+    return startValue + (element.quantity * element.item.price)}, 0); 
+    
 }

@@ -53,12 +53,12 @@ const Nav = props => {
                     </li>
                     </Link>
                 )}
-                <Link href="/about">
+                {/* <Link href="/about">
                     <li onClick={props.openMobileMenu}>
                         <a>About Us</a>
                         <div className="slidingBar" id="/about"></div>
                     </li>
-                </Link>
+                </Link> */}
                 {user && 
                 <>
                 <Link href="/items">

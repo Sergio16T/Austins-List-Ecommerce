@@ -1,10 +1,9 @@
 import React from 'react';
+import Order from '../components/Order'; 
 
 const OrderPage = props => {
     return (
-        <div>
-            
-        </div>
+        <Order id={props.query.id}/>
     );
 };
 

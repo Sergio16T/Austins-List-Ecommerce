@@ -56,6 +56,7 @@ const StyledForm = styled.form`
         padding: 0;
     }
     input, textarea {
+        font-family: inherit; 
         font-size: 1.1rem; 
         box-sizing: border-box; 
         width: 100%; 

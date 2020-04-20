@@ -7,10 +7,10 @@ import Cart from './Cart';
 const theme = {
 	black: '#393939',
     grey: '#3A3A3A',
-    lightgrey: '#E1E1E1',
+    lightgray: '#E1E1E1',
     offWhite: '#EDEDED',
 	maxWidth: '1000px',
-	bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)', //shorthand for box shadow 
+	bs: '1px 1px 4px 1px rgba(51,51,51,.2)', //shorthand for box shadow 
 	blue: "rgba(10,10,54,1)", 
 	purple: "#2b3eab" 
 }
@@ -72,14 +72,12 @@ class Page extends Component {
 			headerDropDown: false,
 			width: window.innerWidth
 		});
-		window.addEventListener('resize', () => this.setState({
-			width: window.innerWidth
-		})); 
 		document.addEventListener('click', this.handleBackDropClick); 
 	}
 	componentWillUnmount() {
 		window.removeEventListener('scroll', this.handleScroll); 
 		window.removeEventListener('load', this.handleScroll);
+		document.removeEventListener('click', this.handleBackDropClick); 
 		this.setState({
 			headerDropDown: false
 		}); 

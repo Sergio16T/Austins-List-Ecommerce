@@ -5,9 +5,11 @@ const HomePageSection = styled.div`
     grid-template-columns: 1fr 1fr; 
     justify-content: center; 
     align-items: center; 
-    grid-gap: 10%; 
-    margin: 4% 8%;
+    grid-gap: 4rem; 
+    padding: 8rem 4rem; 
     opacity: .99; 
+    position:relative; 
+    overflow: hidden; 
     .column1, .column2 {
         display: grid; 
         align-items: center; 
@@ -16,27 +18,28 @@ const HomePageSection = styled.div`
         border-radius: 4px; 
         color: #0a0a36; 
         font-size: 1.6rem; 
+        z-index: 4;
     }
     .column1 {
-        height: 65%; 
+        background: white; 
         box-shadow: 1px 1px 4px 1px rgba(51,51,51,.2);
     }
     .column2 {
-         height: 65%;
+        background-color: white; 
          box-shadow: 1px 1px 4px 1px rgba(51,51,51,.2);
          p {
-            margin: 2% 0;
+            margin: 0;
          }
     }
    @media (max-width: 1000px){
         grid-template-columns: 1fr; 
-        margin: 8% 8%; 
+        padding: 8rem 2rem; 
        
    }
    @media (max-width: 550px) {
-    .column1, .column2 {
+    /* .column1, .column2 {
         height: 85%; 
-    }
+    } */
    }
 `; 
 const Button = styled.button`

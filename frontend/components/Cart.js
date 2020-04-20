@@ -1,63 +1,11 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import User from './User'; 
 import CartItem from './CartItem'; 
 import calculateTotal from '../lib/calculateTotal'; 
 import formatMoney from "../lib/formatMoney"; 
-
-const CartWrapper = styled.div`
-    position: fixed; 
-    height: 100%; 
-    transform: ${props => props.isOpen ? "translateX(0)" : "translateX(100%)" }; 
-    background: ${props => props.theme.offWhite}; 
-    right: 0; 
-    top: 0; 
-    z-index: 5; 
-    border-left: 2px solid ${props => props.theme.purple}; 
-    transition: all 0.3s;
-    overflow: hidden; 
-		padding: 2rem; 
-		.cartHeader {
-			display: flex;
-		}
-		.cartBody {
-			overflow: auto;
-    		max-height: 558px;
-		}
-		#closeX {
-			opacity: .6; 
-			cursor: pointer; 
-			position: absolute;
-			font-size: 2.4rem;  
-			top: 10px; 
-			right: 20px; 
-			background: transparent; 
-			border: none;
-			outline: none; 
-			&:hover {
-				opacity: 1; 
-			}
-		}
-		.deleteCartItem {
-			display: flex; 
-			opacity: .4; 
-			cursor: pointer; 
-			font-size: 1.8rem;  
-			background: transparent; 
-			border: none;
-			outline: none; 
-			&:hover {
-				color: red; 
-				opacity: 1; 
-			}
-		}
-		#totalPrice{ 
-			font-size: 1.8rem; 
-		}
-		@media (max-width: 600px) {
-			padding: 1rem; 
-		}
-`; 
+import styled from 'styled-components';
+import CartWrapper from './styles/CartStyles'; 
+import Checkout from './Checkout'; 
 
 class Cart extends Component {
     render() {
@@ -66,7 +14,7 @@ class Cart extends Component {
 						{({data, loading, error}) => { 
 							if(loading) return null; 
 							const { user } = data;
-							console.log('userPayload', user); 
+							// console.log('userPayload', user); 
 							return (
 							<CartWrapper isOpen={this.props.isOpen}>
 								<div className="cartHeader">
@@ -83,8 +31,19 @@ class Cart extends Component {
 										<CartItem key={cartItem.id} cartItem={cartItem}/> 
 									)}
 								</div>
-								<div>
-									<p id="totalPrice">{formatMoney(calculateTotal(user.cart))}</p>
+								<div className="cartFooter">
+									<div className="cartTotal">
+										<p id="totalLabel">Subtotal|</p> 
+										<p id="totalPrice"> {formatMoney(calculateTotal(user.cart))}</p>
+									</div>
+									<Checkout 
+									totalAmount={calculateTotal(user.cart)} 
+									cart={user.cart} email={user.email}
+									toggleCart={this.props.toggleCart}
+									>
+										<button id="checkout_btn" type="button" onClick={() => console.log('Checkout')} disabled={!user.cart.length ? true : false} aria-disabled={!user.cart.length ? true : false}> Checkout </button>
+									</Checkout>
+									
 								</div>
 								</React.Fragment>
 							}

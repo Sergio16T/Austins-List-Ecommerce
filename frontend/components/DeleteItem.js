@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import Router from 'next/router'; 
 import { ALL_ITEMS_QUERY } from './Items'; 
 import { PAGINATION_QUERY } from './Pagination';
+import { CURRENT_USER_QUERY } from './User';
 
 const DELETE_ITEM_MUTATION = gql`
     mutation DELETE_ITEM_MUTATION($id: ID!) {
@@ -38,6 +39,7 @@ class DeleteItem extends Component {
             {query: ALL_ITEMS_QUERY, variables:{skip: (this.props.page - 1) * 4 -4}},
             {query: ALL_ITEMS_QUERY, variables:{skip: (this.props.page + 1) * 4 -4}},
             {query: PAGINATION_QUERY },
+            {query: CURRENT_USER_QUERY }
         ]}
         >
             {(deleteItem, {error, loading}) => 

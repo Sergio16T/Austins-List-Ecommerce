@@ -21,7 +21,7 @@ input {
     outline: none; 
     box-sizing: border-box; 
     position: relative; 
-    border: 1px solid ${props => props.theme.lightgrey}; 
+    border: 1px solid ${props => props.theme.lightgray}; 
     &:focus {
         border: 1px solid #2b3eab; 
     }
@@ -48,7 +48,7 @@ const DropDown = styled.div`
   position: absolute;     
   width: 100%;
   z-index: 2;
-  border: 1px solid ${props => props.theme.lightgrey};
+  border: 1px solid ${props => props.theme.lightgray};
   overflow: visible; 
 `; 
 
@@ -73,14 +73,14 @@ const SEARCH_ITEMS_QUERY =gql`
     }
 `; 
 const DropDownItem = styled.div`
-  border-bottom: 1px solid ${props => props.theme.lightgrey};
+  border-bottom: 1px solid ${props => props.theme.lightgray};
   background: ${props => (props.highlighted ? '#f7f7f7' : 'white')};
   padding: 1rem;
   transition: all 0.2s;
   ${props => (props.highlighted ? 'padding-left: 2rem;' : null)};
   display: flex;
   align-items: center;
-  border-left: 10px solid ${props => (props.highlighted ? props.theme.lightgrey : 'white')};
+  border-left: 10px solid ${props => (props.highlighted ? props.theme.lightgray : 'white')};
   img {
     margin-right: 10px;
   }

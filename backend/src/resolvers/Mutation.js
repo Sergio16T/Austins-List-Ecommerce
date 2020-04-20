@@ -2,8 +2,12 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken'); 
 const { randomBytes } = require("crypto"); 
 const { promisify } = require("util"); 
-const { transport, email } = require("../Mailer"); 
-const hasPermissions = require('../Utilities'); 
+const { transport, email, confirmationEmail } = require("../Mailer"); 
+const utilities = require('../Utilities'); 
+const hasPermissions = utilities.hasPermissions; 
+const formatMoney = utilities.formatMoney; 
+const stripe = require("../Stripe"); 
+const moment = require('moment'); 
 
 const Mutations = {
     async createItem(parent, args, ctx, info) {
@@ -250,7 +254,122 @@ const Mutations = {
             }, 
             where: { id: cartItem.id }
         }, info); 
-    }
+    }, 
+    async createOrder(parent,args, ctx, info) {
+        //1. Query the currentUser and make sure they are signed in 
+        const { userId } = ctx.request;
+        if(!userId) {
+            throw new Error('You must be signed in to do that!'); 
+        }  
+        const user = await ctx.prisma.query.user({ where: {id: userId}}, `{ 
+            id 
+            name 
+            email 
+            cart {
+                id 
+                quantity 
+                item { 
+                    id 
+                    title 
+                    description 
+                    price 
+                    image
+                    largeImage 
+                }
+            }
+        }`); 
+        console.log(user); 
+        //2. recalculate the price 
+        const amount = user.cart.reduce((startValue, element) => {
+            if(!element.item) return startValue; 
+            return startValue + (element.quantity * element.item.price); 
+        }, 0); 
+        console.log("going to charge",  amount); 
+
+        //3. Create the stripe charge
+        const charge = await stripe.charges.create({
+            amount: amount, 
+            currency: "USD",
+            source: args.token
+        }); 
+        //4. Convert the cartItems to OrderItems 
+        const orderItems = user.cart.map(cartItem => {
+            const orderItem = {
+                ...cartItem.item, 
+                quantity: cartItem.quantity, 
+                user: { connect: { id: userId } },
+            }
+            delete orderItem.id; 
+            return orderItem
+        });
+        //5. Create the order 
+        const order = await ctx.prisma.mutation.createOrder({
+            data: {
+                items: { create: orderItems }, 
+                total: charge.amount, 
+                charge: charge.id, 
+                user: { connect: { id: userId} }
+            }
+        });
+        //6. Clean Up- clear the user's cart,
+        const cartItemIds = user.cart.map(cartItem => cartItem.id); 
+        await ctx.prisma.mutation.deleteManyCartItems({
+            where: {
+                id_in: cartItemIds
+            }, 
+        }); 
+        sendConfirmationEMail(user.email, order.id, charge.amount, order.createdAt); 
+        //7. Return the order to the client 
+        return order; 
+
+    }, 
+    // async sendConfirmationEmail(parent, args, ctx, info) {
+    //     const { email, id, amount, createdAt } = args; 
+    //     console.log('args', args); 
+    //     await transport.sendMail({
+    //         from: "stapiafikes@gmail.com", 
+    //         to: email, 
+    //         subject: "Order Confirmation", 
+    //         html: confirmationEmail(`
+    //         <table>
+    //             <thead>
+    //                 <th>Order Id</th>
+    //                 <th>Order Total</th>
+    //                 <th>Date</th>
+    //             <thead>
+    //             <tbody>
+    //                 <td>${id}</td>
+    //                 <td>${formatMoney(amount)}</td>
+    //                 <td>${moment(createdAt).format('YYYY-MM-DD hh:mm a')}</td>
+    //             </tbody>
+    //         </table>
+    //         `)
+    //     }); 
+    //     return { message: "Email Sent!"}; 
+    // }
+
   }; 
+
+  sendConfirmationEMail = async (email, id, amount, createdAt) => {
+    await transport.sendMail({
+        from: "stapiafikes@gmail.com", 
+        to: email, 
+        subject: "Order Confirmation", 
+        html: confirmationEmail(`
+        <table>
+            <thead>
+                <th>Order Id</th>
+                <th>Order Total</th>
+                <th>Date</th>
+            <thead>
+            <tbody>
+                <td>${id}</td>
+                <td>${formatMoney(amount)}</td>
+                <td>${moment(createdAt).format('YYYY-MM-DD hh:mm a')}</td>
+            </tbody>
+        </table>
+        `)
+    }); 
+  }
 
   module.exports = Mutations

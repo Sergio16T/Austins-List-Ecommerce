@@ -24,5 +24,20 @@ font-size: 20px;
 <p> Sergio Tapia-Fikes</p> 
 </div>`;
 
+const confirmationEmail = table => `
+<div className="email" style="
+padding: 10px; 
+font-family: sans-serif; 
+line-height: 2; 
+font-size: 14px; 
+text-align: left; 
+">
+<h2>Order Confirmation</h2> 
+<div>
+${table} 
+</div>
+<p style="font-size: 14px"> Austin's List </p> 
+</div>`
 exports.transport= transport; 
 exports.email = email; 
+exports.confirmationEmail = confirmationEmail; 

@@ -7,7 +7,7 @@ const PleaseSignIn = props => {
     return (
         <Query query={CURRENT_USER_QUERY}>
             {({data, loading}) => {
-                console.log(data); 
+                // console.log(data); 
                 if (loading) return null; 
                 if(!data.user)  { return (
                     <StyledFormWrapper>
