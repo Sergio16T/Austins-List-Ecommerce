@@ -117,7 +117,7 @@ const Home = (props) => {
         <Container className="Container">
         <StyledHomeDiv className="homeContent">
             <div id="welcome"> 
-                <h2> Wecome to Austin's List </h2>
+                <h2> Welcome to Austin's List </h2>
                 <h3> The place for local Austin designers and artists to upload items and for shoppers to explore!</h3>
             </div>
             <video autoPlay muted loop> 

@@ -1,10 +1,13 @@
 import React from 'react';
+import Orders from '../components/Orders'; 
+import PleaseSignIn from '../components/PleaseSignIn'; 
 
 const OrdersPage = props => {
     return (
-        <div>
-            
-        </div>
+        <PleaseSignIn>
+             <Orders/>
+        </PleaseSignIn>
+       
     );
 };
 

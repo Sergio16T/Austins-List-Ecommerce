@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Nav/> renders a minimal nav when signed out  1`] = `
+Array [
+  <Link
+    href="/contact"
+  >
+    <li
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      <a>
+        Contact
+      </a>
+      <div
+        className="slidingBar"
+        id="/contact"
+      />
+    </li>
+  </Link>,
+  <Link
+    href="/signup"
+  >
+    <li
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      <a>
+        Log In
+      </a>
+      <div
+        className="slidingBar"
+        id="/signup"
+      />
+    </li>
+  </Link>,
+]
+`;
+
+exports[`<Nav/> renders a more robust nav when signed in 1`] = `
+Array [
+  <Link
+    href="/items"
+  >
+    <li
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      <a>
+        Shop
+      </a>
+      <div
+        className="slidingBar"
+        id="/items"
+      />
+    </li>
+  </Link>,
+  <Link
+    href="/sell"
+  >
+    <li
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      <a>
+        Sell
+      </a>
+      <div
+        className="slidingBar"
+        id="/sell"
+      />
+    </li>
+  </Link>,
+  <Link
+    href="/orders"
+  >
+    <li
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      <a>
+        Orders
+      </a>
+      <div
+        className="slidingBar"
+        id="/orders"
+      />
+    </li>
+  </Link>,
+  <Link
+    href="/contact"
+  >
+    <li
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      <a>
+        Contact
+      </a>
+      <div
+        className="slidingBar"
+        id="/contact"
+      />
+    </li>
+  </Link>,
+]
+`;
+
+exports[`<Nav/> renders with cartItems 1`] = `
+<span
+  id="cartCount"
+>
+  9
+</span>
+`;

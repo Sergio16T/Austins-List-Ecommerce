@@ -6,11 +6,14 @@ import formatMoney from '../lib/formatMoney';
 
 const ItemWrapper = styled.div`
     position: relative; 
-    padding-top: 100px; 
+    padding-top: 85px; 
     /* position: relative; 
     background: #FAFAFA; */
     padding: 200px 35px;  
-    background: linear-gradient(to Bottom, rgba(10,10,54,1) 100px, white 0%);  
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    /* background: linear-gradient(to Bottom, rgba(10,10,54,1) 85px, white 0%);   */
     @media (max-width: 800px) {
         /* background: linear-gradient(to Bottom, rgba(10,10,54,1) 10%, white 0%);  
         padding: 15% 0;  */
@@ -68,10 +71,10 @@ class SingleItem extends Component {
             <Query query={SINGLE_ITEM_QUERY} variables={{id: this.props.id}}>
                 {({data, error, loading}) => {
                 if(loading) return null; 
-                if(error) return <p>{error.message}</p>
+                if(error) return <p data-test="graphql-error">{error.message.replace("GraphQL error:", '')}</p>
                 if(!data.item) return <p>Item not found for {this.props.id}</p>
                 const item = data.item; 
-                if(data) console.log(data); 
+                // if(data) console.log(data); 
                 return (
                     <ItemWrapper>
                         <SingleItemStyles>
@@ -94,4 +97,5 @@ class SingleItem extends Component {
 }
 
 export default SingleItem;
+export { SINGLE_ITEM_QUERY }; 
 

@@ -44,7 +44,8 @@ const Nav = props => {
             navBarColor={props.navBarColor} 
             className="navbar" 
             openDropDown={props.openDropDown} 
-            id={`mobileOpen${props.openDropDown}`}>
+            id={`mobileOpen${props.openDropDown}`}
+            data-test="nav">
                 {props.width < 1000 && (
                     <Link href="/">
                         <li onClick={props.openMobileMenu}>
@@ -114,18 +115,13 @@ const Nav = props => {
                     )}
                 </Mutation> 
                }
-               {router.pathname === "/items" && user &&
-                <>
-               <li id="cart">
-                   <a className="feature_icons" onClick={() => props.toggleCart(true)}>
-                       <img id="cartImage" src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-cart.svg?v=4915344247293215888" alt="cart" />
-                       <span id="cartCount">{calculateCartNumer(user.cart)}</span>
-                    </a>
-               </li>
-                <li id="searchIconContainer" >
-                    <a onClick={props.toggleSearchBar}><img src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-search.svg?v=12627112760336229118"></img></a> 
-                </li>
-                </>
+               {router.pathname === "/items" || router.pathname ==="/item" ?  
+                <CartIcons
+                toggleCart={props.toggleCart}
+                toggleSearchBar={props.toggleSearchBar}
+                user={user}
+                />
+                : null
                 }
                 <div id="socialListContainer">
                 <SocialMediaIcon
@@ -160,8 +156,22 @@ const Nav = props => {
          
     );
 };
-
-
+const CartIcons = (props) => {
+    if(!props.user) return null; 
+    return (
+        <React.Fragment>
+        <li id="cart">
+            <a className="feature_icons" onClick={() => props.toggleCart(true)}>
+                <img id="cartImage" src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-cart.svg?v=4915344247293215888" alt="cart" />
+                <span id="cartCount">{calculateCartNumer(props.user.cart)}</span>
+             </a>
+        </li>
+         <li id="searchIconContainer" >
+             <a onClick={props.toggleSearchBar}><img src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-search.svg?v=12627112760336229118"></img></a> 
+         </li>
+         </React.Fragment>
+    ); 
+}
 const SocialMediaIcon = (props) => {
     return (
         <li className="socialListItem">
@@ -197,3 +207,4 @@ const SocialMediaIcon = (props) => {
 }
 
 export default Nav;
+export { CartIcons }; 

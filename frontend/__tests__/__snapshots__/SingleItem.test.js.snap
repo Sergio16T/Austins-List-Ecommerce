@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SingleItem/> Errors with a not found item 1`] = `
+<p
+  data-test="graphql-error"
+>
+   Item not found 
+</p>
+`;
+
+exports[`<SingleItem/> renders with correct data 1`] = `
+<h2
+  className="itemTitle"
+>
+  Viewing 
+  dogs are the best
+</h2>
+`;
+
+exports[`<SingleItem/> renders with correct data 2`] = `
+<img
+  alt="dogs are the best"
+  src="dog.jpg"
+/>
+`;
+
+exports[`<SingleItem/> renders with correct data 3`] = `
+<p
+  className="itemDesc"
+>
+  $50.00
+</p>
+`;

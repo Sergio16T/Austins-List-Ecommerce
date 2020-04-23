@@ -12,6 +12,7 @@ type Query {
     item(where: ItemWhereUniqueInput!): Item
     itemsConnection(where: ItemWhereInput): ItemConnection!
     order(id: ID!): Order
+    orders(where: OrderWhereInput, orderBy:  OrderOrderByInput): [Order]
 }
 
 type Mutation {

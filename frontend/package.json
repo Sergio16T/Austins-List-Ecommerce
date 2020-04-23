@@ -1,20 +1,24 @@
 {
   "name": "ecommerce-nextjs",
   "version": "1.0.0",
-  "description": "",
+  "description": "Austin's List: Ecommerce Web Application",
   "main": "index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "NODE_ENV=test jest --watch",
+    "test-win": "SET NODE_ENV=test&& jest --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/react-testing": "^3.1.3",
     "apollo-boost": "^0.4.7",
     "apollo-cache-inmemory": "^1.6.5",
     "babel-core": "^6.26.3",
+    "casual": "^1.6.2",
     "date-fns": "^2.12.0",
     "downshift": "^5.0.5",
     "graphql": "^14.5.8",
@@ -28,12 +32,36 @@
     "react-apollo": "^3.1.3",
     "react-dom": "^16.12.0",
     "react-stripe-checkout": "^2.6.3",
-    "styled-components": "^5.0.0"
+    "styled-components": "^5.0.0",
+    "waait": "^1.0.5"
   },
   "devDependencies": {
+    "babel-jest": "^25.4.0",
     "babel-plugin-graphql-tag": "^2.5.0",
     "babel-plugin-module-resolver": "^4.0.0",
-    "babel-plugin-styled-components": "^1.10.6"
+    "babel-plugin-styled-components": "^1.10.6",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.4.4",
+    "jest": "^25.4.0",
+    "jest-transform-graphql": "^2.1.0"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/.next/",
+      "<rootDir>/node_modules/"
+    ],
+    "transform": {
+      "\\.(gql|graphql)$": "jest-transform-graphql",
+      ".*": "babel-jest",
+      "^.+\\.js?$": "babel-jest"
+    },
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   },
   "//": "This is our babel config, I prefer this over a .babelrc file",
   "babel": {

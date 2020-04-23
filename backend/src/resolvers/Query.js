@@ -40,6 +40,19 @@ const Query = {
       if(hasPermissions) return order; 
       if(!ownsOrder) throw new Error('You do not have permission to view this order!'); 
       return order; 
+    }, 
+    orders: async (parent, args, ctx, info) => {
+      const { userId } = ctx.request;
+      if(!userId) {
+        throw new Error('You must be logged in to do that!'); 
+      } 
+      let orders = await ctx.prisma.query.orders({
+        where: {
+          user: {id: userId },
+        },
+      }, info); 
+
+      return orders; 
     }
   }; 
 

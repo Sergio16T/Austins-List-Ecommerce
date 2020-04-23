@@ -53,9 +53,9 @@ const DropDown = styled.div`
 `; 
 
 const SearchWrapper = styled.div`
-        max-height: ${props => props.searchBarExpanded ? "100vh" : "0px"};
+        max-height: ${props => props.searchBarExpanded ? "42px" : "0px"};
         overflow: ${props => !props.searchBarOverflow /*&& !props.searchBarExpanded*/ ? "hidden" : ""};
-        transition: max-height 1s ease; 
+        transition: max-height .4s ease; 
 `; 
 
 const SEARCH_ITEMS_QUERY =gql`
@@ -97,6 +97,7 @@ class Search extends Component {
             this.setState({
                 searchBarOverflow: false
             }); 
+            this.downshift.clearSelection(); 
         }
         if(prevProps.searchBarExpanded !== this.props.searchBarExpanded && this.props.searchBarExpanded) {
             this.searchInput.focus(); 
@@ -116,12 +117,14 @@ class Search extends Component {
         }); 
     }, 350); 
     routeToItem = (item) => {
-        this.props.toggleSearchBar(); 
+        if(!item) return; 
+        // this.props.toggleSearchBar(); 
         console.log(item); 
         Router.push({
             pathname: "/item", 
             query: {id: item.id}
         }); 
+        // this.downshift.clearSelection(); 
     }
     render() {
         return (
@@ -135,9 +138,10 @@ class Search extends Component {
 								<Downshift
 								id="item-down-shift" 
                                 onChange={this.routeToItem} 
+                                ref={(el)=> this.downshift = el}
 								itemToString={item => item === null ? '' : item.title}>
 								{({ getInputProps, getItemProps, isOpen, 
-								inputValue, highlightedIndex}) => (
+								inputValue, highlightedIndex, clearSelection}) => (
 								<div className="sub-bar">
 										<ApolloConsumer>
 											{(client) => (

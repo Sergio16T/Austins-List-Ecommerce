@@ -145,6 +145,7 @@ class CreateItem extends Component {
                                 <Spinner spinner={this.state.spinner}/>
                                 {error && <p className="errorMessage">{error.message.replace("GraphQL error:", "")}</p>}
                                 <fieldset disabled={loading} aria-busy={loading}>
+                                    <h2 id="create_header">Upload item</h2>
                                     <label htmlFor="file">
                                         Image
                                         <input

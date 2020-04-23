@@ -154,6 +154,7 @@ class UpdateItem extends Component {
                             <fieldset disabled={loading}>
                                 <div className="formRow">
                                 <div className="formCol-2">
+                                    <h2>Update Item</h2>
                                     <label htmlFor="title">
                                         Title
                                         <input 
