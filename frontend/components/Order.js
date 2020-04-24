@@ -39,55 +39,40 @@ class Order extends Component {
     render() {
         return (
             <StyledOrderWrapper>
-            <Query query={SINGLE_ORDER_QUERY} variables={{id: this.props.id}}>
-                {({data, error, loading}) => {
-                    if (loading) return null; 
-                    console.log('data', data); 
-                    const { order } = data; 
-                    const date = new Date(order.createdAt); 
-                    return (
-                        <div className="orderContainer">
-                            {/* <Mutation 
-                            mutation={SEND_CONFIRMATION_EMAIL_MUTATION} 
-                            variables={{
-                                id: order.id, 
-                                email: order.user.email, 
-                                amount: order.total,
-                                createdAt: order.createdAt
-                            }}>
-                                {(sendConfirmationEmail, {error, loading}) => {
-                                    return <SendEmail sendConfirmationEmail={sendConfirmationEmail}/>
-                                }}
-                              
-                            </Mutation> */}
-                            
-                            <Head>
-                                <title>Austin's List - Order {order.id}</title>
-                            </Head>
-                            <OrderConfirmation>
-                                <h2 id="order_header">Order Confirmation</h2>
-                                <p><span className="orderLabel">Order ID: </span>{order.id}</p>
-                                <p><span className="orderLabel">Order total:</span> {formatMoney(order.total)}</p>
-                                <p><span className="orderLabel">Date:</span> {format(date, 'MMMM d, yyyy h:mm a')}</p>
-                                <div className="items">
-                                    {order.items.map(item => (
-                                        <div key={item.id} className="orderItemRow">
-                                            <img className="orderItemImage" src={item.image} alt={item.title}/>
-                                            <div className="itemDetails">
-                                                <h2>Title: {item.title}</h2>
-                                                <p>Quantity: {item.quantity}</p>
-                                                <p>Each: {formatMoney(item.price)}</p>
-                                                <p>Subtotal: {formatMoney(item.quantity * item.price)}</p>
+                <Query query={SINGLE_ORDER_QUERY} variables={{id: this.props.id}}>
+                    {({data, error, loading}) => {
+                        if (loading) return null; 
+                        console.log('data', data); 
+                        const { order } = data; 
+                        const date = new Date(order.createdAt); 
+                        return (
+                            <div className="orderContainer">
+                                <Head>
+                                    <title>Austin's List - Order {order.id}</title>
+                                </Head>
+                                <OrderConfirmation>
+                                    <h2 id="order_header">Order Confirmation</h2>
+                                    <p><span className="orderLabel">Order ID: </span>{order.id}</p>
+                                    <p><span className="orderLabel">Order total:</span> {formatMoney(order.total)}</p>
+                                    <p><span className="orderLabel">Date:</span> {format(date, 'MMMM d, yyyy h:mm a')}</p>
+                                    <div className="items">
+                                        {order.items.map(item => (
+                                            <div key={item.id} className="orderItemRow">
+                                                <img className="orderItemImage" src={item.image} alt={item.title}/>
+                                                <div className="itemDetails">
+                                                    <h2>Title: {item.title}</h2>
+                                                    <p>Quantity: {item.quantity}</p>
+                                                    <p>Each: {formatMoney(item.price)}</p>
+                                                    <p>Subtotal: {formatMoney(item.quantity * item.price)}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </OrderConfirmation>
-                        </div>
-                    )
-                }}
-               
-            </Query>
+                                        ))}
+                                    </div>
+                                </OrderConfirmation>
+                            </div>
+                        );
+                    }}
+                </Query>
             </StyledOrderWrapper>
            
         );
@@ -110,3 +95,17 @@ class SendEmail  extends React.Component {
     }
 }
 export default Order;
+
+       {/* <Mutation 
+        mutation={SEND_CONFIRMATION_EMAIL_MUTATION} 
+        variables={{
+            id: order.id, 
+            email: order.user.email, 
+            amount: order.total,
+            createdAt: order.createdAt
+        }}>
+            {(sendConfirmationEmail, {error, loading}) => {
+                return <SendEmail sendConfirmationEmail={sendConfirmationEmail}/>
+            }}
+        
+        </Mutation> */}

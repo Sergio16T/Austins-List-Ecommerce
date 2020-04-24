@@ -1,9 +1,12 @@
 import React from 'react';
 import Order from '../components/Order'; 
+import PleaseSignIn from '../components/PleaseSignIn'; 
 
 const OrderPage = props => {
     return (
-        <Order id={props.query.id}/>
+        <PleaseSignIn>
+              <Order id={props.query.id}/>
+        </PleaseSignIn>
     );
 };
 

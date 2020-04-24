@@ -1,11 +1,12 @@
 import React from 'react';
 import SingleItem from '../components/SingleItem'; 
+import PleaseSignIn from '../components/PleaseSignIn';
 
 const SingleItemPage = props => {
     return (
-        <div>
+        <PleaseSignIn>
              <SingleItem id={props.query.id}/>
-        </div>
+        </PleaseSignIn>
        
     );
 };

@@ -53,7 +53,7 @@ describe('<SingleItem/>', () => {
 				</MockedProvider>
 		); 
 		 await wait(); 
-		 wrapper.update(); 
+		 wrapper.update();
 		//  console.log(wrapper.debug());
 		 const item = wrapper.find('[data-test="graphql-error"]'); 
 		 console.log(item.debug()); 

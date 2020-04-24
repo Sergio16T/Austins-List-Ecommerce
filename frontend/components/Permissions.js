@@ -84,36 +84,36 @@ class Permissions extends Component {
     render() {
         return (
             <PermissionsWrapper>
-            <div className="container">
-            <Query query={ALL_USERS_QUERY}>
-                {({data, error, loading}) => {
-                    if (loading) return null; 
-                    if(data) console.log(data);  
-                    return ( 
-                    <div>
-                        <div>
-                            <h2>Manage Permissions</h2>
-                            <Table>
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        {possiblePermissions.map((permission,index) => (
-                                            <th key={index}>{permission}</th>
-                                        ))}
-                                        <th>👇</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {data.users.map(user => <UserPermissions key={user.id} user={user}/>)}
-                                </tbody>
-                            </Table>
-                        </div>
-                     </div>
-                    
-                )}}
-            </Query>
-            </div>
+                <div className="container">
+                    <Query query={ALL_USERS_QUERY}>
+                        {({data, error, loading}) => {
+                            if (loading) return null; 
+                            if(data) console.log(data);  
+                            return ( 
+                                <div>
+                                    <div>
+                                        <h2>Manage Permissions</h2>
+                                        <Table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    {possiblePermissions.map((permission,index) => (
+                                                        <th key={index}>{permission}</th>
+                                                    ))}
+                                                    <th>👇</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {data.users.map(user => <UserPermissions key={user.id} user={user}/>)}
+                                            </tbody>
+                                        </Table>
+                                    </div>
+                                </div>
+                            )
+                        }}
+                    </Query>
+                </div>
             </PermissionsWrapper>
         );
     }
@@ -154,30 +154,30 @@ class UserPermissions extends React.Component {
             }}>
                 {(updatePermissions, {loading, error})=> (
                     <React.Fragment>
-                    {error && <tr><td colSpan="8">{error.message.replace("GraphQL error:", "")}</td></tr>}
-                    <tr>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
-                        {possiblePermissions.map((permission,index) => (
-                        <td key={`${index}a`}>
-                            <label htmlFor={`${user.id}-permission-${permission}`}>
-                                <input type="checkbox" 
-                                id={`${user.id}-permission-${permission}`}
-                                checked={this.state.permissions.includes(permission)}
-                                value={permission}
-                                onChange={this.handlePermissionChange}
-                                />
-                            </label>
-                        </td>  
-                        ))}
-                        <td><button 
-                        type="button"
-                        disabled={loading}
-                        onClick={updatePermissions}
-                        >Updat{loading ? 'ing' : 'e'}</button></td>
-                    </tr>
-                </React.Fragment>
-            )}
+                        {error && <tr><td colSpan="8">{error.message.replace("GraphQL error:", "")}</td></tr>}
+                        <tr>
+                            <td>{user.name}</td>
+                            <td>{user.email}</td>
+                            {possiblePermissions.map((permission,index) => (
+                            <td key={`${index}a`}>
+                                <label htmlFor={`${user.id}-permission-${permission}`}>
+                                    <input type="checkbox" 
+                                    id={`${user.id}-permission-${permission}`}
+                                    checked={this.state.permissions.includes(permission)}
+                                    value={permission}
+                                    onChange={this.handlePermissionChange}
+                                    />
+                                </label>
+                            </td>  
+                            ))}
+                            <td><button 
+                            type="button"
+                            disabled={loading}
+                            onClick={updatePermissions}
+                            >Updat{loading ? 'ing' : 'e'}</button></td>
+                        </tr>
+                    </React.Fragment>
+                )}
             </Mutation>
         );
     }

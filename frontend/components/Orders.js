@@ -75,45 +75,44 @@ const OrderList = styled.div`
 
 class Orders extends Component {
     render() {
-        return (
-            <StyledOrderWrapper>
-							<Query query={ORDER_LIST_QUERY}>
-									{({data, error, loading}) => {
-										if (loading) return null; 
-										console.log(data); 
-										const { orders } = data; 
-										return(
-											<div className="orderContainer">
-													<OrderList>
-														{orders.map(order => (
-															<div className="orderRow">
-																<div className="orderDetails">
-																	<p>ID: {order.id}</p>
-																	<p>Order Total: {formatMoney(order.total)}</p>
-																	<p>Date: {format(new Date(order.createdAt), "MMMM d, yyyy h:mm a")}</p>
-																	<p>{order.items.length} products </p>
-																</div>
-																<div className="items">
-																{order.items.map(item => (
-																	<div className="itemRow">
-																	<img width ="120" src={item.image}/>
-																	<div className="itemDetails">
-																		<h2>{item.title}</h2>
-																		<p> Quantity: {item.quantity}</p>
-																		<p> Each: {formatMoney(item.price)}</p>
-																	</div>
-																</div>
-																))}
-																</div>
-															</div>
-														))}
-													</OrderList>
+		return (
+			<StyledOrderWrapper>
+				<Query query={ORDER_LIST_QUERY}>
+					{({data, error, loading}) => {
+						if (loading) return null; 
+						console.log(data); 
+						const { orders } = data; 
+						return (
+							<div className="orderContainer">
+								<OrderList>
+									{orders.map(order => (
+										<div className="orderRow">
+											<div className="orderDetails">
+												<p>ID: {order.id}</p>
+												<p>Order Total: {formatMoney(order.total)}</p>
+												<p>Date: {format(new Date(order.createdAt), "MMMM d, yyyy h:mm a")}</p>
+												<p>{order.items.length} products </p>
 											</div>
-									)}}
-
-							</Query>
-            </StyledOrderWrapper>
-        );
+											<div className="items">
+											{order.items.map(item => (
+												<div className="itemRow">
+													<img width ="120" src={item.image}/>
+													<div className="itemDetails">
+														<h2>{item.title}</h2>
+														<p> Quantity: {item.quantity}</p>
+														<p> Each: {formatMoney(item.price)}</p>
+													</div>
+												</div>
+											))}
+											</div>
+										</div>
+									))}
+								</OrderList>
+							</div>
+						)}}
+				</Query>
+			</StyledOrderWrapper>
+		);
     }
 }
 

@@ -30,63 +30,63 @@ class Reset extends Component {
 		}); 
 	}
     render() {
-			return (
-				<StyledFormWrapper>
-					<div className="formContainer">
-						<Mutation
-						mutation={RESET_PASSWORD_MUTATION}
-						variables={{
-							resetToken: this.props.resetToken, 
-							password: this.state.password, 
-							confirmPassword: this.state.confirmPassword
-						}}
-						refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-						>
-							{(reset, {error, loading, called}) => {
-								return (
-								<StyledForm method="post" onSubmit ={async (e) => {
-									e.preventDefault(); 
-									const res = await reset(); 
-									console.log(res); 
-									this.setState({
-										confirmPassword: "", 
-										password: ""
-									}); 
-								}}>
-									<fieldset>
-										{!loading && !error && called && <p>Success! 
-											Your password has been reset 
-										</p>
-										}
-										<label htmlFor="password">
-											Password
-											<input
-											type="password"
-											name="password"
-											placeholder="Password"
-											value={this.state.password}
-											onChange={this.handleInput}
-											/>
-										</label>
-										<label htmlFor="confirmPassword">
-											Confirm Password
-											<input
-											type="password"
-											name="confirmPassword"
-											placeholder="Confirm Password"
-											value={this.state.confirmPassword}
-											onChange={this.handleInput}
-											/>
-										</label>
-									</fieldset>
-									<button type="submit"> Reset Password</button>
-								</StyledForm>
-								)}}
-						</Mutation>
-							
-					</div>
-				</StyledFormWrapper>
-			);
+		return (
+			<StyledFormWrapper>
+				<div className="formContainer">
+					<Mutation
+					mutation={RESET_PASSWORD_MUTATION}
+					variables={{
+						resetToken: this.props.resetToken, 
+						password: this.state.password, 
+						confirmPassword: this.state.confirmPassword
+					}}
+					refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+					>
+						{(reset, {error, loading, called}) => {
+							return (
+							<StyledForm method="post" onSubmit ={async (e) => {
+								e.preventDefault(); 
+								const res = await reset(); 
+								console.log(res); 
+								this.setState({
+									confirmPassword: "", 
+									password: ""
+								}); 
+							}}>
+								<fieldset>
+									{!loading && !error && called && <p>Success! 
+										Your password has been reset 
+									</p>
+									}
+									<label htmlFor="password">
+										Password
+										<input
+										type="password"
+										name="password"
+										placeholder="Password"
+										value={this.state.password}
+										onChange={this.handleInput}
+										/>
+									</label>
+									<label htmlFor="confirmPassword">
+										Confirm Password
+										<input
+										type="password"
+										name="confirmPassword"
+										placeholder="Confirm Password"
+										value={this.state.confirmPassword}
+										onChange={this.handleInput}
+										/>
+									</label>
+								</fieldset>
+								<button type="submit"> Reset Password</button>
+							</StyledForm>
+							)}}
+					</Mutation>
+						
+				</div>
+			</StyledFormWrapper>
+		);
     }
 }
 

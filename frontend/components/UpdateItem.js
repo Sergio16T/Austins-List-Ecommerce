@@ -124,95 +124,94 @@ class UpdateItem extends Component {
         const { errorMessage } = this.state; 
         return (
             <StyledFormWrapper>
-               
                 <div className="formContainer">
-                <Query query={SINGLE_ITEM_QUERY} variables={{id: this.props.id}} 
-                onCompleted={data => this.setState({
-                    title: data.item.title,
-                    price: data.item.price /100, 
-                    description: data.item.description, 
-                    image: data.item.image, 
-                    largeImage: data.item.largeImage
-                })}>
-                {({data, error, loading})=> {
-                    if(loading) return null; 
-                    if(error) return <p>{error.message}</p>
-                    console.log(data); 
-                    return (
-                    <Mutation mutation={UPDATE_ITEM_MUTATION} 
-                    variables={this.state}
-                    refetchQueries={[{ query: ALL_ITEMS_QUERY }]}
-                    >
-                        {(updateItem, {error, loading}) => (
-                        <StyledForm onSubmit={async (e) => {
-                            this.updateItem(e, updateItem); 
-                            // e.preventDefault(); 
-                            // const res = await updateItem(); 
-                            // console.log(res);
-                            }} errorMessage={errorMessage}>
-                            <Spinner spinner={this.state.spinner}/>
-                            <fieldset disabled={loading}>
-                                <div className="formRow">
-                                <div className="formCol-2">
-                                    <h2>Update Item</h2>
-                                    <label htmlFor="title">
-                                        Title
-                                        <input 
-                                        type="text"
-                                        name="title"
-                                        id="title"
-                                        defaultValue={data.item.title}
-                                        placeholder="title"
-                                        onChange={this.handleInput}
-                                        />
-                                    </label>
-                                    <label htmlFor="price" id="priceLabel">
-                                        {errorMessage ? errorMessage : "Price"} 
-                                        <input
-                                        type="number"
-                                        name="price"
-                                        id="price"
-                                        step=".01"
-                                        defaultValue={(data.item.price/100)}
-                                        placeholder="price"
-                                        onChange={this.handleInput}
-                                        />
-                                    </label>
-                                    <label htmlFor="description">
-                                    Description
-                                    <textarea
-                                    name="description"
-                                    id="description"
-                                    defaultValue={data.item.description}
-                                    placeholder="Enter a Description"
-                                    onChange={this.handleInput}
-                                    />
-                                </label>
-                                </div>
-                                <div className="formCol-1">
-                                    <div className="imageContainer">
-                                        {this.state.image && this.state.image ? <img  id="itemImage" width="140" src={this.state.image} alt={this.state.title}/> : null}
-                                        <label htmlFor="editInput" id="uploadImageLabel"> Upload Image </label>
-                                            <input
-                                            type ="file" 
-                                            id ="editInput" 
-                                            name="file" 
-                                            placeholder="upload an image" 
-                                            onChange={this.uploadFile}
-                                            />    
-                                    </div>
-                                </div>
-                                
-                                </div>
-                                <button type="submit" disabled={this.state.errorMessage ? true : false} aria-disabled={this.state.errorMessage ? true : false}>Save Changes</button>
-                            </fieldset>
-                        </StyledForm>
-                        )}
-                    </Mutation>
-                    )}}
-                 </Query>
-           </div>
-           </StyledFormWrapper>
+                    <Query query={SINGLE_ITEM_QUERY} variables={{id: this.props.id}} 
+                    onCompleted={data => this.setState({
+                        title: data.item.title,
+                        price: data.item.price /100, 
+                        description: data.item.description, 
+                        image: data.item.image, 
+                        largeImage: data.item.largeImage
+                    })}>
+                        {({data, error, loading})=> {
+                            if(loading) return null; 
+                            if(error) return <p>{error.message}</p>
+                            console.log(data); 
+                            return (
+                            <Mutation mutation={UPDATE_ITEM_MUTATION} 
+                            variables={this.state}
+                            refetchQueries={[{ query: ALL_ITEMS_QUERY }]}
+                            >
+                                {(updateItem, {error, loading}) => (
+                                <StyledForm onSubmit={async (e) => {
+                                    this.updateItem(e, updateItem); 
+                                    // e.preventDefault(); 
+                                    // const res = await updateItem(); 
+                                    // console.log(res);
+                                    }} errorMessage={errorMessage}>
+                                    <Spinner spinner={this.state.spinner}/>
+                                    <fieldset disabled={loading}>
+                                        <div className="formRow">
+                                        <div className="formCol-2">
+                                            <h2>Update Item</h2>
+                                            <label htmlFor="title">
+                                                Title
+                                                <input 
+                                                type="text"
+                                                name="title"
+                                                id="title"
+                                                defaultValue={data.item.title}
+                                                placeholder="title"
+                                                onChange={this.handleInput}
+                                                />
+                                            </label>
+                                            <label htmlFor="price" id="priceLabel">
+                                                {errorMessage ? errorMessage : "Price"} 
+                                                <input
+                                                type="number"
+                                                name="price"
+                                                id="price"
+                                                step=".01"
+                                                defaultValue={(data.item.price/100)}
+                                                placeholder="price"
+                                                onChange={this.handleInput}
+                                                />
+                                            </label>
+                                            <label htmlFor="description">
+                                            Description
+                                            <textarea
+                                            name="description"
+                                            id="description"
+                                            defaultValue={data.item.description}
+                                            placeholder="Enter a Description"
+                                            onChange={this.handleInput}
+                                            />
+                                        </label>
+                                        </div>
+                                        <div className="formCol-1">
+                                            <div className="imageContainer">
+                                                {this.state.image && this.state.image ? <img  id="itemImage" width="140" src={this.state.image} alt={this.state.title}/> : null}
+                                                <label htmlFor="editInput" id="uploadImageLabel"> Upload Image </label>
+                                                    <input
+                                                    type ="file" 
+                                                    id ="editInput" 
+                                                    name="file" 
+                                                    placeholder="upload an image" 
+                                                    onChange={this.uploadFile}
+                                                    />    
+                                            </div>
+                                        </div>
+                                        
+                                        </div>
+                                        <button type="submit" disabled={this.state.errorMessage ? true : false} aria-disabled={this.state.errorMessage ? true : false}>Save Changes</button>
+                                    </fieldset>
+                                </StyledForm>
+                                )}
+                            </Mutation>
+                        )}}
+                    </Query>
+                </div>
+            </StyledFormWrapper>
         );
     }
 }

@@ -37,30 +37,29 @@ class Item extends Component {
     render() {
         const { item } = this.props; 
         return (
-                <StyledItem>
-                    {item.image && <img src={item.image} alt={item.title}/>}
-                    <Title>
-                        <Link href={{
-                            pathname: "/item", 
-                            query: {id: item.id}
-                        }}>
-                            <a>{item.title}</a>
-                        </Link>
-                    </Title>
-                    <p>{item.description}</p>
-                    <p>{formatMoney(item.price)}</p>
-                    <ItemButtons>
-                        <Link href={{
-                            pathname: '/update', 
-                            query: {id: item.id}
-                        }}>
-                            <a id="editButton"> Edit </a>
-                        </Link>
-                        <AddToCart id={item.id}/>
-                        <DeleteItem id={item.id} page={this.props.page}>Delete</DeleteItem>
-                    </ItemButtons>
-                </StyledItem>
-                
+            <StyledItem>
+                {item.image && <img src={item.image} alt={item.title}/>}
+                <Title>
+                    <Link href={{
+                        pathname: "/item", 
+                        query: {id: item.id}
+                    }}>
+                        <a>{item.title}</a>
+                    </Link>
+                </Title>
+                <p>{item.description}</p>
+                <p>{formatMoney(item.price)}</p>
+                <ItemButtons>
+                    <Link href={{
+                        pathname: '/update', 
+                        query: {id: item.id}
+                    }}>
+                        <a id="editButton"> Edit </a>
+                    </Link>
+                    <AddToCart id={item.id}/>
+                    <DeleteItem id={item.id} page={this.props.page}>Delete</DeleteItem>
+                </ItemButtons>
+            </StyledItem>      
         );
     }
 }

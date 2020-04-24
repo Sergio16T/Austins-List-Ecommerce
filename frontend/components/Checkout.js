@@ -12,12 +12,12 @@ const CREATE_ORDER_MUTATION = gql`
     mutation CREATE_ORDER_MUTATION($token: String!) {
         createOrder(token: $token) {
             id
-						total 
-						charge
-						items {
-							id
-							title
-						}
+			total 
+			charge
+			items {
+				id
+				title
+			}
         }
     }
 `; 
@@ -30,38 +30,38 @@ function totalItems(cart) {
 
 class Checkout extends Component {
     onToken = async (res, createOrder) => {
-				console.log(res.id); 
-				this.props.toggleCart(false);
-				const order = await createOrder({
-					variables: { token: res.id }
-				}).catch(err => {
-					console.log(err.message);  
-				}); 
-				console.log(order); 
-				Router.push({
-					pathname: "/order", 
-					query: {id: order.data.createOrder.id}
-				});
+		// console.log(res.id); 
+		this.props.toggleCart(false);
+		const order = await createOrder({
+			variables: { token: res.id }
+		}).catch(err => {
+			console.log(err.message);  
+		}); 
+		console.log(order); 
+		Router.push({
+			pathname: "/order", 
+			query: {id: order.data.createOrder.id}
+		});
 			
     }
     render() {
         return (
-						<Mutation 
-						mutation={CREATE_ORDER_MUTATION}
-						refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-						>
-                {(createOrder, {error, loading}) => 
-							<StripeCheckout
-							amount={this.props.totalAmount}
-							name="Austin's List"
-							description={`Order of ${totalItems(this.props.cart)} items`}
-							image={this.props.cart.length && this.props.cart[0].item ? this.props.cart[0].item.image : null}
-							stripeKey="pk_test_lUHGmLxt0KGqdsIN20tuXiVw00Q2OwgjiR"
-							currency="USD"
-							email={this.props.email}
-							token={(res) => this.onToken(res, createOrder)}
-							>{this.props.children}</StripeCheckout>
-            }
+			<Mutation 
+			mutation={CREATE_ORDER_MUTATION}
+			refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+			>
+				{(createOrder, {error, loading}) => 
+					<StripeCheckout
+					amount={this.props.totalAmount}
+					name="Austin's List"
+					description={`Order of ${totalItems(this.props.cart)} items`}
+					image={this.props.cart.length && this.props.cart[0].item ? this.props.cart[0].item.image : null}
+					stripeKey="pk_test_lUHGmLxt0KGqdsIN20tuXiVw00Q2OwgjiR"
+					currency="USD"
+					email={this.props.email}
+					token={(res) => this.onToken(res, createOrder)}
+					>{this.props.children}</StripeCheckout>
+				}
             </Mutation>
         );
     }

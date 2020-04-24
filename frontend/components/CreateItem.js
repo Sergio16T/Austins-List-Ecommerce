@@ -105,101 +105,100 @@ class CreateItem extends Component {
                             let skip = page * 4 - 4;
                             // console.log(skip); 
                             return (
-                        <Mutation 
-                        mutation={CREATE_ITEM_MUTATION} 
-                        variables={{...this.state, price: setPrice * 100}}
-                        refetchQueries={[
-                            { query: PAGINATION_QUERY }, 
-                            { query: ALL_ITEMS_QUERY, variables: {skip: skip} }, 
-                            { query: ALL_ITEMS_QUERY, variables: {skip: (page-1) * 4 - 4 }}
-                        ]}
-                        >
-                            {(createItem, {loading, error}) => (
-                            <StyledForm onSubmit={ async (e)=> {
-                                e.preventDefault(); 
-                                this.setState({ spinner: true });
-                                let res = await createItem().catch(err => {
-                                    if(err) {
-                                        this.setState({ 
-                                            spinner: false, 
-                                            error: true
-                                         }); 
-                                    } else {
-                                        this.setState({
-                                            error: false
+                            <Mutation 
+                            mutation={CREATE_ITEM_MUTATION} 
+                            variables={{...this.state, price: setPrice * 100}}
+                            refetchQueries={[
+                                { query: PAGINATION_QUERY }, 
+                                { query: ALL_ITEMS_QUERY, variables: {skip: skip} }, 
+                                { query: ALL_ITEMS_QUERY, variables: {skip: (page-1) * 4 - 4 }}
+                            ]}>
+                                {(createItem, {loading, error}) => (
+                                    <StyledForm onSubmit={ async (e)=> {
+                                        e.preventDefault(); 
+                                        this.setState({ spinner: true });
+                                        let res = await createItem().catch(err => {
+                                            if(err) {
+                                                this.setState({ 
+                                                    spinner: false, 
+                                                    error: true
+                                                }); 
+                                            } else {
+                                                this.setState({
+                                                    error: false
+                                                }); 
+                                            }  
                                         }); 
-                                    }  
-                                }); 
-                                this.setState({ spinner: false }); 
-                                console.log(res); 
-                                if(!this.state.error) {
-                                    Router.push({
-                                        pathname: "/items", 
-                                        query: {page: page}
-                                        // query: {id: res.data.createItem.id}
-                                    }); 
-                                }
-                            }} 
-                            errorMessage = {errorMessage}
-                            >
-                                <Spinner spinner={this.state.spinner}/>
-                                {error && <p className="errorMessage">{error.message.replace("GraphQL error:", "")}</p>}
-                                <fieldset disabled={loading} aria-busy={loading}>
-                                    <h2 id="create_header">Upload item</h2>
-                                    <label htmlFor="file">
-                                        Image
-                                        <input
-                                        type ="file" 
-                                        id ="file" 
-                                        name="file" 
-                                        placeholder="upload an image" 
-                                        onChange={this.uploadFile}
-                                        />
-                                    </label>
-                                    {this.state.largeImage && <img width="250" src={this.state.image} alt={this.state.description}></img>}
-                                    <label htmlFor="title">
-                                        Title
-                                        <input
-                                        type ="text" 
-                                        id ="title" 
-                                        name="title" 
-                                        placeholder="Title" 
-                                        value={this.state.title}
-                                        onChange={this.handleInput}
-                                        required  
-                                        />
-                                    </label>
-                                    <label htmlFor="price" id="priceLabel">
-                                        {errorMessage ? errorMessage : 'Price'}
-                                        <input
-                                        type ="number" 
-                                        id ="price" 
-                                        name="price" 
-                                        placeholder="Price" 
-                                        value={this.state.price}
-                                        step=".01"
-                                        onChange={this.handleInput}
-                                        required  
-                                        />
-                                    </label>
-                                    <label htmlFor="description">
-                                        Description
-                                        <textarea
-                                        id ="description" 
-                                        name="description" 
-                                        placeholder="Enter a Description" 
-                                        value={this.state.description}
-                                        onChange={this.handleInput}
-                                        required  
-                                        />
-                                    </label>
-                                    <button type="submit" disabled={errorMessage ? true : false} aria-disabled={errorMessage ? true : false}> Submit </button>
-                                </fieldset>
-                            </StyledForm>
-                        )}
-                        </Mutation> 
-                    )}}
-                </Query>
+                                        this.setState({ spinner: false }); 
+                                        console.log(res); 
+                                        if(!this.state.error) {
+                                            Router.push({
+                                                pathname: "/items", 
+                                                query: {page: page}
+                                                // query: {id: res.data.createItem.id}
+                                            }); 
+                                        }
+                                    }} 
+                                    errorMessage = {errorMessage}
+                                    >
+                                        <Spinner spinner={this.state.spinner}/>
+                                        {error && <p className="errorMessage">{error.message.replace("GraphQL error:", "")}</p>}
+                                        <fieldset disabled={loading} aria-busy={loading}>
+                                            <h2 id="create_header">Upload item</h2>
+                                            <label htmlFor="file">
+                                                Image
+                                                <input
+                                                type ="file" 
+                                                id ="file" 
+                                                name="file" 
+                                                placeholder="upload an image" 
+                                                onChange={this.uploadFile}
+                                                />
+                                            </label>
+                                            {this.state.largeImage && <img width="250" src={this.state.image} alt={this.state.description}></img>}
+                                            <label htmlFor="title">
+                                                Title
+                                                <input
+                                                type ="text" 
+                                                id ="title" 
+                                                name="title" 
+                                                placeholder="Title" 
+                                                value={this.state.title}
+                                                onChange={this.handleInput}
+                                                required  
+                                                />
+                                            </label>
+                                            <label htmlFor="price" id="priceLabel">
+                                                {errorMessage ? errorMessage : 'Price'}
+                                                <input
+                                                type ="number" 
+                                                id ="price" 
+                                                name="price" 
+                                                placeholder="Price" 
+                                                value={this.state.price}
+                                                step=".01"
+                                                onChange={this.handleInput}
+                                                required  
+                                                />
+                                            </label>
+                                            <label htmlFor="description">
+                                                Description
+                                                <textarea
+                                                id ="description" 
+                                                name="description" 
+                                                placeholder="Enter a Description" 
+                                                value={this.state.description}
+                                                onChange={this.handleInput}
+                                                required  
+                                                />
+                                            </label>
+                                            <button type="submit" disabled={errorMessage ? true : false} aria-disabled={errorMessage ? true : false}> Submit </button>
+                                        </fieldset>
+                                    </StyledForm>
+                                )}
+                            </Mutation> 
+                        )}}
+                    </Query>
                 </div>
             </StyledFormWrapper>
         );

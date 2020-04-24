@@ -21,12 +21,12 @@ class AddToCart extends Component {
             refetchQueries={[{query: CURRENT_USER_QUERY }]}
             >
                 {(addToCart, {error, loading}) => 
-                     <button type="button" onClick={async () => {
-                         const res = await addToCart().catch(err => {
-                             alert(err.message); 
-                         }); 
-                         console.log(res); 
-                        }}>Add to Cart</button>
+                    <button type="button" onClick={async () => {
+                        const res = await addToCart().catch(err => {
+                            alert(err.message); 
+                        }); 
+                        console.log(res);
+                    }}>Add to Cart</button>
                 }
             </Mutation>
         );

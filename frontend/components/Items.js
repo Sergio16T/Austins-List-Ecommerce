@@ -52,28 +52,29 @@ const StyledLoadMessage = styled.div`
 class Items extends Component {
     render() {
         return (
-					<ItemStyles>
-							<Query query={ALL_ITEMS_QUERY}
-							variables={{skip: this.props.page * 4 - 4}}
-							>
-								{({ data, error, loading }) => { 
-										if (loading) return null; 
-										if (error) return null; 
-										// console.log('payload', data);
-										return (
-										<StyledItemsWithPagination>
-										{/* <Search/> */}
-										<Pagination page={this.props.page}/>
-												<StyledItemContainer>    
-														{data.items.map(item => (
-																<Item key={item.id} item={item} page={this.props.page}/>           
-														))}
-												</StyledItemContainer>  
-										<Pagination page={this.props.page}/>
-										</StyledItemsWithPagination>
-										)}}
-							</Query>
-					</ItemStyles>
+            <ItemStyles>
+                <Query query={ALL_ITEMS_QUERY}
+                variables={{skip: this.props.page * 4 - 4}}
+                >
+                    {({ data, error, loading }) => { 
+                        if (loading) return null; 
+                        if (error) return null; 
+                        // console.log('payload', data);
+                        return (
+                            <StyledItemsWithPagination>
+                            {/* <Search/> */}
+                            <Pagination page={this.props.page}/>
+                                    <StyledItemContainer>    
+                                            {data.items.map(item => (
+                                                    <Item key={item.id} item={item} page={this.props.page}/>           
+                                            ))}
+                                    </StyledItemContainer>  
+                            <Pagination page={this.props.page}/>
+                            </StyledItemsWithPagination>
+                        )
+                    }}
+                </Query>
+            </ItemStyles>
         );
     }
 }

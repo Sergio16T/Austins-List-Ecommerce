@@ -22,21 +22,20 @@ class RemoveFromCart extends Component {
     }
     render() {
         return (
-					<Mutation 
-					mutation={DELETE_CART_ITEM} 
-					variables={{id: this.props.id}}
-					refetchQueries={[{query: CURRENT_USER_QUERY }]}
-					>
-							{(deleteCartItem, {error, loading}) => {
-									return (
-									<button className="deleteCartItem" type="button" onClick={async () => {
-											await deleteCartItem().catch(err => alert(err.message)); 
-									}}>
-									&times;
-									</button>
-									); 
-							}}
-
+            <Mutation 
+            mutation={DELETE_CART_ITEM} 
+            variables={{id: this.props.id}}
+            refetchQueries={[{query: CURRENT_USER_QUERY }]}
+            >
+                {(deleteCartItem, {error, loading}) => {
+                    return (
+                    <button className="deleteCartItem" type="button" onClick={async () => {
+                            await deleteCartItem().catch(err => alert(err.message)); 
+                    }}>
+                    &times;
+                    </button>
+                    ); 
+                }}
            </Mutation>
         );
     }

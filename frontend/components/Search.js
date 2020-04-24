@@ -135,65 +135,64 @@ class Search extends Component {
                     searchBarOverflow={this.state.searchBarOverflow}
                     >
 						<SearchStyles>
-								<Downshift
-								id="item-down-shift" 
-                                onChange={this.routeToItem} 
-                                ref={(el)=> this.downshift = el}
-								itemToString={item => item === null ? '' : item.title}>
-								{({ getInputProps, getItemProps, isOpen, 
-								inputValue, highlightedIndex, clearSelection}) => (
-								<div className="sub-bar">
-										<ApolloConsumer>
-											{(client) => (
-										<React.Fragment>
-                                                {/* <button id="searchButton">
-                                                    <img src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-search.svg?v=12627112760336229118"></img>
-												</button> */}
-												<input
-												{...getInputProps({
-                                                    ref: (el) => { this.searchInput = el; }, 
-													type: "search",
-													placeholder:"", 
-													id:"search", 
-													className: this.state.loading ? "loading" : '', 
-													onChange: (e) => {
-														//If you want to access the event properties in an asynchronous way, you should call event.persist() on the event, which will remove the synthetic event from the pool and allow references to the event to be retained by user code.
-                                                        e.persist(); 
-                                                        if(e.target.value.length) {
-                                                            this.setState({  
-                                                                searchBarOverflow: true
-                                                            }); 
-                                                        }
-														this.onChange(e, client); 
-												}, 
-												})}
-												/>
-												{/* <button>
-														<img src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-search.svg?v=12627112760336229118"></img>
-												</button> */}
-										</React.Fragment>
-											)}  
-										</ApolloConsumer>
-										{isOpen && (
-											<DropDown>
-											{this.state.items.map((item, index) => (
-													<DropDownItem
-													{...getItemProps({item})}
-													key={item.id}
-													highlighted={index === highlightedIndex ? true : false}
-													>
-															<img width="50" src={item.image} alt={item.title}/>
-															{item.title}
-													</DropDownItem>
-											))}
-											</DropDown>
-										)}
-									{this.state.search && !this.state.items.length && !this.state.loading && 
-									<DropDownItem> Nothing found for {inputValue} </DropDownItem>}
-								</div>
-								)}
-								</Downshift>
-					
+                            <Downshift
+                            id="item-down-shift" 
+                            onChange={this.routeToItem} 
+                            ref={(el)=> this.downshift = el}
+                            itemToString={item => item === null ? '' : item.title}>
+                            {({ getInputProps, getItemProps, isOpen, 
+                            inputValue, highlightedIndex, clearSelection}) => (
+                            <div className="sub-bar">
+                                <ApolloConsumer>
+                                    {(client) => (
+                                    <React.Fragment>
+                                        {/* <button id="searchButton">
+                                            <img src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-search.svg?v=12627112760336229118"></img>
+                                        </button> */}
+                                        <input
+                                        {...getInputProps({
+                                            ref: (el) => { this.searchInput = el; }, 
+                                            type: "search",
+                                            placeholder:"", 
+                                            id:"search", 
+                                            className: this.state.loading ? "loading" : '', 
+                                            onChange: (e) => {
+                                                //If you want to access the event properties in an asynchronous way, you should call event.persist() on the event, which will remove the synthetic event from the pool and allow references to the event to be retained by user code.
+                                                e.persist(); 
+                                                if(e.target.value.length) {
+                                                    this.setState({  
+                                                        searchBarOverflow: true
+                                                    }); 
+                                                }
+                                                this.onChange(e, client); 
+                                        }, 
+                                        })}
+                                        />
+                                        {/* <button>
+                                                <img src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-search.svg?v=12627112760336229118"></img>
+                                        </button> */}
+                                    </React.Fragment>
+                                    )}  
+                                </ApolloConsumer>
+                                {isOpen && (
+                                    <DropDown>
+                                    {this.state.items.map((item, index) => (
+                                        <DropDownItem
+                                        {...getItemProps({item})}
+                                        key={item.id}
+                                        highlighted={index === highlightedIndex ? true : false}
+                                        >
+                                                <img width="50" src={item.image} alt={item.title}/>
+                                                {item.title}
+                                        </DropDownItem>
+                                    ))}
+                                    </DropDown>
+                                )}
+                                {this.state.search && !this.state.items.length && !this.state.loading && 
+                                    <DropDownItem> Nothing found for {inputValue} </DropDownItem>}
+                            </div>
+                            )}
+                            </Downshift>
 						</SearchStyles>
 					</SearchWrapper>
 
