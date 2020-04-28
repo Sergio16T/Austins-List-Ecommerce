@@ -5,7 +5,6 @@ import Item from './Item';
 import { ItemStyles, StyledItemsWithPagination } from './styles/ItemStyles'; 
 import styled from 'styled-components';
 import Pagination from './Pagination'; 
-import Search from './Search'; 
 
 const ALL_ITEMS_QUERY = gql`
     query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = 4) {
@@ -59,17 +58,16 @@ class Items extends Component {
                     {({ data, error, loading }) => { 
                         if (loading) return null; 
                         if (error) return null; 
-                        // console.log('payload', data);
+                        console.log('payload', data);
                         return (
                             <StyledItemsWithPagination>
-                            {/* <Search/> */}
-                            <Pagination page={this.props.page}/>
-                                    <StyledItemContainer>    
+                                <Pagination page={this.props.page}/>
+                                        <StyledItemContainer>    
                                             {data.items.map(item => (
-                                                    <Item key={item.id} item={item} page={this.props.page}/>           
+                                                <Item key={item.id} item={item} page={this.props.page}/>           
                                             ))}
-                                    </StyledItemContainer>  
-                            <Pagination page={this.props.page}/>
+                                        </StyledItemContainer>  
+                                <Pagination page={this.props.page}/>
                             </StyledItemsWithPagination>
                         )
                     }}

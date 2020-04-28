@@ -32,7 +32,10 @@ class RequestReset extends Component {
 					>
 					{(reset, {error, loading, called}) => { 
 						return (  
-						<StyledForm method="post" onSubmit={async (e)=> {
+						<StyledForm 
+						method="post"
+						data-test="form" 
+						onSubmit={async (e)=> {
 							e.preventDefault(); 
 							this.setState({spinner: true }); 
 							const success = await reset(); 
@@ -70,3 +73,4 @@ class RequestReset extends Component {
 }
 
 export default RequestReset;
+export { REQUEST_RESET_MUTATION }; 

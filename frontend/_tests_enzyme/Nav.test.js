@@ -1,9 +1,10 @@
-import { render, screen, act } from '@testing-library/react'; 
+import { mount } from 'enzyme'; 
+import { shallowToJson } from 'enzyme-to-json'; 
 import { CURRENT_USER_QUERY } from '../components/User'; 
 import Nav from '../components/Nav'; 
 import { MockedProvider } from '@apollo/react-testing'; 
 import { mockUser, mockCartItem } from '../lib/testUtilities'; 
-import wait from 'waait'; 
+import wait from 'waait';  
 
 const notSignedInMocks = [{ 
     request: { query: CURRENT_USER_QUERY}, 
@@ -49,41 +50,52 @@ describe('<Nav/>', ()=> {
             query: "",
             asPath: "",
           }));
-        const { container } = render(
+        const wrapper = mount(
             <MockedProvider mocks={notSignedInMocks}>
                     <Nav/>
             </MockedProvider>
         ); 
-        await act( async() => {
-            await wait()
-        }); 
-       
-        const loginLink= screen.getByTestId('login'); 
-        const contactLink = screen.getByTestId('contact'); 
-        const anchors = container.querySelectorAll('a'); 
-        expect(anchors).toHaveLength(6); 
-        expect(loginLink).toBeInTheDocument(); 
-        expect(contactLink).toBeInTheDocument(); 
-        expect(container).toMatchSnapshot(); 
+        await wait(); 
+        wrapper.update(); 
+        expect(wrapper.find('Link')).toHaveLength(2);   
+        const Links = wrapper.find('Link'); 
+        const nav = wrapper.find('ul[data-test="nav"]'); 
+        expect(shallowToJson(Links)).toMatchSnapshot(); 
     }); 
-    it('renders a more robust nav when signed in', async() => {
-        useRouter.mockImplementation(() => ({
-            route: "/",
-            pathname: "/",
+    it('renders a more robust nav when signed in', async ()=> {
+        useRouter.mockImplementation(()=> ({
+            route: "/", 
+            pathname: '/',
             query: "",
-            asPath: "",
-          }));
-        const { container } = render(
+            asPath: ""
+        })); 
+        const wrapper = mount(
             <MockedProvider mocks={signedInMocks}>
-                    <Nav/>
+                <Nav/>
             </MockedProvider>
         ); 
-        await act( async() => {
-            await wait()
-        });
-        const anchors = container.querySelectorAll('a'); 
-        expect(anchors).toHaveLength(9); 
-        expect(container).toMatchSnapshot(); 
-        expect(screen.getByText('Shop')).toBeInTheDocument(); 
-    })
+        await wait(); 
+        wrapper.update();
+        const Links = wrapper.find('Link'); 
+        expect(Links).toHaveLength(4); 
+        expect(shallowToJson(Links)).toMatchSnapshot(); 
+		}); 
+		it('renders with cartItems', async () => {
+			useRouter.mockImplementation(()=> ({
+				route: "/items", 
+				pathname: '/items',
+				query: "",
+				asPath: ""
+		})); 
+		const wrapper = mount(
+				<MockedProvider mocks={signedInMocksWithCart}>
+						<Nav/>
+				</MockedProvider>
+		); 
+		await wait(); 
+		wrapper.update(); 
+		const cartCount = wrapper.find('#cartCount'); 
+		expect(cartCount.text()).toContain(9); 
+		expect(shallowToJson(cartCount)).toMatchSnapshot(); 
+		}); 
 }); 

@@ -1,58 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Item/> renders and matches the snapshot 1`] = `
-<ItemStyles__StyledItem>
-  <img
-    alt="Green Shoe"
-    src="shoe.jpg"
-  />
-  <Item__Title>
-    <Link
-      href={
-        Object {
-          "pathname": "/item",
-          "query": Object {
-            "id": "12eadsfasf",
-          },
-        }
-      }
-    >
-      <a>
-        Green Shoe
-      </a>
-    </Link>
-  </Item__Title>
-  <p>
-    Trainer
-  </p>
-  <p>
-    $50.00
-  </p>
-  <Item__ItemButtons>
-    <Link
-      href={
-        Object {
-          "pathname": "/update",
-          "query": Object {
-            "id": "12eadsfasf",
-          },
-        }
-      }
+<div>
+  <div
+    class="ItemStyles__StyledItem-sc-2ja5ol-1 dXvgRY"
+  >
+    <img
+      alt="dogs are the best"
+      src="dog.jpg"
+    />
+    <div
+      class="Item__Title-gl8sfg-0 huNLuC"
     >
       <a
+        href="/item?id=123"
+      >
+        dogs are the best
+      </a>
+    </div>
+    <p>
+      dogs description
+    </p>
+    <p>
+      $50.00
+    </p>
+    <div
+      class="Item__ItemButtons-gl8sfg-1 fydofk"
+    >
+      <a
+        href="/update?id=123"
         id="editButton"
       >
          Edit 
       </a>
-    </Link>
-    <AddToCart
-      id="12eadsfasf"
-    />
-    <DeleteItem
-      id="12eadsfasf"
-    >
-      Delete
-    </DeleteItem>
-  </Item__ItemButtons>
-</ItemStyles__StyledItem>
+      <button
+        type="button"
+      >
+        Add to Cart
+      </button>
+      <button>
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
 `;

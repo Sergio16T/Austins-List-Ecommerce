@@ -20,7 +20,7 @@ exports[`<SingleItem/> renders with correct data 1`] = `
 exports[`<SingleItem/> renders with correct data 2`] = `
 <img
   alt="dogs are the best"
-  src="dog.jpg"
+  src="dog-large.jpg"
 />
 `;
 

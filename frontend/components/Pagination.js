@@ -40,7 +40,7 @@ const Pagination = props => {
                     const count = data.itemsConnection.aggregate.count; 
                     const pages = Math.ceil(count / perPage); 
                     return (
-                    <PaginationStyles>
+                    <PaginationStyles data-test="pagination">
                         <Head>
                             <title>Austin's List page {props.page} of {pages}</title>
                         </Head>
@@ -50,9 +50,9 @@ const Pagination = props => {
                             query: {page: props.page -1}
                         }}
                         >
-                        <a aria-disabled={props.page <= 1}> &#8592; Prev</a>
+                        <a aria-disabled={props.page <= 1} id="prev"> &#8592; Prev</a>
                         </Link>
-                        <p>Page {props.page} of {pages}</p>
+                        <p data-test="pagecount">Page {props.page} of {pages}</p>
                         <Link                      
                         href={{
                             pathname:"/items",
@@ -60,7 +60,7 @@ const Pagination = props => {
                         }}
 
                         >
-                        <a aria-disabled={props.page >= pages}>Next &#8594;</a>
+                        <a aria-disabled={props.page >= pages} id="next">Next &#8594;</a>
                         </Link>
                     </PaginationStyles>
                     )}}

@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CreateItem/> renders and matches snapshot 1`] = `
+<form
+  className="FormStyles__StyledForm-txoayt-1 lkSerF"
+  data-test="form"
+  onSubmit={[Function]}
+>
+  <Spinner>
+    <Spinner__StyledSpinner>
+      <div
+        className="Spinner__StyledSpinner-ma7w1f-0 FULCn"
+      >
+        <div
+          id="backDrop"
+        >
+          <div
+            id="loading"
+          />
+        </div>
+      </div>
+    </Spinner__StyledSpinner>
+  </Spinner>
+  <fieldset
+    aria-busy={false}
+    disabled={false}
+  >
+    <h2
+      id="create_header"
+    >
+      Upload item
+    </h2>
+    <label
+      htmlFor="file"
+    >
+      Image
+      <input
+        id="file"
+        name="file"
+        onChange={[Function]}
+        placeholder="upload an image"
+        type="file"
+      />
+    </label>
+    <label
+      htmlFor="title"
+    >
+      Title
+      <input
+        id="title"
+        name="title"
+        onChange={[Function]}
+        placeholder="Title"
+        required={true}
+        type="text"
+        value=""
+      />
+    </label>
+    <label
+      htmlFor="price"
+      id="priceLabel"
+    >
+      Price
+      <input
+        id="price"
+        name="price"
+        onChange={[Function]}
+        placeholder="Price"
+        required={true}
+        step=".01"
+        type="number"
+        value={0}
+      />
+    </label>
+    <label
+      htmlFor="description"
+    >
+      Description
+      <textarea
+        id="description"
+        name="description"
+        onChange={[Function]}
+        placeholder="Enter a Description"
+        required={true}
+        value=""
+      />
+    </label>
+    <button
+      aria-disabled={false}
+      disabled={false}
+      type="submit"
+    >
+       Submit 
+    </button>
+  </fieldset>
+</form>
+`;

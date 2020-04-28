@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RequestReset/> renders and matches snapshot 1`] = `
+<form
+  className="FormStyles__StyledForm-txoayt-1 lkSerF"
+  data-test="form"
+  method="post"
+  onSubmit={[Function]}
+>
+  <Spinner>
+    <Spinner__StyledSpinner>
+      <div
+        className="Spinner__StyledSpinner-ma7w1f-0 FULCn"
+      >
+        <div
+          id="backDrop"
+        >
+          <div
+            id="loading"
+          />
+        </div>
+      </div>
+    </Spinner__StyledSpinner>
+  </Spinner>
+  <fieldset
+    aria-busy={false}
+    disabled={false}
+  >
+    <h2>
+      Request a password reset
+    </h2>
+    <label
+      htmlFor="email"
+    >
+      Email
+      <input
+        name="email"
+        onChange={[Function]}
+        placeholder="Email"
+        required={true}
+        type="email"
+        value=""
+      />
+    </label>
+    <button
+      type="submit"
+    >
+       Request Reset!
+    </button>
+  </fieldset>
+</form>
+`;

@@ -165,7 +165,7 @@ const FeatureIcons = styled.div`
             left: 0px;
             width: 100%;
             bottom: 0;
-            top: 16px;
+            top: 17px;
             font-size: 1.2rem;
             text-align: center;
         }

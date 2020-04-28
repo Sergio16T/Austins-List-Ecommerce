@@ -3,7 +3,6 @@ import { shallowToJson } from 'enzyme-to-json';
 import SingleItem, { SINGLE_ITEM_QUERY } from '../components/SingleItem'; 
 import { MockedProvider } from '@apollo/react-testing'; 
 import { mockItem } from '../lib/testUtilities'; 
-import { ItemButtons } from '../components/Item';
 import { act } from 'react-dom/test-utils'; 
 import wait from 'waait'; 
 
@@ -22,7 +21,7 @@ describe('<SingleItem/>', () => {
         }]; 
      
         const wrapper = mount(
-                <MockedProvider addTypename={false} mocks={mocks}>
+                <MockedProvider mocks={mocks}>
                      <SingleItem id='123'/>
                 </MockedProvider>
             ); 
@@ -56,7 +55,7 @@ describe('<SingleItem/>', () => {
 		 wrapper.update();
 		//  console.log(wrapper.debug());
 		 const item = wrapper.find('[data-test="graphql-error"]'); 
-		 console.log(item.debug()); 
+		//  console.log(item.debug()); 
 		 expect(item.text()).toContain("Item not found"); 
 		 expect(shallowToJson(item)).toMatchSnapshot(); 
 		}); 

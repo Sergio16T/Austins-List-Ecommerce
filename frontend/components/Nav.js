@@ -85,14 +85,14 @@ const Nav = props => {
 
                     <Link href="/contact">
                         <li onClick={props.openMobileMenu}>
-                            <a>Contact</a>
+                            <a data-testid="contact">Contact</a>
                             <div className="slidingBar" id="/contact"></div>
                         </li>
                     </Link>
                     {!user && 
                     <Link href="/signup">
                         <li onClick={props.openMobileMenu}>
-                            <a>Log In</a>
+                            <a data-testid="login">Log In</a>
                             <div className="slidingBar" id="/signup"></div>
                         </li>
                     </Link>

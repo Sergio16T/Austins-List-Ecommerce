@@ -3,14 +3,14 @@ import casual from 'casual';
 casual.seed(111); 
 
 const mockItem = () => ({
-    __typename: 'Item',
+    // __typename: 'Item',
     id: '123',
     price: 5000,
     user: null,
-    image: 'dog-small.jpg',
+    image: 'dog.jpg',
     title: 'dogs are the best',
-    description: 'dogs',
-    largeImage: 'dog.jpg',
+    description: 'dogs description',
+    largeImage: 'dog-large.jpg',
 }); 
 
 const mockUserWithItemsInCart = () =>  ({

@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Pagination/> mounts with correct number of pages 1`] = `
+<div
+  className="PaginationStyles-cr7hxd-0 hzzTYo"
+  data-test="pagination"
+>
+  <Head>
+    <Component
+      handleStateChange={null}
+      inAmpMode={false}
+      reduceComponentsToState={[Function]}
+    />
+  </Head>
+  <Link
+    href={
+      Object {
+        "pathname": "/items",
+        "query": Object {
+          "page": 0,
+        },
+      }
+    }
+  >
+    <a
+      aria-disabled={true}
+      href="/items?page=0"
+      id="prev"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+       ← Prev
+    </a>
+  </Link>
+  <p
+    data-test="pagecount"
+  >
+    Page 
+    1
+     of 
+    2
+  </p>
+  <Link
+    href={
+      Object {
+        "pathname": "/items",
+        "query": Object {
+          "page": 2,
+        },
+      }
+    }
+  >
+    <a
+      aria-disabled={false}
+      href="/items?page=2"
+      id="next"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      Next →
+    </a>
+  </Link>
+</div>
+`;
