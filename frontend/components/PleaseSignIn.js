@@ -10,7 +10,7 @@ const PleaseSignIn = props => {
                 // console.log(data); 
                 if (loading) return null; 
                 if(!data.user)  { return (
-                    <StyledFormWrapper>
+                    <StyledFormWrapper data-testid="pleaseSignin">
                         <div className="formContainer">
                             <SignIn/>
                         </div>

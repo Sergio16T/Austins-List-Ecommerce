@@ -43,13 +43,13 @@ const StyledForm = styled.form`
     label {
         display: block;
         margin-bottom: 1rem;
-        font-size: 1.4rem; 
+        font-size: 1.3rem; 
         padding: 2px 0; 
     }
     #priceLabel {
         color: ${props => props.errorMessage ? 'red' : 'black'}; 
         /* font-size: ${props => props.errorMessage ? '1.2rem' : '1.2rem'};  */
-        font-size: 1.2rem; 
+        font-size: 1.3rem; 
     }   
     fieldset {
         border: 0;
@@ -57,16 +57,21 @@ const StyledForm = styled.form`
     }
     input, textarea {
         font-family: inherit; 
-        font-size: 1.1rem; 
+        font-size: 1.2rem; 
         box-sizing: border-box; 
         width: 100%; 
-        border: 1px solid rgba(10,10,54,1); 
-        padding: 0.5rem; 
+        /* border: 1px solid rgba(10,10,54,1);  */
+        border: 1px solid #d9e4ec; 
+        border-radius: 3px; 
+        padding: .8rem; 
         margin: .5rem 0; 
         &:focus {
         outline: 0;
         border-color: rgb(119, 38, 151);
         }
+    }
+    textarea {
+        min-height: 80px; 
     }
     button {
         width: 200px; 
@@ -80,6 +85,11 @@ const StyledForm = styled.form`
         outline: none; 
         border: none; 
         cursor: pointer; 
+    }
+    #uploadPhotosDiv {
+        width: 100%; 
+        display: flex; 
+        justify-content: center; 
     }
     .imageContainer {
         margin-bottom: 1rem; 
@@ -97,6 +107,29 @@ const StyledForm = styled.form`
     opacity: .6;
     pointer-events: none;
   }
+  .dropzone {
+      padding: 2rem; 
+      border-style: dashed;
+      border-color: #d9e4ec;
+  }
+  #dropInput {
+      outline: none; 
+  }
+  #form_H1 {
+      margin-bottom: 3rem; 
+  }
+  /* .custom-file-input::before {
+    content: "Upload Images"; 
+    color: black; 
+    background-color: transparent; 
+    border: 1px solid #d9e4ec;
+  }
+    .custom-file-input {
+        color: transparent;
+    }
+    .custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+    } */
     @media (min-width: 700px) {
     #editInput {
         position: absolute;
@@ -126,18 +159,18 @@ const StyledForm = styled.form`
     #itemImage {
         margin: .5rem; 
     }
-    .formRow { 
+    /* .formRow { 
         display: flex; 
         .formCol-2 {
-            flex: 0 0 66%; 
-            max-width: 66%; 
+            flex: 0 0 50%; 
+            max-width: 50%; 
         }
         .formCol-1{ 
             display: flex; 
             justify-content: center; 
-            flex: 0 0 33%; 
+            flex: 0 0 50%; 
         }
-    }
+    } */
     }
 `;
 

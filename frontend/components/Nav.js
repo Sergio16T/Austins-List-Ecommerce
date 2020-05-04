@@ -45,7 +45,7 @@ const Nav = props => {
                 className="navbar" 
                 openDropDown={props.openDropDown} 
                 id={`mobileOpen${props.openDropDown}`}
-                data-test="nav">
+                data-testid="nav">
                     {props.width < 1000 && (
                         <Link href="/">
                             <li onClick={props.openMobileMenu}>
@@ -163,7 +163,7 @@ const CartIcons = (props) => {
             <li id="cart">
                 <a className="feature_icons" onClick={() => props.toggleCart(true)}>
                     <img id="cartImage" src="https://cdn.shopify.com/s/files/1/0558/4169/t/138/assets/icon-cart.svg?v=4915344247293215888" alt="cart" />
-                    <span id="cartCount">{calculateCartNumer(props.user.cart)}</span>
+                    <span id="cartCount" data-testid="cartCount">{calculateCartNumer(props.user.cart)}</span>
                 </a>
             </li>
             <li id="searchIconContainer" >

@@ -14,25 +14,37 @@ const Mutations = {
         if(!ctx.request.userId) {
             throw new Error("You must be logged in to do that!"); 
         }
+        const images = args.image; 
+        const largeImages = args.largeImage; 
+        console.log(args); 
         const item = await ctx.prisma.mutation.createItem({
             data: {
                 ...args,
+                image: {set: images},
+                largeImage: {set: largeImages},
                 user: {
                     connect: { id: ctx.request.user.id}
                 }, 
             },
         }, info); 
-
+        console.log('await item', item); 
         return item; 
     },
     async updateItem(parent, args, ctx, info) {
         console.log(args); 
         const updates = {...args}; 
-
+        const images = args.image; 
+        const largeImages = args.largeImage; 
         delete updates.id; 
 
         return ctx.prisma.mutation.updateItem({
-            data: updates, 
+            data: {
+                title: args.title,
+                price: args.price, 
+                description: args.description,
+                image: {set: images }, 
+                largeImage: {set: largeImages }
+             },
             where: { id: args.id}
         }, info)
     }, 

@@ -4,7 +4,7 @@ exports[`<Nav/> renders a minimal nav when signed out  1`] = `
 <div>
   <ul
     class="NavStyles__StyledNav-zwz3s4-0 gGDtos navbar"
-    data-test="nav"
+    data-testid="nav"
     id="mobileOpenundefined"
   >
     <li>
@@ -134,7 +134,7 @@ exports[`<Nav/> renders a more robust nav when signed in 1`] = `
 <div>
   <ul
     class="NavStyles__StyledNav-zwz3s4-0 gGDtos navbar"
-    data-test="nav"
+    data-testid="nav"
     id="mobileOpenundefined"
   >
     <li>

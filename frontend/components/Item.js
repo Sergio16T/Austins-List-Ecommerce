@@ -38,7 +38,7 @@ class Item extends Component {
         const { item } = this.props; 
         return (
             <StyledItem>
-                {item.image && <img src={item.image} alt={item.title}/>}
+                {item.image && <img src={item.image[0]} alt={item.title}/>}
                 <Title>
                     <Link href={{
                         pathname: "/item", 

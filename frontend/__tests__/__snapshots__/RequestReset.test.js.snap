@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RequestReset renders the component 1`] = `
+<div>
+  <div
+    class="FormStyles__StyledFormWrapper-txoayt-0 cmAGHL"
+  >
+    <div
+      class="formContainer"
+    >
+      <form
+        class="FormStyles__StyledForm-txoayt-1 lkSerF"
+        data-test="form"
+        method="post"
+      >
+        <div
+          class="Spinner__StyledSpinner-ma7w1f-0 FULCn"
+        >
+          <div
+            id="backDrop"
+          >
+            <div
+              id="loading"
+            />
+          </div>
+        </div>
+        <fieldset
+          aria-busy="false"
+        >
+          <h2>
+            Request a password reset
+          </h2>
+          <label
+            for="email"
+          >
+            Email
+            <input
+              name="email"
+              placeholder="Email"
+              required=""
+              type="email"
+              value=""
+            />
+          </label>
+          <button
+            type="submit"
+          >
+             Request Reset!
+          </button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+`;

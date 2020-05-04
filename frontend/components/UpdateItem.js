@@ -5,6 +5,7 @@ import Router from 'next/router';
 import { StyledForm, StyledFormWrapper } from './styles/FormStyles'; 
 import { ALL_ITEMS_QUERY } from './Items';
 import Spinner from './Spinner'; 
+import { UploadPhotosDropNClick } from './Photos'; 
 //need to write query for single item to fill out the form with values from the current item use id from props
 
 const SINGLE_ITEM_QUERY = gql`
@@ -25,8 +26,8 @@ const UPDATE_ITEM_MUTATION = gql`
         $title: String
         $price: Int 
         $description: String
-        $image: String
-        $largeImage: String
+        $image: [String]
+        $largeImage: [String]
         ) {
         updateItem(
             id: $id
@@ -47,8 +48,10 @@ class UpdateItem extends Component {
         title: '', 
         price: 0, 
         description: '',
-        image: '',
-        largeImage: '',
+        // image: '',
+        // largeImage: '',
+        image: [],
+        largeImage: [],
         errorMessage: '',
         spinner: false
     }
@@ -70,13 +73,10 @@ class UpdateItem extends Component {
             pathname: "/items"
         }); 
     }
-    uploadFile = async (e) => {
-        console.log('uploading file'); 
-        this.setState({ spinner: true }); 
-        const files = e.target.files; 
-        const data = new FormData(); 
-        data.append('file', files[0]); 
-        data.append('upload_preset', 'AustinArts'); 
+    handleUpload = async (data) => {
+        let images = [...this.state.image]; 
+        let largeImages = [...this.state.largeImage]; 
+        if(largeImages.length >= 6) return; 
 
         const res = await fetch('https://api.cloudinary.com/v1_1/dddnhychw/image/upload', {
             method: 'POST', 
@@ -85,15 +85,42 @@ class UpdateItem extends Component {
         const file = await res.json(); 
         console.log(file); 
         try {
+            images.push(file.secure_url); 
+            largeImages.push(file.eager[0].secure_url); 
+            // this.setState({
+            //     image: file.secure_url, 
+            //     largeImage: file.eager[0].secure_url,
+            //     spinner: false
+            // }); 
             this.setState({
-                image: file.secure_url, 
-                largeImage: file.eager[0].secure_url,
+                image: images, 
+                largeImage: largeImages, 
                 spinner: false
             }); 
+            this.fileInput.value= ""; 
         }
         catch(err) {
             this.setState({uploadError: err.message}); 
         }
+    }
+    dropFile = (files) => {
+        console.log(files); 
+        console.log('uploading file'); 
+        this.setState({ spinner: true }); 
+        const data = new FormData(); 
+        data.append('file', files[0]); 
+        data.append('upload_preset', 'AustinArts'); 
+        this.handleUpload(data); 
+    }
+    uploadFile = (e) => {
+        console.log('uploading file'); 
+        this.setState({ spinner: true }); 
+        const files = e.target.files; 
+        const data = new FormData(); 
+        data.append('file', files[0]); 
+        data.append('upload_preset', 'AustinArts'); 
+        this.handleUpload(data); 
+    
     }
     handleInput = (e) => {
         let regEx = /^\d+(\.\d{0,2})?$/; 
@@ -118,6 +145,18 @@ class UpdateItem extends Component {
         }
         this.setState({
             [name]: val
+        }); 
+    }
+    deletePhoto = (index) => {
+        console.log(index); 
+        const images = [...this.state.image]; 
+        const largeImages = [...this.state.largeImage]; 
+        images.splice(index, 1); 
+        largeImages.splice(index,1); 
+
+        this.setState({
+            image: images, 
+            largeImage: largeImages
         }); 
     }
     render() {
@@ -151,57 +190,60 @@ class UpdateItem extends Component {
                                     }} errorMessage={errorMessage}>
                                     <Spinner spinner={this.state.spinner}/>
                                     <fieldset disabled={loading}>
+                                        <div className="formheader">
+                                            <h1 id="form_H1">Updating {this.state.title}</h1>
+                                        </div>
                                         <div className="formRow">
-                                        <div className="formCol-2">
-                                            <h2>Update Item</h2>
-                                            <label htmlFor="title">
-                                                Title
-                                                <input 
-                                                type="text"
-                                                name="title"
-                                                id="title"
-                                                defaultValue={data.item.title}
-                                                placeholder="title"
-                                                onChange={this.handleInput}
-                                                />
-                                            </label>
-                                            <label htmlFor="price" id="priceLabel">
-                                                {errorMessage ? errorMessage : "Price"} 
-                                                <input
-                                                type="number"
-                                                name="price"
-                                                id="price"
-                                                step=".01"
-                                                defaultValue={(data.item.price/100)}
-                                                placeholder="price"
-                                                onChange={this.handleInput}
-                                                />
-                                            </label>
-                                            <label htmlFor="description">
-                                            Description
-                                            <textarea
-                                            name="description"
-                                            id="description"
-                                            defaultValue={data.item.description}
-                                            placeholder="Enter a Description"
-                                            onChange={this.handleInput}
-                                            />
-                                        </label>
-                                        </div>
-                                        <div className="formCol-1">
-                                            <div className="imageContainer">
-                                                {this.state.image && this.state.image ? <img  id="itemImage" width="140" src={this.state.image} alt={this.state.title}/> : null}
-                                                <label htmlFor="editInput" id="uploadImageLabel"> Upload Image </label>
-                                                    <input
-                                                    type ="file" 
-                                                    id ="editInput" 
-                                                    name="file" 
-                                                    placeholder="upload an image" 
-                                                    onChange={this.uploadFile}
-                                                    />    
+                                            <div className="formCol-1">
+                                                <div className="imageContainer">
+                                                    <UploadPhotosDropNClick
+                                                    inputRef={(el) => this.fileInput = el}
+                                                    dropFile={this.dropFile}
+                                                    uploadFile={this.uploadFile}
+                                                    image={this.state.image}
+                                                    largeImage={this.state.largeImage}
+                                                    description={this.state.description}
+                                                    deletePhoto={this.deletePhoto}
+                                                    />
+                                                </div>
                                             </div>
-                                        </div>
-                                        
+                                            <div className="formCol-2">
+                                                <h2>Item Details</h2>
+                                                {/* <h2>Update Item</h2> */}
+                                                <label htmlFor="title">
+                                                    Title
+                                                    <input 
+                                                    type="text"
+                                                    name="title"
+                                                    id="title"
+                                                    defaultValue={data.item.title}
+                                                    // placeholder="title"
+                                                    onChange={this.handleInput}
+                                                    />
+                                                </label>
+                                                <label htmlFor="price" id="priceLabel">
+                                                    {errorMessage ? errorMessage : "Price"} 
+                                                    <input
+                                                    type="number"
+                                                    name="price"
+                                                    id="price"
+                                                    step=".01"
+                                                    defaultValue={(data.item.price/100)}
+                                                    // placeholder="price"
+                                                    onChange={this.handleInput}
+                                                    />
+                                                </label>
+                                                <label htmlFor="description">
+                                                Description
+                                                <textarea
+                                                name="description"
+                                                id="description"
+                                                defaultValue={data.item.description}
+                                                // placeholder="Enter a Description"
+                                                onChange={this.handleInput}
+                                                />
+                                                </label>
+                                            </div>
                                         </div>
                                         <button type="submit" disabled={this.state.errorMessage ? true : false} aria-disabled={this.state.errorMessage ? true : false}>Save Changes</button>
                                     </fieldset>
@@ -218,3 +260,40 @@ class UpdateItem extends Component {
 
 export default UpdateItem;
 export { SINGLE_ITEM_QUERY }; 
+
+
+
+{/* <h2>Update Item Images</h2>
+
+<Dropzone 
+disableClick={true}
+onDrop={this.dropFile}>
+    {({ getRootProps, getInputProps }) => (
+        <>
+        <section  className="dropzone">
+        <div 
+        id="dropInput" 
+        {...getRootProps({
+            onClick: event => event.stopPropagation()
+        })}>
+            <input {...getInputProps()}/>
+            <p>Drop files here or click below</p>
+            <label htmlFor="editInput" id="uploadImageLabel"> Upload Image </label>
+            </div>
+        </section>
+        </>
+    ) }
+
+</Dropzone>
+    <input
+    type ="file" 
+    id ="editInput" 
+    name="file" 
+    ref={el => this.fileInput = el}
+    placeholder="upload an image" 
+    onChange={this.uploadFile}
+    />    
+    {this.state.largeImage && 
+    <PhotosWrapper images={this.state.image}
+    description={this.state.description}/>
+    } */}

@@ -28,6 +28,7 @@ const SingleItemStyles = styled.div`
     grid-auto-flow: column; 
     min-height: 800px; 
     background: white; 
+    /* padding: 0 2rem;  */
     .gridContainer {
         display: flex; 
         position: relative; 
@@ -39,6 +40,23 @@ const SingleItemStyles = styled.div`
         display: flex;
         text-align: center;
         flex-direction: column;
+        button {
+            width: 100%; 
+			background: #2b3eab;
+			text-transform: uppercase;
+			color: white;
+			padding: 14px;
+			font-size: 1.2rem;
+			font-weight: 500;
+			letter-spacing: .1rem; 
+			outline: none; 
+			border: none; 
+			cursor: pointer; 
+		}
+		button[aria-disabled='true'] {
+			opacity: .6;
+			pointer-events: none;
+		}
     }
     .itemTitle {
         font-size: 2rem; 
@@ -80,12 +98,13 @@ class SingleItem extends Component {
                         <SingleItemStyles>
                             <div className="gridContainer">
                                 <div className="gridBox">
-                                <img src={data.item.largeImage} alt={data.item.title}/>
+                                <img src={data.item.largeImage[0]} alt={data.item.title}/>
                                 </div>
                             </div>
                             <div className="itemBox">
                                <h2 className="itemTitle">Viewing {data.item.title}</h2> 
                                <p className="itemDesc">{formatMoney(data.item.price)}</p>
+                               {/* <button>Add to Cart</button> */}
                             </div>
                         </SingleItemStyles>
                     </ItemWrapper>

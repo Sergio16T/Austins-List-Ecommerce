@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Pagination/> mounts with correct number of pages 1`] = `
+<div>
+  <div
+    class="Pagination__PaginationContainer-sc-19vuk7g-0 kTjDNS"
+  >
+    <div
+      class="PaginationStyles-cr7hxd-0 hzzTYo"
+      data-testid="pagination"
+    >
+      <a
+        aria-disabled="true"
+        href="/items?page=0"
+        id="prev"
+      >
+         ← Prev
+      </a>
+      <p
+        data-test="pagecount"
+      >
+        Page 
+        1
+         of 
+        5
+      </p>
+      <a
+        aria-disabled="false"
+        href="/items?page=2"
+        id="next"
+      >
+        Next →
+      </a>
+    </div>
+  </div>
+</div>
+`;

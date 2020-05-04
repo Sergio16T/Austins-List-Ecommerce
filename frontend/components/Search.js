@@ -182,7 +182,7 @@ class Search extends Component {
                                         key={item.id}
                                         highlighted={index === highlightedIndex ? true : false}
                                         >
-                                                <img width="50" src={item.image} alt={item.title}/>
+                                                <img width="50" src={item.image[0]} alt={item.title}/>
                                                 {item.title}
                                         </DropDownItem>
                                     ))}

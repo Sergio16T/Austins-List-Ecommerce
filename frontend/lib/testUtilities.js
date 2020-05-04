@@ -3,7 +3,7 @@ import casual from 'casual';
 casual.seed(111); 
 
 const mockItem = () => ({
-    // __typename: 'Item',
+    __typename: 'Item', // typename needed or no ?
     id: '123',
     price: 5000,
     user: null,

@@ -31,6 +31,7 @@
     "react": "^16.12.0",
     "react-apollo": "^3.1.3",
     "react-dom": "^16.12.0",
+    "react-dropzone": "^11.0.1",
     "react-stripe-checkout": "^2.6.3",
     "styled-components": "^5.0.0",
     "waait": "^1.0.5"
@@ -38,6 +39,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/react": "^10.0.3",
+    "@testing-library/user-event": "^10.1.0",
     "babel-jest": "^25.4.0",
     "babel-plugin-graphql-tag": "^2.5.0",
     "babel-plugin-module-resolver": "^4.0.0",

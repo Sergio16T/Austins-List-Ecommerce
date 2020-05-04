@@ -7,14 +7,15 @@ import Spinner from './Spinner';
 import { ALL_ITEMS_QUERY } from './Items'; 
 import { PAGINATION_QUERY } from './Pagination'; 
 import WithPagination from './WithPagination'; 
+import { UploadPhotosDropNClick } from './Photos'; 
 
 const CREATE_ITEM_MUTATION = gql`
     mutation CREATE_ITEM_MUTATION(
         $title: String! 
         $description: String!
         $price: Int! 
-        $image: String!
-        $largeImage: String!
+        $image: [String]!
+        $largeImage: [String]!
         ) {
         createItem(
             title: $title, 
@@ -30,34 +31,55 @@ const CREATE_ITEM_MUTATION = gql`
 class CreateItem extends Component {
     state = {
         title: '', 
-        price: 0, 
+        price: '', 
         description: '',
-        image: '',
-        largeImage: '',
+        // image: '',
+        // largeImage: '',
+        image: [],
+        largeImage: [],
         errorMessage: '',
         uploadError: ''
     }
-    uploadFile = async (e) => {
+
+    dropFile = (files) => {
+        console.log(files); 
+        console.log('uploading file'); 
+        this.setState({ spinner: true }); 
+        const data = new FormData(); 
+        data.append('file', files[0]); 
+        data.append('upload_preset', 'AustinArts'); 
+        this.handleUpload(data); 
+    }
+    uploadFile = (e) => {
         console.log('uploading file'); 
         this.setState({ spinner: true }); 
         const files = e.target.files; 
         const data = new FormData(); 
         data.append('file', files[0]); 
         data.append('upload_preset', 'AustinArts'); 
-
+        this.handleUpload(data); 
+    
+    }
+    handleUpload = async (data) => {
+        let images = [...this.state.image]; 
+        let largeImages = [...this.state.largeImage]; 
+        if(largeImages.length >= 6) return; 
+        
         const res = await fetch('https://api.cloudinary.com/v1_1/dddnhychw/image/upload', {
             method: 'POST', 
             body: data  
         }); 
         const file = await res.json(); 
         console.log(file); 
-
         try {
+            images.push(file.secure_url); 
+            largeImages.push(file.eager[0].secure_url); 
             this.setState({
-                image: file.secure_url, 
-                largeImage: file.eager[0].secure_url,
+                image: images, 
+                largeImage: largeImages, 
                 spinner: false
             }); 
+            this.fileInput.value= ""; 
         }
         catch(err) {
             this.setState({uploadError: err.message}); 
@@ -86,6 +108,18 @@ class CreateItem extends Component {
         }
         this.setState({
             [name]: val
+        }); 
+    }
+    deletePhoto = (index) => {
+        console.log(index); 
+        const images = [...this.state.image]; 
+        const largeImages = [...this.state.largeImage]; 
+        images.splice(index, 1); 
+        largeImages.splice(index,1); 
+
+        this.setState({
+            image: images, 
+            largeImage: largeImages
         }); 
     }
     render() {
@@ -137,25 +171,26 @@ class CreateItem extends Component {
                                 <Spinner spinner={this.state.spinner}/>
                                 {error && <p className="errorMessage">{error.message.replace("GraphQL error:", "")}</p>}
                                 <fieldset disabled={loading} aria-busy={loading}>
-                                    <h2 id="create_header">Upload item</h2>
-                                    <label htmlFor="file">
-                                        Image
-                                        <input
-                                        type ="file" 
-                                        id ="file" 
-                                        name="file" 
-                                        placeholder="upload an image" 
-                                        onChange={this.uploadFile}
-                                        />
-                                    </label>
-                                    {this.state.largeImage && <img width="250" src={this.state.image} alt={this.state.description}></img>}
+                                    <div className="formheader">
+                                            <h1 id="form_H1">Upload New Item</h1>
+                                        </div>
+                                    <UploadPhotosDropNClick
+                                     inputRef={(el) => this.fileInput = el}
+                                     dropFile={this.dropFile}
+                                     uploadFile={this.uploadFile}
+                                     image={this.state.image}
+                                     largeImage={this.state.largeImage}
+                                     description={this.state.description}
+                                     deletePhoto={this.deletePhoto}
+                                    />
+                                    <h2>Item Details</h2>
                                     <label htmlFor="title">
                                         Title
                                         <input
                                         type ="text" 
                                         id ="title" 
                                         name="title" 
-                                        placeholder="Title" 
+                                        // placeholder="Title" 
                                         value={this.state.title}
                                         onChange={this.handleInput}
                                         required  
@@ -167,7 +202,7 @@ class CreateItem extends Component {
                                         type ="number" 
                                         id ="price" 
                                         name="price" 
-                                        placeholder="Price" 
+                                        // placeholder="Price" 
                                         value={this.state.price}
                                         step=".01"
                                         onChange={this.handleInput}
@@ -179,7 +214,7 @@ class CreateItem extends Component {
                                         <textarea
                                         id ="description" 
                                         name="description" 
-                                        placeholder="Enter a Description" 
+                                        // placeholder="Enter a Description" 
                                         value={this.state.description}
                                         onChange={this.handleInput}
                                         required  
@@ -196,5 +231,69 @@ class CreateItem extends Component {
     }
 }
 
+
 export default WithPagination(CreateItem);
-export { CREATE_ITEM_MUTATION }; 
+export { CreateItem, CREATE_ITEM_MUTATION }; 
+
+
+
+
+
+
+
+    // uploadFile = async (e) => {
+    //     let images = [...this.state.image]; 
+    //     let largeImages = [...this.state.largeImage]; 
+
+    //     if(largeImages.length >= 6) return; 
+
+    //     console.log('uploading file'); 
+    //     this.setState({ spinner: true }); 
+    //     const files = e.target.files; 
+    //     const data = new FormData(); 
+    //     data.append('file', files[0]); 
+    //     data.append('upload_preset', 'AustinArts'); 
+
+    //     const res = await fetch('https://api.cloudinary.com/v1_1/dddnhychw/image/upload', {
+    //         method: 'POST', 
+    //         body: data  
+    //     }); 
+    //     const file = await res.json(); 
+    //     console.log(file); 
+
+    //     try {
+    //         images.push(file.secure_url); 
+    //         largeImages.push(file.eager[0].secure_url); 
+    //         // this.setState({
+    //         //     image: file.secure_url, 
+    //         //     largeImage: file.eager[0].secure_url,
+    //         //     spinner: false
+    //         // }); 
+    //         this.setState({
+    //             image: images, 
+    //             largeImage: largeImages, 
+    //             spinner: false
+    //         }); 
+    //         this.fileInput.value= ""; 
+    //     }
+    //     catch(err) {
+    //         this.setState({uploadError: err.message}); 
+    //     }
+    // }
+
+
+{/* <label htmlFor="file" >
+        Upload Images
+        <input
+        type ="file" 
+        id ="file" 
+        name="file" 
+        placeholder="upload an image" 
+        ref={(el) => this.fileInput = el}
+        onChange={this.uploadFile}
+        />
+    </label>    
+{this.state.largeImage && 
+    <PhotosWrapper images={this.state.image}
+    description={this.state.description}/>
+} */}

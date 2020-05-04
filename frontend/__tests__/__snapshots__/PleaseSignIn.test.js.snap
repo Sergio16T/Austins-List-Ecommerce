@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PleaseSignIn/> renders the sign in component for logged out users 1`] = `
+<div>
+  <div
+    class="FormStyles__StyledFormWrapper-txoayt-0 cmAGHL"
+    data-testid="pleaseSignin"
+  >
+    <div
+      class="formContainer"
+    >
+      <form
+        class="FormStyles__StyledForm-txoayt-1 lkSerF"
+        method="post"
+      >
+        <div
+          class="Spinner__StyledSpinner-ma7w1f-0 FULCn"
+        >
+          <div
+            id="backDrop"
+          >
+            <div
+              id="loading"
+            />
+          </div>
+        </div>
+        <fieldset
+          aria-busy="false"
+        >
+          <h2>
+            Sign in
+          </h2>
+          <label
+            for="email"
+          >
+            Email
+            <input
+              name="email"
+              placeholder="Enter your email address"
+              type="text"
+              value=""
+            />
+          </label>
+          <label
+            for="password"
+          >
+            Password
+            <input
+              name="password"
+              placeholder="Password"
+              required=""
+              type="password"
+              value=""
+            />
+          </label>
+          <button
+            type="submit"
+          >
+             Sign In 
+          </button>
+        </fieldset>
+        <div
+          class="FormStyles__StyledResetNote-txoayt-2 hTHisz"
+        >
+          <p
+            id="resetNote"
+          >
+            Forgot your Password? Request reset
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;

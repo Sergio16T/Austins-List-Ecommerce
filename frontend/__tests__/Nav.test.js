@@ -85,5 +85,24 @@ describe('<Nav/>', ()=> {
         expect(anchors).toHaveLength(9); 
         expect(container).toMatchSnapshot(); 
         expect(screen.getByText('Shop')).toBeInTheDocument(); 
-    })
+    }); 
+    it('renders with cart items' , async () => {
+        useRouter.mockImplementation(() => ({
+            route: "/items",
+            pathname: "/items",
+            query: "",
+            asPath: "",
+          }));
+        const { container, debug } = render(
+            <MockedProvider mocks={signedInMocksWithCart}>
+                    <Nav/>
+            </MockedProvider>
+        ); 
+        await act( async () => {
+            await wait(); 
+        }); 
+        // debug()
+        const cartCount = screen.getByTestId('cartCount'); 
+        expect(cartCount.innerHTML).toEqual("9"); 
+    });
 }); 

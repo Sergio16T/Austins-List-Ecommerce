@@ -81,7 +81,7 @@ const CartItem = (props) => {
     }
 	return (
 		<StyledCartItem>
-			<img className="cartItemImage" src={item.image}/> 
+			<img className="cartItemImage" src={item.image[0]}/> 
 			<CartItemDescription>
 				<p className="cartitem_title">{item.title}</p>
 				<div className="priceandquantity">

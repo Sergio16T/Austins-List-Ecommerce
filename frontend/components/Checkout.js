@@ -55,7 +55,7 @@ class Checkout extends Component {
 					amount={this.props.totalAmount}
 					name="Austin's List"
 					description={`Order of ${totalItems(this.props.cart)} items`}
-					image={this.props.cart.length && this.props.cart[0].item ? this.props.cart[0].item.image : null}
+					image={this.props.cart.length && this.props.cart[0].item.image ? this.props.cart[0].item.image[0] : null}
 					stripeKey="pk_test_lUHGmLxt0KGqdsIN20tuXiVw00Q2OwgjiR"
 					currency="USD"
 					email={this.props.email}
