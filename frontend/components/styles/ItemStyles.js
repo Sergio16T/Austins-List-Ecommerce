@@ -19,8 +19,11 @@ const StyledItem = styled.div`
     box-shadow: 1px 1px 4px 1px rgba(51,51,51,.2); 
     img {
         width: 100%; 
-        height: 400px; 
+        height: 330px; 
         object-fit: cover; 
+        &:hover {
+            cursor: pointer; 
+        }
     }
 `; 
 const StyledItemsWithPagination = styled.div`

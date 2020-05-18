@@ -48,8 +48,6 @@ class UpdateItem extends Component {
         title: '', 
         price: 0, 
         description: '',
-        // image: '',
-        // largeImage: '',
         image: [],
         largeImage: [],
         errorMessage: '',
@@ -77,35 +75,39 @@ class UpdateItem extends Component {
         let images = [...this.state.image]; 
         let largeImages = [...this.state.largeImage]; 
         if(largeImages.length >= 6) return; 
-
-        const res = await fetch('https://api.cloudinary.com/v1_1/dddnhychw/image/upload', {
-            method: 'POST', 
-            body: data  
-        }); 
-        const file = await res.json(); 
-        console.log(file); 
+        this.setState({ spinner: true }); 
         try {
+            const res = await fetch('https://api.cloudinary.com/v1_1/dddnhychw/image/upload', {
+                method: 'POST', 
+                body: data  
+            }); 
+            const file = await res.json(); 
+            if(file.hasOwnProperty('error')) throw file.error.message; 
+
             images.push(file.secure_url); 
             largeImages.push(file.eager[0].secure_url); 
-            // this.setState({
-            //     image: file.secure_url, 
-            //     largeImage: file.eager[0].secure_url,
-            //     spinner: false
-            // }); 
             this.setState({
                 image: images, 
                 largeImage: largeImages, 
-                spinner: false
+                spinner: false,
+                fileError: ''
             }); 
             this.fileInput.value= ""; 
         }
         catch(err) {
-            this.setState({uploadError: err.message}); 
+            console.log(err); 
+            this.setState({
+                fileError: err, 
+                spinner: false
+            }); 
+            return; 
         }
     }
     dropFile = (files) => {
-        console.log(files); 
-        console.log('uploading file'); 
+        if(!files.length) {
+            this.setState({ fileError: 'No Files Provided'}); 
+            return; 
+        }
         this.setState({ spinner: true }); 
         const data = new FormData(); 
         data.append('file', files[0]); 
@@ -114,7 +116,6 @@ class UpdateItem extends Component {
     }
     uploadFile = (e) => {
         console.log('uploading file'); 
-        this.setState({ spinner: true }); 
         const files = e.target.files; 
         const data = new FormData(); 
         data.append('file', files[0]); 
@@ -175,7 +176,7 @@ class UpdateItem extends Component {
                         {({data, error, loading})=> {
                             if(loading) return null; 
                             if(error) return <p>{error.message}</p>
-                            console.log(data); 
+                            // console.log(data); 
                             return (
                             <Mutation mutation={UPDATE_ITEM_MUTATION} 
                             variables={this.state}
@@ -204,11 +205,12 @@ class UpdateItem extends Component {
                                                     largeImage={this.state.largeImage}
                                                     description={this.state.description}
                                                     deletePhoto={this.deletePhoto}
+                                                    fileError={this.state.fileError}
                                                     />
                                                 </div>
                                             </div>
                                             <div className="formCol-2">
-                                                <h2>Item Details</h2>
+                                                {/* <h2>Item Details</h2> */}
                                                 {/* <h2>Update Item</h2> */}
                                                 <label htmlFor="title">
                                                     Title

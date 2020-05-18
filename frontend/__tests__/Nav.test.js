@@ -59,11 +59,11 @@ describe('<Nav/>', ()=> {
         }); 
        
         const loginLink= screen.getByTestId('login'); 
-        const contactLink = screen.getByTestId('contact'); 
+        // const contactLink = screen.getByTestId('contact'); 
         const anchors = container.querySelectorAll('a'); 
-        expect(anchors).toHaveLength(6); 
+        expect(anchors).toHaveLength(5); 
         expect(loginLink).toBeInTheDocument(); 
-        expect(contactLink).toBeInTheDocument(); 
+        // expect(contactLink).toBeInTheDocument(); 
         expect(container).toMatchSnapshot(); 
     }); 
     it('renders a more robust nav when signed in', async() => {
@@ -82,7 +82,7 @@ describe('<Nav/>', ()=> {
             await wait()
         });
         const anchors = container.querySelectorAll('a'); 
-        expect(anchors).toHaveLength(9); 
+        expect(anchors).toHaveLength(8); 
         expect(container).toMatchSnapshot(); 
         expect(screen.getByText('Shop')).toBeInTheDocument(); 
     }); 

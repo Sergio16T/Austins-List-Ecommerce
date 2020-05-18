@@ -38,7 +38,14 @@ class Item extends Component {
         const { item } = this.props; 
         return (
             <StyledItem>
-                {item.image && <img src={item.image[0]} alt={item.title}/>}
+                {item.image && 
+                    <Link href={{
+                        pathname: "/item",
+                        query: {id: item.id}
+                    }}>
+                        <img src={item.image[0]} alt={item.title}/>
+                    </Link>
+                }
                 <Title>
                     <Link href={{
                         pathname: "/item", 
@@ -56,7 +63,7 @@ class Item extends Component {
                     }}>
                         <a id="editButton"> Edit </a>
                     </Link>
-                    <AddToCart id={item.id}/>
+                    <AddToCart id={item.id} toggleCart={this.props.toggleCart}/>
                     <DeleteItem id={item.id} page={this.props.page}>Delete</DeleteItem>
                 </ItemButtons>
             </StyledItem>      

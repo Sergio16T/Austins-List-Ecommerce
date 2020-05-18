@@ -10,11 +10,11 @@ exports[`<PleaseSignIn/> renders the sign in component for logged out users 1`] 
       class="formContainer"
     >
       <form
-        class="FormStyles__StyledForm-txoayt-1 lkSerF"
+        class="FormStyles__StyledForm-txoayt-1 jOxosP"
         method="post"
       >
         <div
-          class="Spinner__StyledSpinner-ma7w1f-0 FULCn"
+          class="Spinner__StyledSpinner-ma7w1f-0 VyxpA"
         >
           <div
             id="backDrop"

@@ -112,26 +112,16 @@ const StyledForm = styled.form`
       border-style: dashed;
       border-color: #d9e4ec;
   }
+  #drop_message {
+      font-size: 1.3rem; 
+  }
   #dropInput {
       outline: none; 
   }
   #form_H1 {
       margin-bottom: 3rem; 
   }
-  /* .custom-file-input::before {
-    content: "Upload Images"; 
-    color: black; 
-    background-color: transparent; 
-    border: 1px solid #d9e4ec;
-  }
-    .custom-file-input {
-        color: transparent;
-    }
-    .custom-file-input::-webkit-file-upload-button {
-    visibility: hidden;
-    } */
-    @media (min-width: 700px) {
-    #editInput {
+  #editInput {
         position: absolute;
         border: 0;
         height: 1px;
@@ -156,6 +146,8 @@ const StyledForm = styled.form`
         margin: .5rem;
         line-height: inherit;
     }
+    @media (min-width: 700px) {
+
     #itemImage {
         margin: .5rem; 
     }

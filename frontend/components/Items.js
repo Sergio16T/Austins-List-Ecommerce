@@ -58,13 +58,18 @@ class Items extends Component {
                     {({ data, error, loading }) => { 
                         if (loading) return null; 
                         if (error) return null; 
-                        console.log('payload', data);
+                        // console.log('payload', data);
                         return (
                             <StyledItemsWithPagination>
                                 <Pagination page={this.props.page}/>
                                         <StyledItemContainer>    
                                             {data.items.map(item => (
-                                                <Item key={item.id} item={item} page={this.props.page}/>           
+                                                <Item 
+                                                key={item.id} 
+                                                item={item} 
+                                                page={this.props.page}
+                                                toggleCart={this.props.toggleCart}
+                                                />           
                                             ))}
                                         </StyledItemContainer>  
                                 <Pagination page={this.props.page}/>

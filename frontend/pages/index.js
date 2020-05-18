@@ -9,7 +9,7 @@ const Home = (props) => {
                 <StyledHomeDiv className="homeContent">
                     <div id="welcome"> 
                         <h2> Welcome to Austin's List </h2>
-                        <h3> The place for local Austin designers and artists to upload items and for shoppers to explore!</h3>
+                        <h3> The place for shoppers to explore local Austin designers and artist's work!</h3>
                     </div>
                     <video autoPlay muted loop> 
                         <source src="https://mooveit-videos.s3-us-west-2.amazonaws.com/compilation_preview.mp4" alt="homePageVideo" type="video/mp4"/> {/*link to video in aws s3 bucket*/}

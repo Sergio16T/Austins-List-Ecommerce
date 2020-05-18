@@ -3,11 +3,11 @@
 exports[`<Item/> renders and matches the snapshot 1`] = `
 <div>
   <div
-    class="ItemStyles__StyledItem-sc-2ja5ol-1 dXvgRY"
+    class="ItemStyles__StyledItem-sc-2ja5ol-1 gshjIO"
   >
     <img
       alt="dogs are the best"
-      src="dog.jpg"
+      src="d"
     />
     <div
       class="Item__Title-gl8sfg-0 huNLuC"
@@ -34,6 +34,7 @@ exports[`<Item/> renders and matches the snapshot 1`] = `
          Edit 
       </a>
       <button
+        id="addToCart"
         type="button"
       >
         Add to Cart

@@ -5,7 +5,7 @@ const Photos = styled.div`
     display: grid; 
     grid-template-columns: 1fr 1fr 1fr; 
     grid-gap: 10px; 
-    padding: 1rem 0; 
+    padding: 1.4rem 0; 
     .photoContainer {
         display: flex; 
         justify-content: center; 
@@ -52,32 +52,51 @@ const Photos = styled.div`
         grid-template-columns: 1fr; 
     }
 `; 
-
+const Error = styled.div`
+    border: 1px solid red;
+    border-left: 5px solid red;
+    margin: 1rem 0; 
+    padding: 1rem; 
+    background-color: rgb(255, 0, 0, .1); 
+    position: relative; 
+    #drop_errormessage {
+      padding-left: 2rem; 
+      color: red; 
+      font-size: 1.2rem; 
+    }
+`; 
 const UploadPhotosDropNClick = (props) => {
     return (
         <React.Fragment>
-            <h2>Item Images</h2>
+            {/* <h2>Item Images</h2> */}
             <Dropzone 
-            disableClick={true}
-            onDrop={props.dropFile}>
+            onDrop={props.dropFile}
+            accept="image/*"
+            >
                 {({ getRootProps, getInputProps }) => (
                     <>
-                    <section  className="dropzone">
-                    <div 
-                    id="dropInput" 
-                    {...getRootProps({
-                        onClick: event => event.stopPropagation()
-                    })}>
-                        <input {...getInputProps()}/>
-                        <p>Drop files here or click below</p>
-                        <label htmlFor="editInput" id="uploadImageLabel"> Upload Image </label>
-                        </div>
-                    </section>
+                        {props.fileError ? 
+                            <Error>
+                                <p id="drop_errormessage">Please only upload images</p>
+                            </Error>
+                        : null }
+                        <section className="dropzone">
+                            <div 
+                            id="dropInput" 
+                            {...getRootProps({
+                                onClick: event => event.stopPropagation()
+                            })}>
+                                <input {...getInputProps()} />
+                                <p id="drop_message">Drop files here or click below</p>
+                                <label htmlFor="editInput" id="uploadImageLabel"> Upload Image </label>
+                            </div>
+                        </section>
                     </>
                 )}
             </Dropzone>
             <input
             type ="file" 
+            accept="image/*"
             id ="editInput" 
             name="file" 
             className="custom-file-input"

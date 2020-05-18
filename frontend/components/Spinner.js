@@ -13,7 +13,7 @@ const StyledSpinner = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 10; 
+        z-index: 3; 
     }
     #loading {
       display: inline-block;

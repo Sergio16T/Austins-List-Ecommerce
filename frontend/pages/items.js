@@ -5,7 +5,10 @@ import PleaseSignIn from '../components/PleaseSignIn';
 const ItemsPage = props => {
     return (
         <PleaseSignIn>
-            <Items page={parseFloat(props.query.page)|| 1}/>
+            <Items 
+            toggleCart={props.toggleCart}
+            page={parseFloat(props.query.page)|| 1}
+            />
         </PleaseSignIn> 
     );
 };

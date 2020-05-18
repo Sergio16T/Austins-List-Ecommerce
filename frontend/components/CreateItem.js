@@ -33,8 +33,6 @@ class CreateItem extends Component {
         title: '', 
         price: '', 
         description: '',
-        // image: '',
-        // largeImage: '',
         image: [],
         largeImage: [],
         errorMessage: '',
@@ -42,8 +40,10 @@ class CreateItem extends Component {
     }
 
     dropFile = (files) => {
-        console.log(files); 
-        console.log('uploading file'); 
+        if(!files.length) {
+            this.setState({ fileError: 'No Files Provided'}); 
+            return; 
+        }
         this.setState({ spinner: true }); 
         const data = new FormData(); 
         data.append('file', files[0]); 
@@ -51,8 +51,7 @@ class CreateItem extends Component {
         this.handleUpload(data); 
     }
     uploadFile = (e) => {
-        console.log('uploading file'); 
-        this.setState({ spinner: true }); 
+        // console.log('uploading file'); 
         const files = e.target.files; 
         const data = new FormData(); 
         data.append('file', files[0]); 
@@ -64,25 +63,34 @@ class CreateItem extends Component {
         let images = [...this.state.image]; 
         let largeImages = [...this.state.largeImage]; 
         if(largeImages.length >= 6) return; 
-        
-        const res = await fetch('https://api.cloudinary.com/v1_1/dddnhychw/image/upload', {
-            method: 'POST', 
-            body: data  
-        }); 
-        const file = await res.json(); 
-        console.log(file); 
+
+        this.setState({ spinner: true }); 
+
         try {
+            const res = await fetch('https://api.cloudinary.com/v1_1/dddnhychw/image/upload', {
+                method: 'POST', 
+                body: data  
+            }); 
+            const file = await res.json(); 
+            if(file.hasOwnProperty('error')) throw file.error.message; 
+
             images.push(file.secure_url); 
             largeImages.push(file.eager[0].secure_url); 
             this.setState({
                 image: images, 
                 largeImage: largeImages, 
-                spinner: false
+                spinner: false,
+                fileError: ''
             }); 
             this.fileInput.value= ""; 
         }
         catch(err) {
-            this.setState({uploadError: err.message}); 
+            console.log(err); 
+            this.setState({
+                fileError: err, 
+                spinner: false
+            }); 
+            return; 
         }
     }
     handleInput = (e) => {
@@ -182,8 +190,9 @@ class CreateItem extends Component {
                                      largeImage={this.state.largeImage}
                                      description={this.state.description}
                                      deletePhoto={this.deletePhoto}
+                                     fileError={this.state.fileError}
                                     />
-                                    <h2>Item Details</h2>
+                                    {/* <h2>Item Details</h2> */}
                                     <label htmlFor="title">
                                         Title
                                         <input

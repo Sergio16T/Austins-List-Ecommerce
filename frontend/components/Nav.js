@@ -83,12 +83,12 @@ const Nav = props => {
                     </>
                     }
 
-                    <Link href="/contact">
+                    {/* <Link href="/contact">
                         <li onClick={props.openMobileMenu}>
                             <a data-testid="contact">Contact</a>
                             <div className="slidingBar" id="/contact"></div>
                         </li>
-                    </Link>
+                    </Link> */}
                     {!user && 
                     <Link href="/signup">
                         <li onClick={props.openMobileMenu}>

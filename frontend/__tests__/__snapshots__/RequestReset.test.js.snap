@@ -9,12 +9,12 @@ exports[`RequestReset renders the component 1`] = `
       class="formContainer"
     >
       <form
-        class="FormStyles__StyledForm-txoayt-1 lkSerF"
+        class="FormStyles__StyledForm-txoayt-1 jOxosP"
         data-test="form"
         method="post"
       >
         <div
-          class="Spinner__StyledSpinner-ma7w1f-0 FULCn"
+          class="Spinner__StyledSpinner-ma7w1f-0 VyxpA"
         >
           <div
             id="backDrop"

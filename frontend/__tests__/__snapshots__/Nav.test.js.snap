@@ -9,17 +9,6 @@ exports[`<Nav/> renders a minimal nav when signed out  1`] = `
   >
     <li>
       <a
-        data-testid="contact"
-      >
-        Contact
-      </a>
-      <div
-        class="slidingBar"
-        id="/contact"
-      />
-    </li>
-    <li>
-      <a
         data-testid="login"
       >
         Log In
@@ -162,17 +151,6 @@ exports[`<Nav/> renders a more robust nav when signed in 1`] = `
       <div
         class="slidingBar"
         id="/orders"
-      />
-    </li>
-    <li>
-      <a
-        data-testid="contact"
-      >
-        Contact
-      </a>
-      <div
-        class="slidingBar"
-        id="/contact"
       />
     </li>
     <li>
