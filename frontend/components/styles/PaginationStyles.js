@@ -24,4 +24,21 @@ const PaginationStyles = styled.div`
   }
 `;
 
+const PaginationContainer = styled.div`
+    padding-top: 4rem; 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    @media (max-width: 480px) {
+        padding: 2rem 0; 
+    }
+`;
+const Placeholder = styled.div`
+    height: 45px;
+    margin-top: 24px; 
+    margin-bottom: 24px; 
+`; 
+
 export default PaginationStyles;
+
+export { PaginationContainer, Placeholder }; 

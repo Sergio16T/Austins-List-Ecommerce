@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PaginationStyles from './styles/PaginationStyles'; 
+import React from 'react';
+import PaginationStyles, { PaginationContainer, Placeholder } from './styles/PaginationStyles'; 
 import { Query } from 'react-apollo'; 
 import Head from "next/head"; 
 import Link from "next/link"; 
@@ -19,17 +19,6 @@ const PAGINATION_QUERY = gql`
 `;
 
 
-const PaginationContainer = styled.div`
-    padding-top: 4rem; 
-    width: 100%; 
-    display: flex; 
-    justify-content: center; 
-`;
-const Placeholder = styled.div`
-    height: 45px;
-    margin-top: 24px; 
-    margin-bottom: 24px; 
-`; 
 const Pagination = props => {
     return (
         <PaginationContainer>

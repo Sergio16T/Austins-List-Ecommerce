@@ -4,7 +4,7 @@
   "description": "Austin's List: Ecommerce Web Application",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
+    "dev": "next -p 7777",
     "build": "next build",
     "start": "next start -p $PORT",
     "test": "NODE_ENV=test jest --watch",

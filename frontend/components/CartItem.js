@@ -1,10 +1,9 @@
 import React from 'react';
 import { useMutation } from 'react-apollo'; 
 import gql from 'graphql-tag'; 
-import styled from 'styled-components';
 import RemoveFromCart from './RemoveFromCart'; 
 import formatMoney from "../lib/formatMoney";
-import { CURRENT_USER_QUERY } from './User';
+import { StyledCartItem, CartItemDescription, QuantityDiv } from './styles/CartStyles'; 
 
 const UPDATE_CART_ITEM_MUTATION = gql`
     mutation UPDATE_CART_ITEM_MUTATION($updateType: String!, $id: ID!) {
@@ -15,60 +14,7 @@ const UPDATE_CART_ITEM_MUTATION = gql`
     }
 `; 
 
-const StyledCartItem = styled.div`
-display: grid; 
-grid-template-columns: 1fr 2fr .5fr; 
-padding: 2rem 0; 
-.cartItemImage {
-    width: 120px; 
-}
-#itemNA {
-    padding-left: 2rem; 
-}
-@media (max-width: 600px) {
-    padding: 1rem 0; 
-    .cartItemImage {
-        width: 80px; 
-    }
-}
-`; 
 
-const CartItemDescription = styled.div`
-    padding-left: 2rem;
-.cartitem_title{
-    margin-top: 0; 
-    font-size: 1.2rem;
-}
-.priceandquantity {
-    display: flex; 
-    flex-direction: row; 
-}
-`; 
-const QuantityDiv = styled.div`
-    display: flex;
-    flex-direction: row; 
-    font-size: 1.6rem; 
-    padding-left: 2rem; 
-    align-items: center; 
-.cartItem_Quantity, .minus, .plus {
-    padding:  0 .75rem; 
-    margin: 0; 
-}
-.minus, .plus {
-    outline: none; 
-    border: none; 
-    background: transparent; 
-    font-size: 1.6rem; 
-    cursor: pointer; 
-}
-.cartitem_price {
-    font-size: 1.2rem; 
-}
-button[aria-disabled='true'] {
-    opacity: .6;
-    pointer-events: none; 
-}
-`; 
 const CartItem = (props) => {
     const [updateCartItem, { data }] = useMutation(UPDATE_CART_ITEM_MUTATION); 
     const { item } = props.cartItem; 

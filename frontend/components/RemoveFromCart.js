@@ -11,15 +11,6 @@ const DELETE_CART_ITEM = gql`
     }
 `; 
 class RemoveFromCart extends Component {
-    // this gets called as as we get response from server after mutation 
-    update = (cache, payload) => {
-        const data = cache.readQuery({ query: CURRENT_USER_QUERY}); 
-        console.log('data', data); 
-        console.log('payload', payload); 
-        data.user.cart = data.user.cart.filter(cartItem => cartItem.id !== payload.data.deleteCartItem.id); 
-        console.log('', data.user.cart); 
-        cache.writeQuery({query: CURRENT_USER_QUERY, data: data }); 
-    }
     render() {
         return (
             <Mutation 

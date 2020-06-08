@@ -6,7 +6,6 @@ import { StyledForm, StyledFormWrapper } from './styles/FormStyles';
 import { ALL_ITEMS_QUERY } from './Items';
 import Spinner from './Spinner'; 
 import { UploadPhotosDropNClick } from './Photos'; 
-//need to write query for single item to fill out the form with values from the current item use id from props
 
 const SINGLE_ITEM_QUERY = gql`
     query SINGLE_ITEM_QUERY($id: ID!) {
@@ -262,40 +261,3 @@ class UpdateItem extends Component {
 
 export default UpdateItem;
 export { SINGLE_ITEM_QUERY }; 
-
-
-
-{/* <h2>Update Item Images</h2>
-
-<Dropzone 
-disableClick={true}
-onDrop={this.dropFile}>
-    {({ getRootProps, getInputProps }) => (
-        <>
-        <section  className="dropzone">
-        <div 
-        id="dropInput" 
-        {...getRootProps({
-            onClick: event => event.stopPropagation()
-        })}>
-            <input {...getInputProps()}/>
-            <p>Drop files here or click below</p>
-            <label htmlFor="editInput" id="uploadImageLabel"> Upload Image </label>
-            </div>
-        </section>
-        </>
-    ) }
-
-</Dropzone>
-    <input
-    type ="file" 
-    id ="editInput" 
-    name="file" 
-    ref={el => this.fileInput = el}
-    placeholder="upload an image" 
-    onChange={this.uploadFile}
-    />    
-    {this.state.largeImage && 
-    <PhotosWrapper images={this.state.image}
-    description={this.state.description}/>
-    } */}

@@ -86,7 +86,7 @@ class Orders extends Component {
 							<div className="orderContainer">
 								<OrderList>
 									{orders.map(order => (
-										<div className="orderRow">
+										<div className="orderRow" key={order.id}>
 											<div className="orderDetails">
 												<p>ID: {order.id}</p>
 												<p>Order Total: {formatMoney(order.total)}</p>
@@ -94,8 +94,8 @@ class Orders extends Component {
 												<p>{order.items.length} products </p>
 											</div>
 											<div className="items">
-											{order.items.map(item => (
-												<div className="itemRow">
+											{order.items.map((item, index) => (
+												<div className="itemRow" key={index}>
 													<img width ="120" src={item.image}/>
 													<div className="itemDetails">
 														<h2>{item.title}</h2>
