@@ -308,6 +308,8 @@ const Mutations = {
         const orderItems = user.cart.map(cartItem => {
             const orderItem = {
                 ...cartItem.item, 
+                image: {set: cartItem.item.image},
+                largeImage: {set: cartItem.item.largeImage},
                 quantity: cartItem.quantity, 
                 user: { connect: { id: userId } },
             }

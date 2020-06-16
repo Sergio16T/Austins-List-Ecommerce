@@ -96,7 +96,7 @@ class Orders extends Component {
 											<div className="items">
 											{order.items.map((item, index) => (
 												<div className="itemRow" key={index}>
-													<img width ="120" src={item.image}/>
+													<img width ="120" src={item.image[0]}/>
 													<div className="itemDetails">
 														<h2>{item.title}</h2>
 														<p> Quantity: {item.quantity}</p>

@@ -46,7 +46,7 @@ const HomePageSection = styled.div`
     }
    @media (min-width: 1000px) {
        .column1, .column2 {
-           min-height: 250px;
+           min-height: 230px;
        }
    }
    @media (max-width: 1000px){

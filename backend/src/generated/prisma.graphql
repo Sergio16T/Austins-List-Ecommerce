@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Fri May 01 2020 01:27:29 GMT-0500 (Central Daylight Time)
+# timestamp: Mon Jun 15 2020 23:18:29 GMT-0500 (Central Daylight Time)
 
 type AggregateCartItem {
   count: Int!
@@ -779,8 +779,8 @@ type OrderItem implements Node {
   id: ID!
   title: String!
   description: String!
-  image: String!
-  largeImage: String!
+  image: [String!]!
+  largeImage: [String!]!
   price: Int!
   quantity: Int!
   user: User
@@ -796,20 +796,43 @@ type OrderItemConnection {
   aggregate: AggregateOrderItem!
 }
 
+input OrderItemCreateimageInput {
+  set: [String!]
+}
+
 input OrderItemCreateInput {
   id: ID
   title: String!
   description: String!
-  image: String!
-  largeImage: String!
   price: Int!
   quantity: Int
-  user: UserCreateOneInput
+  image: OrderItemCreateimageInput
+  largeImage: OrderItemCreatelargeImageInput
+  user: UserCreateOneWithoutOrdersInput
+}
+
+input OrderItemCreatelargeImageInput {
+  set: [String!]
 }
 
 input OrderItemCreateManyInput {
   create: [OrderItemCreateInput!]
   connect: [OrderItemWhereUniqueInput!]
+}
+
+input OrderItemCreateManyWithoutUserInput {
+  create: [OrderItemCreateWithoutUserInput!]
+  connect: [OrderItemWhereUniqueInput!]
+}
+
+input OrderItemCreateWithoutUserInput {
+  id: ID
+  title: String!
+  description: String!
+  price: Int!
+  quantity: Int
+  image: OrderItemCreateimageInput
+  largeImage: OrderItemCreatelargeImageInput
 }
 
 """An edge in a connection."""
@@ -828,10 +851,6 @@ enum OrderItemOrderByInput {
   title_DESC
   description_ASC
   description_DESC
-  image_ASC
-  image_DESC
-  largeImage_ASC
-  largeImage_DESC
   price_ASC
   price_DESC
   quantity_ASC
@@ -842,8 +861,8 @@ type OrderItemPreviousValues {
   id: ID!
   title: String!
   description: String!
-  image: String!
-  largeImage: String!
+  image: [String!]!
+  largeImage: [String!]!
   price: Int!
   quantity: Int!
 }
@@ -977,86 +996,6 @@ input OrderItemScalarWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
-  image: String
-
-  """All values that are not equal to given value."""
-  image_not: String
-
-  """All values that are contained in given list."""
-  image_in: [String!]
-
-  """All values that are not contained in given list."""
-  image_not_in: [String!]
-
-  """All values less than the given value."""
-  image_lt: String
-
-  """All values less than or equal the given value."""
-  image_lte: String
-
-  """All values greater than the given value."""
-  image_gt: String
-
-  """All values greater than or equal the given value."""
-  image_gte: String
-
-  """All values containing the given string."""
-  image_contains: String
-
-  """All values not containing the given string."""
-  image_not_contains: String
-
-  """All values starting with the given string."""
-  image_starts_with: String
-
-  """All values not starting with the given string."""
-  image_not_starts_with: String
-
-  """All values ending with the given string."""
-  image_ends_with: String
-
-  """All values not ending with the given string."""
-  image_not_ends_with: String
-  largeImage: String
-
-  """All values that are not equal to given value."""
-  largeImage_not: String
-
-  """All values that are contained in given list."""
-  largeImage_in: [String!]
-
-  """All values that are not contained in given list."""
-  largeImage_not_in: [String!]
-
-  """All values less than the given value."""
-  largeImage_lt: String
-
-  """All values less than or equal the given value."""
-  largeImage_lte: String
-
-  """All values greater than the given value."""
-  largeImage_gt: String
-
-  """All values greater than or equal the given value."""
-  largeImage_gte: String
-
-  """All values containing the given string."""
-  largeImage_contains: String
-
-  """All values not containing the given string."""
-  largeImage_not_contains: String
-
-  """All values starting with the given string."""
-  largeImage_starts_with: String
-
-  """All values not starting with the given string."""
-  largeImage_not_starts_with: String
-
-  """All values ending with the given string."""
-  largeImage_ends_with: String
-
-  """All values not ending with the given string."""
-  largeImage_not_ends_with: String
   price: Int
 
   """All values that are not equal to given value."""
@@ -1143,30 +1082,38 @@ input OrderItemSubscriptionWhereInput {
 input OrderItemUpdateDataInput {
   title: String
   description: String
-  image: String
-  largeImage: String
   price: Int
   quantity: Int
-  user: UserUpdateOneInput
+  image: OrderItemUpdateimageInput
+  largeImage: OrderItemUpdatelargeImageInput
+  user: UserUpdateOneWithoutOrdersInput
+}
+
+input OrderItemUpdateimageInput {
+  set: [String!]
 }
 
 input OrderItemUpdateInput {
   title: String
   description: String
-  image: String
-  largeImage: String
   price: Int
   quantity: Int
-  user: UserUpdateOneInput
+  image: OrderItemUpdateimageInput
+  largeImage: OrderItemUpdatelargeImageInput
+  user: UserUpdateOneWithoutOrdersInput
+}
+
+input OrderItemUpdatelargeImageInput {
+  set: [String!]
 }
 
 input OrderItemUpdateManyDataInput {
   title: String
   description: String
-  image: String
-  largeImage: String
   price: Int
   quantity: Int
+  image: OrderItemUpdateimageInput
+  largeImage: OrderItemUpdatelargeImageInput
 }
 
 input OrderItemUpdateManyInput {
@@ -1184,10 +1131,22 @@ input OrderItemUpdateManyInput {
 input OrderItemUpdateManyMutationInput {
   title: String
   description: String
-  image: String
-  largeImage: String
   price: Int
   quantity: Int
+  image: OrderItemUpdateimageInput
+  largeImage: OrderItemUpdatelargeImageInput
+}
+
+input OrderItemUpdateManyWithoutUserInput {
+  create: [OrderItemCreateWithoutUserInput!]
+  connect: [OrderItemWhereUniqueInput!]
+  set: [OrderItemWhereUniqueInput!]
+  disconnect: [OrderItemWhereUniqueInput!]
+  delete: [OrderItemWhereUniqueInput!]
+  update: [OrderItemUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [OrderItemUpdateManyWithWhereNestedInput!]
+  deleteMany: [OrderItemScalarWhereInput!]
+  upsert: [OrderItemUpsertWithWhereUniqueWithoutUserInput!]
 }
 
 input OrderItemUpdateManyWithWhereNestedInput {
@@ -1195,15 +1154,35 @@ input OrderItemUpdateManyWithWhereNestedInput {
   data: OrderItemUpdateManyDataInput!
 }
 
+input OrderItemUpdateWithoutUserDataInput {
+  title: String
+  description: String
+  price: Int
+  quantity: Int
+  image: OrderItemUpdateimageInput
+  largeImage: OrderItemUpdatelargeImageInput
+}
+
 input OrderItemUpdateWithWhereUniqueNestedInput {
   where: OrderItemWhereUniqueInput!
   data: OrderItemUpdateDataInput!
+}
+
+input OrderItemUpdateWithWhereUniqueWithoutUserInput {
+  where: OrderItemWhereUniqueInput!
+  data: OrderItemUpdateWithoutUserDataInput!
 }
 
 input OrderItemUpsertWithWhereUniqueNestedInput {
   where: OrderItemWhereUniqueInput!
   update: OrderItemUpdateDataInput!
   create: OrderItemCreateInput!
+}
+
+input OrderItemUpsertWithWhereUniqueWithoutUserInput {
+  where: OrderItemWhereUniqueInput!
+  update: OrderItemUpdateWithoutUserDataInput!
+  create: OrderItemCreateWithoutUserInput!
 }
 
 input OrderItemWhereInput {
@@ -1335,86 +1314,6 @@ input OrderItemWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
-  image: String
-
-  """All values that are not equal to given value."""
-  image_not: String
-
-  """All values that are contained in given list."""
-  image_in: [String!]
-
-  """All values that are not contained in given list."""
-  image_not_in: [String!]
-
-  """All values less than the given value."""
-  image_lt: String
-
-  """All values less than or equal the given value."""
-  image_lte: String
-
-  """All values greater than the given value."""
-  image_gt: String
-
-  """All values greater than or equal the given value."""
-  image_gte: String
-
-  """All values containing the given string."""
-  image_contains: String
-
-  """All values not containing the given string."""
-  image_not_contains: String
-
-  """All values starting with the given string."""
-  image_starts_with: String
-
-  """All values not starting with the given string."""
-  image_not_starts_with: String
-
-  """All values ending with the given string."""
-  image_ends_with: String
-
-  """All values not ending with the given string."""
-  image_not_ends_with: String
-  largeImage: String
-
-  """All values that are not equal to given value."""
-  largeImage_not: String
-
-  """All values that are contained in given list."""
-  largeImage_in: [String!]
-
-  """All values that are not contained in given list."""
-  largeImage_not_in: [String!]
-
-  """All values less than the given value."""
-  largeImage_lt: String
-
-  """All values less than or equal the given value."""
-  largeImage_lte: String
-
-  """All values greater than the given value."""
-  largeImage_gt: String
-
-  """All values greater than or equal the given value."""
-  largeImage_gte: String
-
-  """All values containing the given string."""
-  largeImage_contains: String
-
-  """All values not containing the given string."""
-  largeImage_not_contains: String
-
-  """All values starting with the given string."""
-  largeImage_starts_with: String
-
-  """All values not starting with the given string."""
-  largeImage_not_starts_with: String
-
-  """All values ending with the given string."""
-  largeImage_ends_with: String
-
-  """All values not ending with the given string."""
-  largeImage_not_ends_with: String
   price: Int
 
   """All values that are not equal to given value."""
@@ -1766,6 +1665,7 @@ type User implements Node {
   resetTokenExpiry: Float
   permissions: [Permission!]!
   cart(where: CartItemWhereInput, orderBy: CartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CartItem!]
+  orders(where: OrderItemWhereInput, orderBy: OrderItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [OrderItem!]
 }
 
 """A connection to a list of items."""
@@ -1787,6 +1687,7 @@ input UserCreateInput {
   resetTokenExpiry: Float
   permissions: UserCreatepermissionsInput
   cart: CartItemCreateManyWithoutUserInput
+  orders: OrderItemCreateManyWithoutUserInput
 }
 
 input UserCreateOneInput {
@@ -1796,6 +1697,11 @@ input UserCreateOneInput {
 
 input UserCreateOneWithoutCartInput {
   create: UserCreateWithoutCartInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutOrdersInput {
+  create: UserCreateWithoutOrdersInput
   connect: UserWhereUniqueInput
 }
 
@@ -1811,6 +1717,18 @@ input UserCreateWithoutCartInput {
   resetToken: String
   resetTokenExpiry: Float
   permissions: UserCreatepermissionsInput
+  orders: OrderItemCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutOrdersInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: UserCreatepermissionsInput
+  cart: CartItemCreateManyWithoutUserInput
 }
 
 """An edge in a connection."""
@@ -1892,6 +1810,7 @@ input UserUpdateDataInput {
   resetTokenExpiry: Float
   permissions: UserUpdatepermissionsInput
   cart: CartItemUpdateManyWithoutUserInput
+  orders: OrderItemUpdateManyWithoutUserInput
 }
 
 input UserUpdateInput {
@@ -1902,6 +1821,7 @@ input UserUpdateInput {
   resetTokenExpiry: Float
   permissions: UserUpdatepermissionsInput
   cart: CartItemUpdateManyWithoutUserInput
+  orders: OrderItemUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
@@ -1911,15 +1831,6 @@ input UserUpdateManyMutationInput {
   resetToken: String
   resetTokenExpiry: Float
   permissions: UserUpdatepermissionsInput
-}
-
-input UserUpdateOneInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: UserUpdateDataInput
-  upsert: UserUpsertNestedInput
 }
 
 input UserUpdateOneRequiredInput {
@@ -1936,6 +1847,15 @@ input UserUpdateOneRequiredWithoutCartInput {
   upsert: UserUpsertWithoutCartInput
 }
 
+input UserUpdateOneWithoutOrdersInput {
+  create: UserCreateWithoutOrdersInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: UserUpdateWithoutOrdersDataInput
+  upsert: UserUpsertWithoutOrdersInput
+}
+
 input UserUpdatepermissionsInput {
   set: [Permission!]
 }
@@ -1947,6 +1867,17 @@ input UserUpdateWithoutCartDataInput {
   resetToken: String
   resetTokenExpiry: Float
   permissions: UserUpdatepermissionsInput
+  orders: OrderItemUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutOrdersDataInput {
+  name: String
+  email: String
+  password: String
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: UserUpdatepermissionsInput
+  cart: CartItemUpdateManyWithoutUserInput
 }
 
 input UserUpsertNestedInput {
@@ -1957,6 +1888,11 @@ input UserUpsertNestedInput {
 input UserUpsertWithoutCartInput {
   update: UserUpdateWithoutCartDataInput!
   create: UserCreateWithoutCartInput!
+}
+
+input UserUpsertWithoutOrdersInput {
+  update: UserUpdateWithoutOrdersDataInput!
+  create: UserCreateWithoutOrdersInput!
 }
 
 input UserWhereInput {
@@ -2193,6 +2129,9 @@ input UserWhereInput {
   cart_every: CartItemWhereInput
   cart_some: CartItemWhereInput
   cart_none: CartItemWhereInput
+  orders_every: OrderItemWhereInput
+  orders_some: OrderItemWhereInput
+  orders_none: OrderItemWhereInput
 }
 
 input UserWhereUniqueInput {
