@@ -77,7 +77,7 @@ const PermissionsWrapper = styled.div`
     }
     div {
         position: block; 
-        color: white; 
+        /* color: white;  */
     }
 `; 
 class Permissions extends Component {
