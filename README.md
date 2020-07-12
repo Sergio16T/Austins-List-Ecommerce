@@ -16,7 +16,7 @@
 
 ## Future goals for this project 
 
-### Seperate Git branches with different implementations without Prisma
+### Separate Git branches with different implementations without Prisma
 * Utilize both SQL and NoSQL database management systems including MYSQL and MongoDB, each in their own git branch, to get comfortable using GraphQL with these different systems. 
 * Create a branch that uses TypeScript 
 
