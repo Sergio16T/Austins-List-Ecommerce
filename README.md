@@ -25,8 +25,6 @@ Visit www.sergiotapiafikes.com and view projects
 
 ## Screen Shots 
 
-![Mobile Screen Shot of homepage with open dropdown menu](https://res.cloudinary.com/dddnhychw/image/upload/v1591413268/AustinArts%20/Screen_Shot_2020-06-05_at_9.46.56_PM_h7rf0c.png)
-
 ![Home Page](https://res.cloudinary.com/dddnhychw/image/upload/v1594582591/AustinArts%20/Screen_Shot_2020-07-12_at_2.26.52_PM_kn3z4o.png)
 
 ![Shopping cart open on shop page](https://res.cloudinary.com/dddnhychw/image/upload/v1594582601/AustinArts%20/Screen_Shot_2020-07-12_at_2.30.56_PM_qatl55.png)
@@ -42,3 +40,5 @@ Visit www.sergiotapiafikes.com and view projects
 ![Item details page view](https://res.cloudinary.com/dddnhychw/image/upload/v1594582652/AustinArts%20/Screen_Shot_2020-07-12_at_2.32.32_PM_wiopj8.png)
 
 ![Search bar](https://res.cloudinary.com/dddnhychw/image/upload/v1594582674/AustinArts%20/Screen_Shot_2020-07-12_at_2.33.27_PM_owodjk.png)
+
+![Mobile Screen Shot of homepage with open dropdown menu](https://res.cloudinary.com/dddnhychw/image/upload/v1591413268/AustinArts%20/Screen_Shot_2020-06-05_at_9.46.56_PM_h7rf0c.png)
