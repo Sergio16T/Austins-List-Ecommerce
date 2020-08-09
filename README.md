@@ -8,10 +8,28 @@
 * **Apollo:** is a complete state management library for JavaScript apps. Simply write a GraphQL query, and Apollo Client will take care of requesting and caching your data, as well as updating your UI.
 * **Prisma:** Prisma makes database access easy with an auto-generated and type-safe query builder that's tailored to your database schema. It provides an alternative to traditional ORMs and SQL query builders. Start with a new database or introspect an existing one to get started.
 
+## Main Features 
+ - Home page 
+ - Signup & Login page
+ - Forgot password/Reset password
+ - JWT authentication to persist log in
+ - Paginated list of products/items 
+ - Shopping Cart
+ - Search 
+ - Item details page
+ - Create new item/product with details & photos. 
+ - Update item details & photos 
+ - Delete items
+ - Check out with stripe
+ - Order confirmation page 
+ - Orders Page
+ - Managing permissions view for admin
+ - Responsive 
+
 ## Goals while building this project 
 
 * Get Familiar with Next.js, Styled Components, GraphQL and Apollo
-* Host it locally with Docker and use Prisma to handle the DB layer with MYSQL 
+* Host it locally with Docker and use Prisma to handle the DB with MYSQL 
 * Building and understanding a GraphQL server, GraphQL Schemas, TypeDefs & Resolvers
 
 ## Future goals for this project 
