@@ -14,7 +14,6 @@ class Cart extends Component {
 				{({data, loading, error}) => { 
 					if(loading) return null; 
 					const { user } = data;
-					// console.log('userPayload', user); 
 					return (
 					<CartWrapper isOpen={this.props.isOpen}>
 						<div className="cartHeader">

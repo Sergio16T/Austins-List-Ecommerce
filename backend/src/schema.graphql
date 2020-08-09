@@ -30,7 +30,7 @@ type Mutation {
     deleteCartItem(id: ID!): CartItem
     updateCartItem(updateType: String!, id: ID!): CartItem
     createOrder(token: String!): Order
-    sendConfirmationEmail(email: String!, id: ID!, amount: Int!, createdAt: String! ): SuccessMessage
+    # sendConfirmationEmail(email: String!, id: ID!, amount: Int!, createdAt: String! ): SuccessMessage
 }
 
 type User {

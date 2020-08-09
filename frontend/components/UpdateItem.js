@@ -175,19 +175,17 @@ class UpdateItem extends Component {
                         {({data, error, loading})=> {
                             if(loading) return null; 
                             if(error) return <p>{error.message}</p>
-                            // console.log(data); 
                             return (
                             <Mutation mutation={UPDATE_ITEM_MUTATION} 
                             variables={this.state}
                             refetchQueries={[{ query: ALL_ITEMS_QUERY }]}
                             >
                                 {(updateItem, {error, loading}) => (
-                                <StyledForm onSubmit={async (e) => {
+                                <StyledForm 
+                                onSubmit = {async (e) => {
                                     this.updateItem(e, updateItem); 
-                                    // e.preventDefault(); 
-                                    // const res = await updateItem(); 
-                                    // console.log(res);
-                                    }} errorMessage={errorMessage}>
+                                }} 
+                                errorMessage={errorMessage}>
                                     <Spinner spinner={this.state.spinner}/>
                                     <fieldset disabled={loading}>
                                         <div className="formheader">

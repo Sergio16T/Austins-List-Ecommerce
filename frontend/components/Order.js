@@ -79,23 +79,25 @@ class Order extends Component {
     }
 }
 
-const SEND_CONFIRMATION_EMAIL_MUTATION=gql`
-    mutation SEND_CONFIRMATION_EMAIL_MUTATION($email: String!, $id: ID!, $amount: Int!, $createdAt: String!) {
-        sendConfirmationEmail(email: $email, id: $id, amount: $amount, createdAt: $createdAt){
-            message
-        }
-    }
-`; 
-class SendEmail  extends React.Component {
-    componentDidMount(){
-        this.props.sendConfirmationEmail(); 
-    }
-    render(){
-        return null; 
-    }
-}
+
 export default Order;
 
+
+// const SEND_CONFIRMATION_EMAIL_MUTATION=gql`
+//     mutation SEND_CONFIRMATION_EMAIL_MUTATION($email: String!, $id: ID!, $amount: Int!, $createdAt: String!) {
+//         sendConfirmationEmail(email: $email, id: $id, amount: $amount, createdAt: $createdAt){
+//             message
+//         }
+//     }
+// `; 
+// class SendEmail  extends React.Component {
+//     componentDidMount(){
+//         this.props.sendConfirmationEmail(); 
+//     }
+//     render(){
+//         return null; 
+//     }
+// }
        {/* <Mutation 
         mutation={SEND_CONFIRMATION_EMAIL_MUTATION} 
         variables={{

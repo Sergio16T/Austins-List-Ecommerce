@@ -51,7 +51,6 @@ class CreateItem extends Component {
         this.handleUpload(data); 
     }
     uploadFile = (e) => {
-        // console.log('uploading file'); 
         const files = e.target.files; 
         const data = new FormData(); 
         data.append('file', files[0]); 
@@ -97,7 +96,6 @@ class CreateItem extends Component {
         let regEx = /^\d+(\.\d{0,2})?$/; 
         const { value, type, name } = e.target; 
         let val = type === 'number' && value.length ? parseFloat(value) : value;  
-        // console.log(regEx.test(val)); 
         try {
             if ((typeof val === 'number') && !regEx.test(val)) {
                 throw new Error('Only two decimal points please'); 
@@ -134,14 +132,16 @@ class CreateItem extends Component {
         let regEx2= /^\d+(\.\d{0,1})$/; 
         const { errorMessage } = this.state; 
         const setPrice = regEx2.test(this.state.price) ? this.state.price.toFixed(2) : this.state.price; 
+        let page = Math.ceil((this.props.count+1)/4) 
+        const skip =  page * 4 - 4;
         return (
             <Mutation 
             mutation={CREATE_ITEM_MUTATION} 
             variables={{...this.state, price: setPrice * 100}}
             refetchQueries={[
                 { query: PAGINATION_QUERY }, 
-                { query: ALL_ITEMS_QUERY, variables: {skip: this.props.skip} }, 
-                { query: ALL_ITEMS_QUERY, variables: {skip: (this.props.page-1) * 4 - 4 }}
+                { query: ALL_ITEMS_QUERY, variables: {skip: skip} }, 
+                { query: ALL_ITEMS_QUERY, variables: {skip: (page-1) * 4 - 4 }}
             ]}>
                 {(createItem, {loading, error}) => (
                     <StyledFormWrapper>
@@ -169,7 +169,9 @@ class CreateItem extends Component {
                                 if(!this.state.error) {
                                     Router.push({
                                         pathname: "/items", 
-                                        query: {page: this.props.page}
+                                        query: {page: page}
+                                        // option 2 direct user to item page
+                                        //pathname: "/item"
                                         // query: {id: res.data.createItem.id}
                                     }); 
                                 }

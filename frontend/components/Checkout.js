@@ -30,7 +30,6 @@ function totalItems(cart) {
 
 class Checkout extends Component {
     onToken = async (res, createOrder) => {
-		// console.log(res.id); 
 		this.props.toggleCart(false);
 		const order = await createOrder({
 			variables: { token: res.id }

@@ -337,31 +337,6 @@ const Mutations = {
         return order; 
 
     }, 
-    // async sendConfirmationEmail(parent, args, ctx, info) {
-    //     const { email, id, amount, createdAt } = args; 
-    //     console.log('args', args); 
-    //     await transport.sendMail({
-    //         from: "stapiafikes@gmail.com", 
-    //         to: email, 
-    //         subject: "Order Confirmation", 
-    //         html: confirmationEmail(`
-    //         <table>
-    //             <thead>
-    //                 <th>Order Id</th>
-    //                 <th>Order Total</th>
-    //                 <th>Date</th>
-    //             <thead>
-    //             <tbody>
-    //                 <td>${id}</td>
-    //                 <td>${formatMoney(amount)}</td>
-    //                 <td>${moment(createdAt).format('YYYY-MM-DD hh:mm a')}</td>
-    //             </tbody>
-    //         </table>
-    //         `)
-    //     }); 
-    //     return { message: "Email Sent!"}; 
-    // }
-
   }; 
 
   sendConfirmationEMail = async (email, id, amount, createdAt) => {
@@ -387,3 +362,35 @@ const Mutations = {
   }
 
   module.exports = Mutations
+
+
+
+
+
+
+
+
+   // async sendConfirmationEmail(parent, args, ctx, info) {
+    //     const { email, id, amount, createdAt } = args; 
+    //     console.log('args', args); 
+    //     await transport.sendMail({
+    //         from: "stapiafikes@gmail.com", 
+    //         to: email, 
+    //         subject: "Order Confirmation", 
+    //         html: confirmationEmail(`
+    //         <table>
+    //             <thead>
+    //                 <th>Order Id</th>
+    //                 <th>Order Total</th>
+    //                 <th>Date</th>
+    //             <thead>
+    //             <tbody>
+    //                 <td>${id}</td>
+    //                 <td>${formatMoney(amount)}</td>
+    //                 <td>${moment(createdAt).format('YYYY-MM-DD hh:mm a')}</td>
+    //             </tbody>
+    //         </table>
+    //         `)
+    //     }); 
+    //     return { message: "Email Sent!"}; 
+    // }

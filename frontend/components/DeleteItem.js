@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo'; 
 import gql from 'graphql-tag';
-import Router from 'next/router'; 
 import { ALL_ITEMS_QUERY } from './Items'; 
 import { PAGINATION_QUERY } from './Pagination';
 import { CURRENT_USER_QUERY } from './User';
@@ -14,19 +13,6 @@ const DELETE_ITEM_MUTATION = gql`
         }
     }
 `
-
-let query = gql`
-query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = 4) {
-    items(skip: $skip, first: $first, orderBy: createdAt_ASC) {
-        id
-        title
-        price
-        description
-        image 
-        largeImage
-    }
-}
-`; 
 
 class DeleteItem extends Component {
     render() {
@@ -48,7 +34,6 @@ class DeleteItem extends Component {
                     let res = await deleteItem().catch(err => {
                         alert(err.message); 
                     }); 
-                    console.log('delete res', res); 
                     // Router.push({
                     //     pathname: "/items", 
                     //     query: {page: this.props.page}
