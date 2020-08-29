@@ -42,6 +42,9 @@
 Visit www.sergiotapiafikes.com and view projects
 
 <div align="center">
+    <br/>
+    <br/>
+    <br/>
     <h3>Landing Page</h3>
     <img src="https://res.cloudinary.com/dddnhychw/image/upload/v1594582591/AustinArts%20/Screen_Shot_2020-07-12_at_2.26.52_PM_kn3z4o.png" alt="landingpage" width ="800"/>
     <h3>Shopping Cart</h3>
