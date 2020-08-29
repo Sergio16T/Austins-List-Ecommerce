@@ -41,22 +41,15 @@
 ## To view sample video demos of some of the pages for this project
 Visit www.sergiotapiafikes.com and view projects
 
-## Screen Shots 
-
-![Home Page](https://res.cloudinary.com/dddnhychw/image/upload/v1594582591/AustinArts%20/Screen_Shot_2020-07-12_at_2.26.52_PM_kn3z4o.png)
-
-![Shopping cart open on shop page](https://res.cloudinary.com/dddnhychw/image/upload/v1594582601/AustinArts%20/Screen_Shot_2020-07-12_at_2.30.56_PM_qatl55.png)
-
-![Stripe Payment Modal](https://res.cloudinary.com/dddnhychw/image/upload/v1594582626/AustinArts%20/Screen_Shot_2020-07-12_at_2.35.16_PM_wwbu7v.png)
-
-![Order confirmation page](https://res.cloudinary.com/dddnhychw/image/upload/v1594582635/AustinArts%20/Screen_Shot_2020-07-12_at_2.35.42_PM_uth50j.png) 
-
-![Upload new item page view](https://res.cloudinary.com/dddnhychw/image/upload/v1594582665/AustinArts%20/Screen_Shot_2020-07-12_at_2.32.58_PM_rehpmi.png)
-
-![Edit existing item view](https://res.cloudinary.com/dddnhychw/image/upload/v1594582644/AustinArts%20/Screen_Shot_2020-07-12_at_2.31.55_PM_yhv2to.png)
-
-![Item details page view](https://res.cloudinary.com/dddnhychw/image/upload/v1594582652/AustinArts%20/Screen_Shot_2020-07-12_at_2.32.32_PM_wiopj8.png)
-
-![Search bar](https://res.cloudinary.com/dddnhychw/image/upload/v1594582674/AustinArts%20/Screen_Shot_2020-07-12_at_2.33.27_PM_owodjk.png)
-
-![Mobile Screen Shot of homepage with open dropdown menu](https://res.cloudinary.com/dddnhychw/image/upload/v1591413268/AustinArts%20/Screen_Shot_2020-06-05_at_9.46.56_PM_h7rf0c.png)
+<div align="center">
+    <h2>Screen Shots</h2>
+    <img src="https://res.cloudinary.com/dddnhychw/image/upload/v1594582591/AustinArts%20/Screen_Shot_2020-07-12_at_2.26.52_PM_kn3z4o.png" alt="landingpage" width ="600"/>
+    <img src="https://res.cloudinary.com/dddnhychw/image/upload/v1594582601/AustinArts%20/Screen_Shot_2020-07-12_at_2.30.56_PM_qatl55.png" alt="Shopping cart open" width ="600"/>
+    <img src="https://res.cloudinary.com/dddnhychw/image/upload/v1594582626/AustinArts%20/Screen_Shot_2020-07-12_at_2.35.16_PM_wwbu7v.png" alt="Stripe Payment Modal" width ="600"/>
+    <img src="https://res.cloudinary.com/dddnhychw/image/upload/v1594582635/AustinArts%20/Screen_Shot_2020-07-12_at_2.35.42_PM_uth50j.png" alt="Order Confirmation" width ="600"/>
+    <img src="https://res.cloudinary.com/dddnhychw/image/upload/v1594582665/AustinArts%20/Screen_Shot_2020-07-12_at_2.32.58_PM_rehpmi.png" alt="Upload New Item Page View" width ="600"/>
+    <img src="https://res.cloudinary.com/dddnhychw/image/upload/v1594582644/AustinArts%20/Screen_Shot_2020-07-12_at_2.31.55_PM_yhv2to.png" alt="Edit existing item view" width ="600"/>
+    <img src="https://res.cloudinary.com/dddnhychw/image/upload/v1594582652/AustinArts%20/Screen_Shot_2020-07-12_at_2.32.32_PM_wiopj8.png" alt="Item Details Page View" width="600"/>
+    <img src="https://res.cloudinary.com/dddnhychw/image/upload/v1594582674/AustinArts%20/Screen_Shot_2020-07-12_at_2.33.27_PM_owodjk.png" alt="Search Bar" width="600"/>
+    <img src="https://res.cloudinary.com/dddnhychw/image/upload/v1591413268/AustinArts%20/Screen_Shot_2020-06-05_at_9.46.56_PM_h7rf0c.png" alt="mobile friendly view" width="300"/>
+<div>
